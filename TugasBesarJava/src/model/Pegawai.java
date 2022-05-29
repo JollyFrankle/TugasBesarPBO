@@ -16,6 +16,14 @@ public class Pegawai {
         this.noHandphonePegawai = noHandphonePegawai;
         this.jobDesc = jobDesc;
     }
+    
+    public String getNama(){
+        return namaPegawai;
+    }
+    
+    public void setNama(String namaPegawai){
+        this.namaPegawai = namaPegawai;
+    }
 
     public void showDataPegawai(){
         System.out.println("Nama Pegawai: "+namaPegawai);
