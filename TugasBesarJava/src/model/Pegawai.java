@@ -1,18 +1,25 @@
 package model;
 
-public abstract class Pegawai {
-    protected String namaPegawai;
-    protected String idPegawai;
-    protected String tglLahir;
-    protected String noHandphonePegawai;
+public class Pegawai {
+    private String namaPegawai;
+    private String idPegawai;
+    private String tglLahir;
+    private String noHandphonePegawai;
+    private String jobDesc;
 
-    public Pegawai(String namaPegawai, String idPegawai, String tglLahir, String noHandphonePegawai){
+    public Pegawai(String namaPegawai, String idPegawai, String tglLahir, String noHandphonePegawai, String jobDesc){
         this.namaPegawai = namaPegawai;
         this.idPegawai = idPegawai;
         this.tglLahir = tglLahir;
         this.noHandphonePegawai = noHandphonePegawai;
+        this.jobDesc = jobDesc;
     }
 
-    public abstract void showDataPegawai();
-    public abstract void hitungGajiPegawai();
+    public void showDataPegawai(){
+
+    }
+
+    public void hitungGajiPegawai(){
+        
+    }
 }
