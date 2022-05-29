@@ -45,6 +45,7 @@ public class DbConnection {
             System.out.println("Error closing database..");
             System.out.println("info");
             System.out.println(e.toString());
+            System.out.println("infooooo");
         }
     }
 }
