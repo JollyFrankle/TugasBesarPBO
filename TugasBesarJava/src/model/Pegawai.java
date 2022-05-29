@@ -9,11 +9,11 @@ public class Pegawai {
     private String noHP;
     private String jobDesc;
 
-    public String getNamaPegawai() {
+    public String getNama() {
         return this.namaPegawai;
     }
 
-    public void setNamaPegawai(String namaPegawai) {
+    public void setNama(String namaPegawai) {
         this.namaPegawai = namaPegawai;
     }
 
