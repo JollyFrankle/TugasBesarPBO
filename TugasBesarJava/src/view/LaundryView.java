@@ -6,7 +6,7 @@ package view;
 
 /**
  *
- * @author ASUS
+ * AGES
  */
 public class LaundryView extends javax.swing.JPanel {
 
