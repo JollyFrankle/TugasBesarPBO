@@ -15,4 +15,9 @@ public class PegawaiDAO {
     private static final DbConnection DBC = new DbConnection();
     private Connection con;
     private String sql = "";
+    private int test;
+
+    public PegawaiDAO(int test) {
+        this.test = test;
+    }
 }
