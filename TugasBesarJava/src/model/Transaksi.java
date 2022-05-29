@@ -21,9 +21,6 @@ public class Transaksi {
         this.tglAmbil = tglAmbil;
         this.tipeLayanan = tipeLayanan;
         this.customer = customer;
-
-        List<ItemLaundry> listItem = new ArrayList<ItemLaundry>();
-        List<JobHistory> listHistory = new ArrayList<JobHistory>();
     }
 
     public int getIdTransaksi() {
@@ -82,5 +79,11 @@ public class Transaksi {
         this.customer = input;
     }
 
+    public void setListItem(List<ItemLaundry> listItem){
+        this.listItem = listItem;
+    }
 
+    public void setJobHistory(List<JobHistory> listHistory){
+        this.listHistory = listHistory;
+    }
 }
