@@ -20,6 +20,7 @@ public class DbConnection {
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_YELLOW = "\u001B[33m";
     
+    
     public Connection makeConnection() {        
         System.out.println("Opening database..");
         try {
@@ -41,7 +42,9 @@ public class DbConnection {
             System.out.println("success!");
         } catch (Exception e) {
             System.out.println("Error closing database..");
+            System.out.println("info");
             System.out.println(e.toString());
+            System.out.println("infooooo");
         }
     }
 }
