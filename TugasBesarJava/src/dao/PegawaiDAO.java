@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import model.Customer;
 import model.Pegawai;
+import model.Transaksi;
 /**
  *
  * @author M S I
@@ -113,4 +115,31 @@ public class PegawaiDAO {
         }
         dbCon.closeConnection();
     }    
+    
+    public Pegawai searchPegawai(String id){
+        con = dbCon.makeConnection();
+        
+        String sql = "SELECT * FROM pegawai  WHERE id = '" + id + "'";
+        System.out.println("Mencari Pegawai...");
+        
+        Pegawai p = null;
+        try{
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+        
+            if(rs != null){
+                  while(rs.next()){
+                    p = new Pegawai(rs.getString("id"), rs.getString("nama"), rs.getString("tglLahir"), rs.getString("noHP"), rs.getString("jobDesc"));
+                }
+            }
+            rs.close();
+            statement.close();
+        } catch(Exception e){
+                System.out.println("Error reading Database...");
+                System.out.println(e);
+        }
+        dbCon.closeConnection();
+
+        return p;
+    }
 }
