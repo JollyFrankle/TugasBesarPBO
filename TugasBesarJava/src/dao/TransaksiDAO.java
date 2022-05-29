@@ -10,6 +10,6 @@ package dao;
  * NPM : 200710824
  * Kelas : PBO B
  */
-public class CustomerDBO {
+public class TransaksiDAO {
 
 }
