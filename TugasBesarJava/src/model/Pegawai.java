@@ -1,13 +1,19 @@
 package model;
 
-import java.net.SocketTimeoutException;
-
 public class Pegawai {
     private String namaPegawai;
     private String id;
     private String tglLahir;
     private String noHP;
     private String jobDesc;
+
+    public Pegawai(String namaPegawai, String id, String tglLahir, String noHP, String jobDesc){
+        this.namaPegawai = namaPegawai;
+        this.id = id;
+        this.tglLahir = tglLahir;
+        this.noHP = noHP;
+        this.jobDesc = jobDesc;
+    }
 
     public String getNama() {
         return this.namaPegawai;
@@ -48,17 +54,7 @@ public class Pegawai {
     public void setJobDesc(String jobDesc) {
         this.jobDesc = jobDesc;
     }
-
-    public Pegawai(String namaPegawai, String id, String tglLahir, String noHP, String jobDesc){
-        this.namaPegawai = namaPegawai;
-        this.id = id;
-        this.tglLahir = tglLahir;
-        this.noHP = noHP;
-        this.jobDesc = jobDesc;
-    }
     
-    
-
     public void showDataPegawai(){
         System.out.println("Nama Pegawai: "+namaPegawai);
         System.out.println("ID Pegawai: "+id);

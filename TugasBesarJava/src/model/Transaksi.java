@@ -86,4 +86,21 @@ public class Transaksi {
     public void setJobHistory(List<JobHistory> listHistory){
         this.listHistory = listHistory;
     }
+
+    public double hitungDurasi(){
+        return 1; // dummy
+    }
+
+    public double hitungBonus(){
+        return 1; //dummy
+    }
+
+    public double hitungBerat(){
+        return 1; //dummy
+    }
+
+    public double hitungTotalBiaya(){
+        return 1; // dummy
+    }
+
 }
