@@ -22,13 +22,10 @@ public class DbConnection {
     
     
     public Connection makeConnection() {        
-        System.out.println("Opening database..");
         try {
             CON = DriverManager.getConnection(URL + PATH, USER, PWD);
-            System.out.println("success!");
         } catch (Exception e) {
-            System.out.println("Error opening database..");
-            System.out.println(e.toString());
+            System.out.println(ANSI_RED + "[E] DBcon/make: " + e.toString());
             
         }
         
@@ -36,13 +33,10 @@ public class DbConnection {
     }
     
     public void closeConnection() {
-        System.out.println("Closing database..");
         try {
             CON.close();
-            System.out.println("success!");
         } catch (Exception e) {
-            System.out.println("Error closing database..");
-            System.out.println(e.toString());
+            System.out.println(ANSI_RED + "[E] DBcon/close: " + e.toString());
         }
     }
 }
