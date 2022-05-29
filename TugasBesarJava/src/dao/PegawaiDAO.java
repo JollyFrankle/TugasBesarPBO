@@ -4,10 +4,15 @@
  */
 package dao;
 
+import connection.DbConnection;
+import java.sql.Connection;
+
 /**
  *
  * @author M S I
  */
 public class PegawaiDAO {
-    
+    private static final DbConnection DBC = new DbConnection();
+    private Connection con;
+    private String sql = "";
 }
