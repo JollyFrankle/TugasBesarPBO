@@ -16,6 +16,7 @@ public class DbConnection {
     public static final String USER = "ifestuajy_pbo2122";
     public static final String PWD = "ifestuajy_pbo2122";
     
+    
     public Connection makeConnection() {        
         System.out.println("Opening database..");
         try {
@@ -37,6 +38,7 @@ public class DbConnection {
             System.out.println("success!");
         } catch (Exception e) {
             System.out.println("Error closing database..");
+            System.out.println("info");
             System.out.println(e.toString());
         }
     }
