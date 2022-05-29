@@ -11,6 +11,31 @@ public class JobHistory {
         this.aktivitas = aktivitas;
     }
     
+    public Pegawai getPegawai(){
+        return pegawai;
+    }
+    
+    public void setPegawai(Pegawai pegawai){
+        this.pegawai = pegawai;
+    }
+    
+    public String gettglLog(){
+        return tglLog;
+    }
+    
+    public void settglLog(String tglLog){
+        this.tglLog = tglLog;
+    }
+    
+    public String getAktivitas(){
+        return aktivitas;
+    }
+    
+    public void setAktivitas(String aktivitas){
+        this.aktivitas = aktivitas;
+    }
+    
+    
     public void showDataPegawai(){
         
     }
