@@ -8,38 +8,94 @@ public class Transaksi {
     private String tglMasuk;
     private String tglSelesai;
     private String tglAmbil;
-    private double totalBiaya;
     private String tipeLayanan;
     private List<ItemLaundry> listItem;
-    private List<JobHistory> jobHistory;
-    Customer customer;
+    private List<JobHistory> listHistory;
+    private Customer customer;
 
-    public Transaksi(String status, String tglMasuk, String tglSelesai, String tglAmbil, double totalBiaya, String tipeLayanan, Customer customer){
+    public Transaksi(int idTransaksi, String status, String tglMasuk, String tglSelesai, String tglAmbil, String tipeLayanan, List<ItemLaundry> listItem, List<JobHistory> listHistory, Customer customer) {
+        this.idTransaksi = idTransaksi;
         this.status = status;
         this.tglMasuk = tglMasuk;
         this.tglSelesai = tglSelesai;
         this.tglAmbil = tglAmbil;
-        this.totalBiaya = totalBiaya;
         this.tipeLayanan = tipeLayanan;
+        this.listItem = listItem;
+        this.listHistory = listHistory;
         this.customer = customer;
-
-        List<ItemLaundry> listItem = new ArrayList<ItemLaundry>();
-        List<JobHistory> jobHistory = new ArrayList<JobHistory>();
     }
 
-    public void hitungBiaya(){
-
+    public int getIdTransaksi() {
+        return this.idTransaksi;
     }
 
-    public double hitungDurasi(){
-        return 1;
+    public void setIdTransaksi(int input) {
+        this.idTransaksi = input;
     }
 
-    public double hitungBonus(){
-        return 1;
+    public String getStatus() {
+        return this.status;
     }
 
-    public void hitungBerat(){
-
+    public void setStatus(String input) {
+        this.status = input;
     }
+
+    public String getTglMasuk() {
+        return this.tglMasuk;
+    }
+
+    public void setTglMasuk(String input) {
+        this.tglMasuk = input;
+    }
+
+    public String getTglSelesai() {
+        return this.tglSelesai;
+    }
+
+    public void setTglSelesai(String input) {
+        this.tglSelesai = input;
+    }
+
+    public String getTglAmbil() {
+        return this.tglAmbil;
+    }
+
+    public void setTglAmbil(String input) {
+        this.tglAmbil = input;
+    }
+
+    public String getTipeLayanan() {
+        return this.tipeLayanan;
+    }
+
+    public void setTipeLayanan(String input) {
+        this.tipeLayanan = input;
+    }
+
+    public List<ItemLaundry> getListItem() {
+        return this.listItem;
+    }
+
+    public void setListItem(List<ItemLaundry> input) {
+        this.listItem = input;
+    }
+
+    public List<JobHistory> getListHistory() {
+        return this.listHistory;
+    }
+
+    public void setListHistory(List<JobHistory> input) {
+        this.listHistory = input;
+    }
+
+    public Customer getCustomer() {
+        return this.customer;
+    }
+
+    public void setCustomer(Customer input) {
+        this.customer = input;
+    }
+
+
 }
