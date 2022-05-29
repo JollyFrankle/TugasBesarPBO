@@ -10,11 +10,16 @@ import java.sql.DriverManager;
 
 public class DbConnection {
 
-    public static Connection CON;
-    public static final String URL = "jdbc:mysql://";
-    public static final String PATH = "202.14.92.91:3306/ifestuajy_tubes_pbo?useSSL=false";
-    public static final String USER = "ifestuajy_pbo2122";
-    public static final String PWD = "ifestuajy_pbo2122";
+    private static Connection CON;
+    private static final String URL = "jdbc:mysql://";
+    private static final String PATH = "202.14.92.91:3306/ifestuajy_tubes_pbo?useSSL=false";
+    private static final String USER = "ifestuajy_pbo2122";
+    private static final String PWD = "ifestuajy_pbo2122";
+    
+    // Additional: colour indicators for SUCCESS, DANGER, or WARNING
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
     
     
     public Connection makeConnection() {        
