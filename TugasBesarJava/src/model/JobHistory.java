@@ -10,7 +10,7 @@ public class JobHistory {
         this.tglLog = tglLog;
         this.aktivitas = aktivitas;
     }
-
+    
     public void showDataPegawai(){
         
     }
