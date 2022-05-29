@@ -1,6 +1,6 @@
 package model;
 
-import java.util.*;
+import java.util.List;
 
 public class Transaksi {
     private int idTransaksi;
@@ -13,16 +13,16 @@ public class Transaksi {
     private List<JobHistory> listHistory;
     private Customer customer;
 
-    public Transaksi(int idTransaksi, String status, String tglMasuk, String tglSelesai, String tglAmbil, String tipeLayanan, List<ItemLaundry> listItem, List<JobHistory> listHistory, Customer customer) {
+    public Transaksi(int idTransaksi, String status, String tglMasuk, String tglSelesai, String tglAmbil, String tipeLayanan, Customer customer) {
         this.idTransaksi = idTransaksi;
         this.status = status;
         this.tglMasuk = tglMasuk;
         this.tglSelesai = tglSelesai;
         this.tglAmbil = tglAmbil;
         this.tipeLayanan = tipeLayanan;
-        this.listItem = listItem;
-        this.listHistory = listHistory;
         this.customer = customer;
+        
+        // list item laundry dan job history sebaiknya di-set saja, jangan di constructor
     }
 
     public int getIdTransaksi() {
@@ -96,6 +96,4 @@ public class Transaksi {
     public void setCustomer(Customer input) {
         this.customer = input;
     }
-
-
 }
