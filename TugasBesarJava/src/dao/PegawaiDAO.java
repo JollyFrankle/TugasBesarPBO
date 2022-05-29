@@ -9,9 +9,5 @@ package dao;
  * @author M S I
  */
 public class PegawaiDAO {
-    public PegawaiDAO(String makan){
-        this.makan = makan;
-    }
-    
     
 }
