@@ -41,7 +41,15 @@ public class Pegawai {
         this.tglLahir = tglLahir;
     }
     
-    public String sgetjobDesc(){
+    public String getnoHandphonePegawai(){
+        return noHandphonePegawai;
+    }
+    
+    public void setnoHandphonePegawai(String noHandphonePegawai){
+        this.noHandphonePegawai = noHandphonePegawai;
+    }
+    
+    public String getjobDesc(){
         return jobDesc;
     }
     
