@@ -20,4 +20,9 @@ public class PegawaiDAO {
     public PegawaiDAO(int test) {
         this.test = test;
     }
+
+    public int getTest(){
+        return test;
+    }
+    
 }
