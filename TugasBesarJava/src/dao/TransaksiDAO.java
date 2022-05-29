@@ -3,13 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-package control;
+package dao;
 
 /**
  * Nama : Calvin Andrean Suhedy
  * NPM : 200710824
  * Kelas : PBO B
  */
-public class LaundryControl {
+public class TransaksiDAO {
 
 }
