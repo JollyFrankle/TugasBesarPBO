@@ -13,16 +13,17 @@ public class Transaksi {
     private List<JobHistory> listHistory;
     private Customer customer;
 
-    public Transaksi(int idTransaksi, String status, String tglMasuk, String tglSelesai, String tglAmbil, String tipeLayanan, List<ItemLaundry> listItem, List<JobHistory> listHistory, Customer customer) {
+    public Transaksi(int idTransaksi, String status, String tglMasuk, String tglSelesai, String tglAmbil, String tipeLayanan, Customer customer) {
         this.idTransaksi = idTransaksi;
         this.status = status;
         this.tglMasuk = tglMasuk;
         this.tglSelesai = tglSelesai;
         this.tglAmbil = tglAmbil;
         this.tipeLayanan = tipeLayanan;
-        this.listItem = listItem;
-        this.listHistory = listHistory;
         this.customer = customer;
+
+        List<ItemLaundry> listItem = new ArrayList<ItemLaundry>();
+        List<JobHistory> listHistory = new ArrayList<JobHistory>();
     }
 
     public int getIdTransaksi() {
@@ -71,22 +72,6 @@ public class Transaksi {
 
     public void setTipeLayanan(String input) {
         this.tipeLayanan = input;
-    }
-
-    public List<ItemLaundry> getListItem() {
-        return this.listItem;
-    }
-
-    public void setListItem(List<ItemLaundry> input) {
-        this.listItem = input;
-    }
-
-    public List<JobHistory> getListHistory() {
-        return this.listHistory;
-    }
-
-    public void setListHistory(List<JobHistory> input) {
-        this.listHistory = input;
     }
 
     public Customer getCustomer() {
