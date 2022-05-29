@@ -11,9 +11,9 @@ import java.sql.DriverManager;
 public class DbConnection {
     private static Connection CON;
     private static final String URL = "jdbc:mysql://";
-    private static final String PATH = "202.14.92.91:3306/ifestuajy_tubes_pbo?useSSL=false";
-    private static final String USER = "ifestuajy_pbo2122";
-    private static final String PWD = "ifestuajy_pbo2122";
+    private static final String PATH = "109.106.254.101:3306/u764338354_tubes?useSSL=false";
+    private static final String USER = "u764338354_tubes";
+    private static final String PWD = "tubesPBOB1";
     
     // Additional: colour indicators for SUCCESS, DANGER, or WARNING
     public static final String ANSI_RED = "\u001B[31m";
@@ -26,7 +26,6 @@ public class DbConnection {
             CON = DriverManager.getConnection(URL + PATH, USER, PWD);
         } catch (Exception e) {
             System.out.println(ANSI_RED + "[E] DBcon/make: " + e.toString());
-            
         }
         
         return CON;
