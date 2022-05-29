@@ -42,10 +42,7 @@ public class DbConnection {
             System.out.println("success!");
         } catch (Exception e) {
             System.out.println("Error closing database..");
-            System.out.println("info");
             System.out.println(e.toString());
-            System.out.println("infooooo");
-            System.out.println("info2");
         }
     }
 }
