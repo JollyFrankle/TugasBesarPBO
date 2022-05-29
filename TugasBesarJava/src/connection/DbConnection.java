@@ -45,6 +45,7 @@ public class DbConnection {
             System.out.println("info");
             System.out.println(e.toString());
             System.out.println("infooooo");
+            System.out.println("info2");
         }
     }
 }
