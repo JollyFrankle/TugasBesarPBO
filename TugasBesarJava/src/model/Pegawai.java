@@ -1,5 +1,7 @@
 package model;
 
+import java.net.SocketTimeoutException;
+
 public class Pegawai {
     private String namaPegawai;
     private String idPegawai;
@@ -16,7 +18,11 @@ public class Pegawai {
     }
 
     public void showDataPegawai(){
-
+        System.out.println("Nama Pegawai: "+namaPegawai);
+        System.out.println("ID Pegawai: "+idPegawai);
+        System.out.println("Tanggal Lahir: "+tglLahir);
+        System.out.println("No Handphone: "+noHandphonePegawai);
+        System.out.println("Job Desc: "+jobDesc);
     }
 
     public void hitungGajiPegawai(){

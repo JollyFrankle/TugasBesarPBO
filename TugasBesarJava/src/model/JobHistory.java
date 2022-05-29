@@ -1,20 +1,18 @@
 package model;
 
 public class JobHistory {
-    private Transaksi transaksi;
     private Pegawai pegawai;
     private String tglLog;
-    private String kegiatan;
+    private String aktivitas;
 
-    public JobHistory(Transaksi transaksi, Pegawai pegawai, String tglLog, String kegiatan){
-        this.transaksi = transaksi;
+    public JobHistory(Pegawai pegawai, String tglLog, String aktivitas){
         this.pegawai = pegawai;
         this.tglLog = tglLog;
-        this.kegiatan = kegiatan;
+        this.aktivitas = aktivitas;
     }
 
     public void showDataPegawai(){
-
+        
     }
 
     public void hitungGajiPegawai(){
