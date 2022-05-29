@@ -12,7 +12,7 @@ public class DbConnection {
 
     public static Connection CON;
     public static final String URL = "jdbc:mysql://";
-    public static final String PATH = "202.14.92.91:3306/ifestuajy_pbo2122?useSSL=false";
+    public static final String PATH = "202.14.92.91:3306/ifestuajy_tubes_pbo?useSSL=false";
     public static final String USER = "ifestuajy_pbo2122";
     public static final String PWD = "ifestuajy_pbo2122";
     
