@@ -356,7 +356,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JButton" name="jButton1">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="jButton1"/>
+                        <Property name="text" type="java.lang.String" value="Customer"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -411,7 +411,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JButton" name="jButton2">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="jButton2"/>
+                        <Property name="text" type="java.lang.String" value="Pegawai"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -470,13 +470,12 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="cariBtn" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace min="0" pref="1" max="32767" attributes="0"/>
-                              <Component id="cariText" min="-2" pref="42" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="viewWhereAU" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="cariText" alignment="1" min="-2" pref="42" max="-2" attributes="0"/>
+                                  <Component id="viewWhereAU" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>

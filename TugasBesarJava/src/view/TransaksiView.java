@@ -200,7 +200,7 @@ public class TransaksiView extends javax.swing.JFrame {
 
         jPanel7.setBackground(new java.awt.Color(169, 217, 246));
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Customer");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -233,7 +233,7 @@ public class TransaksiView extends javax.swing.JFrame {
 
         jPanel8.setBackground(new java.awt.Color(169, 217, 246));
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Pegawai");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -309,12 +309,11 @@ public class TransaksiView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cariBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, searchLayout.createSequentialGroup()
-                        .addGap(0, 1, Short.MAX_VALUE)
-                        .addComponent(cariText, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(searchLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(viewWhereAU)))
+                        .addGap(0, 1, Short.MAX_VALUE)
+                        .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cariText, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(viewWhereAU))))
                 .addContainerGap())
         );
 
