@@ -9,7 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class DbConnection {
-    public static Connection CON;
+    private static Connection CON;
     public static final String URL = "jdbc:mysql://";
     public static final String PATH = "109.106.254.101:3306/u764338354_tubes?useSSL=false";
     public static final String USER = "u764338354_tubes";
