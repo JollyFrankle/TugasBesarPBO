@@ -62,7 +62,7 @@ public class TransaksiDAO {
             
             if(rs != null){
                 while(rs.next()){
-                    Customer c = new Customer(rs.getString("c.nama"), rs.getString("c.alamat"), rs.getString("noHP"));
+                    Customer c = new Customer(rs.getInt("c.id"), rs.getString("c.nama"), rs.getString("c.alamat"), rs.getString("noHP"));
                     Transaksi t = new Transaksi(rs.getInt("t.id"),rs.getString("t.status"), rs.getString("t.tglMasuk"), rs.getString("t.tglSelesai"), rs.getString("t.tglAmbil"), rs.getString("t.tipeLayanan"), c);
                     list1.add(t);
                 }
@@ -130,7 +130,7 @@ public class TransaksiDAO {
         
             if(rs != null){
                   while(rs.next()){
-                    Customer c = new Customer(rs.getString("c.nama"), rs.getString("c.alamat"), rs.getString("noHP"));
+                    Customer c = new Customer(rs.getInt("c.id"), rs.getString("c.nama"), rs.getString("c.alamat"), rs.getString("noHP"));
                     t = new Transaksi(rs.getInt("t.id"),rs.getString("t.status"), rs.getString("t.tglMasuk"), rs.getString("t.tglSelesai"), rs.getString("t.tglAmbil"), rs.getString("t.tipeLayanan"), c);
                 }
             }

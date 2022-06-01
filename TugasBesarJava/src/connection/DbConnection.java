@@ -9,11 +9,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class DbConnection {
-    private static Connection CON;
-    private static final String URL = "jdbc:mysql://";
-    private static final String PATH = "109.106.254.101:3306/u764338354_tubes?useSSL=false";
-    private static final String USER = "u764338354_tubes";
-    private static final String PWD = "tubesPBOB1";
+    public static Connection CON;
+    public static final String URL = "jdbc:mysql://";
+    public static final String PATH = "109.106.254.101:3306/u764338354_tubes?useSSL=false";
+    public static final String USER = "u764338354_tubes";
+    public static final String PWD = "tubesPBOB1";
     
     // Additional: colour indicators for SUCCESS, DANGER, or WARNING
     public static final String ANSI_RED = "\u001B[31m";
@@ -25,7 +25,7 @@ public class DbConnection {
         try {
             CON = DriverManager.getConnection(URL + PATH, USER, PWD);
         } catch (Exception e) {
-            System.out.println(ANSI_RED + "[E] DBcon/make: " + e.toString());
+            System.out.println(ANSI_RED + "[E] [DBcon/make]: " + e.toString());
         }
         
         return CON;
@@ -35,7 +35,7 @@ public class DbConnection {
         try {
             CON.close();
         } catch (Exception e) {
-            System.out.println(ANSI_RED + "[E] DBcon/close: " + e.toString());
+            System.out.println(ANSI_RED + "[E] [DBcon/close]: " + e.toString());
         }
     }
 }

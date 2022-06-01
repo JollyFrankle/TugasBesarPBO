@@ -5,8 +5,9 @@ public class Customer {
     private String nama;
     private String alamat;
     private String noHP;
-
-    public Customer(String nama, String alamat, String noHP){
+    
+    public Customer(int id, String nama, String alamat, String noHP){
+        this.id = id;
         this.nama = nama;
         this.alamat = alamat;
         this.noHP = noHP;

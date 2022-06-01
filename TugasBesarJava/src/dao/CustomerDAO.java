@@ -19,14 +19,13 @@ public class CustomerDAO {
     private static final DbConnection DBC = new DbConnection();
     private DbConnection dbCon = new DbConnection();
     private Connection con;
-    private String sql = "";
     private int test;
     
     public void insertCustomer(Customer c){
         con = dbCon.makeConnection();
         
-        String sql = "INSERT INTO customer(id, nama, alamat, noHP) "
-                + "VALUES ('" + c.getId() + "', '" + c.getNama() + "', '" + c.getAlamat() + "', '" + c.getNoHP() + "')";
+        String sql = "INSERT INTO customer(nama, alamat, noHP) "
+                + "VALUES ('" + c.getNama() + "', '" + c.getAlamat() + "', '" + c.getNoHP() + "')";
         System.out.println("Adding Customer...");
         
         try{
@@ -56,7 +55,7 @@ public class CustomerDAO {
             
             if(rs != null){
                 while(rs.next()){
-                    Customer c = new Customer(rs.getString("nama"), rs.getString("alamat"), rs.getString("noHP"));
+                    Customer c = new Customer(rs.getInt("id"), rs.getString("nama"), rs.getString("alamat"), rs.getString("noHP"));
                     list1.add(c);
                 }
             }
@@ -121,7 +120,7 @@ public class CustomerDAO {
         
             if(rs != null){
                   while(rs.next()){
-                    c = new Customer(rs.getString("nama"), rs.getString("alamat"), rs.getString("noHP"));
+                    c = new Customer(rs.getInt("id"), rs.getString("nama"), rs.getString("alamat"), rs.getString("noHP"));
                 }
             }
             rs.close();
