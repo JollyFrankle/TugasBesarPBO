@@ -51,6 +51,8 @@ public class TransaksiView extends javax.swing.JFrame {
         cariText = new javax.swing.JTextField();
         cariBtn = new javax.swing.JButton();
         menu = new javax.swing.JPanel();
+        logos = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         footer = new javax.swing.JPanel();
         footerName = new javax.swing.JLabel();
 
@@ -65,8 +67,8 @@ public class TransaksiView extends javax.swing.JFrame {
 
         logo.setBackground(new java.awt.Color(195, 228, 248));
 
-        logoIcon.setBackground(new java.awt.Color(195, 228, 248));
         logoIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/washing-machine.png"))); // NOI18N
+        logoIcon.setBackground(new java.awt.Color(195, 228, 248));
 
         javax.swing.GroupLayout logoLayout = new javax.swing.GroupLayout(logo);
         logo.setLayout(logoLayout);
@@ -87,14 +89,14 @@ public class TransaksiView extends javax.swing.JFrame {
 
         namaCorp.setBackground(new java.awt.Color(195, 228, 248));
 
-        clean.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
         clean.setText("CLEAN");
+        clean.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
 
-        and.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         and.setText("&");
+        and.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
 
-        fresh.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
         fresh.setText("FRESH");
+        fresh.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
 
         javax.swing.GroupLayout namaCorpLayout = new javax.swing.GroupLayout(namaCorp);
         namaCorp.setLayout(namaCorpLayout);
@@ -279,8 +281,8 @@ public class TransaksiView extends javax.swing.JFrame {
 
         search.setBackground(new java.awt.Color(195, 228, 248));
 
-        viewWhereAU.setFont(new java.awt.Font("Eras Demi ITC", 1, 36)); // NOI18N
         viewWhereAU.setText("TRANSAKSI");
+        viewWhereAU.setFont(new java.awt.Font("Eras Demi ITC", 1, 36)); // NOI18N
 
         cariText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -327,13 +329,33 @@ public class TransaksiView extends javax.swing.JFrame {
         );
         menuLayout.setVerticalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 466, Short.MAX_VALUE)
+            .addGap(0, 402, Short.MAX_VALUE)
+        );
+
+        logos.setBackground(new java.awt.Color(195, 228, 248));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/keranjang.png"))); // NOI18N
+
+        javax.swing.GroupLayout logosLayout = new javax.swing.GroupLayout(logos);
+        logos.setLayout(logosLayout);
+        logosLayout.setHorizontalGroup(
+            logosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(logosLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        logosLayout.setVerticalGroup(
+            logosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, logosLayout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         footer.setBackground(new java.awt.Color(169, 217, 246));
 
-        footerName.setForeground(new java.awt.Color(102, 102, 102));
         footerName.setText("Made by Love and Clean Heart's");
+        footerName.setForeground(new java.awt.Color(102, 102, 102));
 
         javax.swing.GroupLayout footerLayout = new javax.swing.GroupLayout(footer);
         footer.setLayout(footerLayout);
@@ -359,8 +381,9 @@ public class TransaksiView extends javax.swing.JFrame {
             .addComponent(corpName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(navBar, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
             .addComponent(footer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(menu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(logos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         BackgoundLayout.setVerticalGroup(
             BackgoundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -371,8 +394,10 @@ public class TransaksiView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(logos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(footer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -442,11 +467,13 @@ public class TransaksiView extends javax.swing.JFrame {
     private javax.swing.JLabel fresh;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel logo;
     private javax.swing.JLabel logoIcon;
+    private javax.swing.JPanel logos;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel namaCorp;
     private javax.swing.JPanel navBar;
