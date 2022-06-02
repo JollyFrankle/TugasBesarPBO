@@ -7,6 +7,7 @@ package connection;
 
 import dao.CustomerPreparedDAO;
 import dao.PegawaiPreparedDAO;
+import dao.PegawaiPreparedDAOMultithread;
 import dao.TransaksiPreparedDAO;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -40,7 +41,7 @@ public class DAOTestKit {
                 getRandomStr(12)
         );
         
-        PegawaiPreparedDAO pDAO = new PegawaiPreparedDAO();
+        PegawaiPreparedDAOMultithread pDAO = new PegawaiPreparedDAOMultithread();
         
         
         // Test here:
@@ -49,35 +50,43 @@ public class DAOTestKit {
 //        cDAO.updateCustomer(C);
 //        cDAO.deleteCustomer(7);
         
-        for(int i=0; i<1; i++) {
-            Pegawai P = new Pegawai(
-                getRandomStr(8),
-                getRandomStr(15),
-                LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE),
-                getRandomStr(12),
-                getRandomStr(50)
-            );
+        for(int i=0; i<500; i++) {
+            new Thread(() -> {
+                Pegawai P = new Pegawai(
+                    getRandomStr(8),
+                    getRandomStr(15),
+                    LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE),
+                    getRandomStr(12),
+                    getRandomStr(50)
+                );
 
-            pDAO.insertPegawai(P);
-            pDAO.searchPegawai();
-            pDAO.updatePegawai(P);
-            pDAO.deletePegawai(P.getId());
+                new Thread(() -> {
+                    pDAO.insertPegawai(P);
+                    pDAO.deletePegawai(P.getId());
+                }).start();
+                new Thread(() -> {
+                    pDAO.searchPegawai();
+                }).start();
+                new Thread(() -> {
+                    pDAO.updatePegawai(P);
+                }).start();
+            }).start();
         }
         
-        TransaksiPreparedDAO tDAO = new TransaksiPreparedDAO();
-        Transaksi T = new Transaksi(
-                4,
-                "BELUM",
-                LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE),
-                LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE),
-                null,
-                "REGULER",
-                C
-        );
-        tDAO.insertTransaksi(T);
-        tDAO.searchTransaksi();
-        tDAO.updateTransaksi(T);
-        tDAO.deleteTransaksi(T.getIdTransaksi());
+//        TransaksiPreparedDAO tDAO = new TransaksiPreparedDAO();
+//        Transaksi T = new Transaksi(
+//                4,
+//                "BELUM",
+//                LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE),
+//                LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE),
+//                null,
+//                "REGULER",
+//                C
+//        );
+//        tDAO.insertTransaksi(T);
+//        tDAO.searchTransaksi();
+//        tDAO.updateTransaksi(T);
+//        tDAO.deleteTransaksi(T.getIdTransaksi());
     }
     
     public static String getRandomStr(int targetLength) {
