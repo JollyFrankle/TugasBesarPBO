@@ -65,11 +65,11 @@ public class PegawaiPreparedDAO {
             if(rs != null){
                 while(rs.next()){
                     Pegawai p = new Pegawai(
-                            rs.getString("id"),
-                            rs.getString("nama"),
-                            rs.getString("tglLahir"),
-                            rs.getString("noHP"),
-                            rs.getString("jobDesc")
+                        rs.getString("id"),
+                        rs.getString("nama"),
+                        rs.getString("tglLahir"),
+                        rs.getString("noHP"),
+                        rs.getString("jobDesc")
                     );
                     list.add(p);
                     rowCount++;

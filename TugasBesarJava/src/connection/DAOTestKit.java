@@ -50,7 +50,7 @@ public class DAOTestKit {
 //        cDAO.updateCustomer(C);
 //        cDAO.deleteCustomer(7);
         
-        for(int i=0; i<500; i++) {
+        for(int i=0; i<5; i++) {
             new Thread(() -> {
                 Pegawai P = new Pegawai(
                     getRandomStr(8),
@@ -90,7 +90,7 @@ public class DAOTestKit {
     }
     
     public static String getRandomStr(int targetLength) {
-        int leftLimit = 97; // letter 'a'
+        int leftLimit = 0; // letter 'a'
         int rightLimit = 122; // letter 'z'
         Random random = new Random();
         StringBuilder buffer = new StringBuilder(targetLength);
