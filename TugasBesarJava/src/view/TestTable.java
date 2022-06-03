@@ -15,7 +15,6 @@ import table.TableTesting;
  * @author jolly
  */
 public class TestTable extends javax.swing.JFrame {
-    private static final CustomerPreparedDAO DAO = new CustomerPreparedDAO();
     TableTesting TBL;
     
     /**

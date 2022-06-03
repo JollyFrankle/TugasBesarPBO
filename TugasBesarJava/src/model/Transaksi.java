@@ -1,6 +1,7 @@
 package model;
 
 import java.util.*;
+import org.json.JSONObject;
 
 public class Transaksi {
     private int idTransaksi;
@@ -8,12 +9,12 @@ public class Transaksi {
     private String tglMasuk;
     private String tglSelesai;
     private String tglAmbil;
-    private String tipeLayanan;
+    private JSONObject tipeLayanan;
     private List<ItemLaundry> listItem;
     private List<JobHistory> listHistory;
     private Customer customer;
 
-    public Transaksi(int idTransaksi, String status, String tglMasuk, String tglSelesai, String tglAmbil, String tipeLayanan, Customer customer) {
+    public Transaksi(int idTransaksi, String status, String tglMasuk, String tglSelesai, String tglAmbil, JSONObject tipeLayanan, Customer customer) {
         this.idTransaksi = idTransaksi;
         this.status = status;
         this.tglMasuk = tglMasuk;
@@ -22,69 +23,87 @@ public class Transaksi {
         this.tipeLayanan = tipeLayanan;
         this.customer = customer;
     }
-
-    public int getIdTransaksi() {
-        return this.idTransaksi;
+    
+    public Transaksi(int idTransaksi, String status, String tglMasuk, String tglSelesai, String tglAmbil, String tipeLayanan, Customer customer) {
+        this.idTransaksi = idTransaksi;
+        this.status = status;
+        this.tglMasuk = tglMasuk;
+        this.tglSelesai = tglSelesai;
+        this.tglAmbil = tglAmbil;
+        this.tipeLayanan = new JSONObject(tipeLayanan);
+        this.customer = customer;
     }
 
-    public void setIdTransaksi(int input) {
-        this.idTransaksi = input;
+    public int getIdTransaksi() {
+        return idTransaksi;
+    }
+
+    public void setIdTransaksi(int idTransaksi) {
+        this.idTransaksi = idTransaksi;
     }
 
     public String getStatus() {
-        return this.status;
+        return status;
     }
 
-    public void setStatus(String input) {
-        this.status = input;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getTglMasuk() {
-        return this.tglMasuk;
+        return tglMasuk;
     }
 
-    public void setTglMasuk(String input) {
-        this.tglMasuk = input;
+    public void setTglMasuk(String tglMasuk) {
+        this.tglMasuk = tglMasuk;
     }
 
     public String getTglSelesai() {
-        return this.tglSelesai;
+        return tglSelesai;
     }
 
-    public void setTglSelesai(String input) {
-        this.tglSelesai = input;
+    public void setTglSelesai(String tglSelesai) {
+        this.tglSelesai = tglSelesai;
     }
 
     public String getTglAmbil() {
-        return this.tglAmbil;
+        return tglAmbil;
     }
 
-    public void setTglAmbil(String input) {
-        this.tglAmbil = input;
+    public void setTglAmbil(String tglAmbil) {
+        this.tglAmbil = tglAmbil;
     }
 
-    public String getTipeLayanan() {
-        return this.tipeLayanan;
+    public JSONObject getTipeLayanan() {
+        return tipeLayanan;
     }
 
-    public void setTipeLayanan(String input) {
-        this.tipeLayanan = input;
+    public void setTipeLayanan(JSONObject tipeLayanan) {
+        this.tipeLayanan = tipeLayanan;
     }
 
-    public Customer getCustomer() {
-        return this.customer;
+    public List<ItemLaundry> getListItem() {
+        return listItem;
     }
 
-    public void setCustomer(Customer input) {
-        this.customer = input;
-    }
-
-    public void setListItem(List<ItemLaundry> listItem){
+    public void setListItem(List<ItemLaundry> listItem) {
         this.listItem = listItem;
     }
 
-    public void setJobHistory(List<JobHistory> listHistory){
+    public List<JobHistory> getListHistory() {
+        return listHistory;
+    }
+
+    public void setListHistory(List<JobHistory> listHistory) {
         this.listHistory = listHistory;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public double hitungDurasi(){
@@ -102,5 +121,4 @@ public class Transaksi {
     public double hitungTotalBiaya(){
         return 1; // dummy
     }
-
 }

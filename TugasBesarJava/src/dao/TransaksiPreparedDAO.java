@@ -33,7 +33,7 @@ public class TransaksiPreparedDAO {
             st.setString(3, T.getTglMasuk());
             st.setString(4, T.getTglSelesai());
             st.setString(5, T.getTglAmbil());
-            st.setString(6, T.getTipeLayanan());
+            st.setString(6, T.getTipeLayanan().toString());
             
             rowCount = st.executeUpdate();
             System.out.println(DbConnection.ANSI_GREEN + "[OK] [TransaksiPreparedDAO/insertTransaksi] Added " + rowCount + " row(s).");
@@ -129,7 +129,7 @@ public class TransaksiPreparedDAO {
             st.setString(3, T.getTglMasuk());
             st.setString(4, T.getTglSelesai());
             st.setString(5, T.getTglAmbil());
-            st.setString(6, T.getTipeLayanan());
+            st.setString(6, T.getTipeLayanan().toString());
             st.setInt(7, T.getIdTransaksi());
             
             rowCount = st.executeUpdate();

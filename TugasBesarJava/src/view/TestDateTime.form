@@ -69,6 +69,10 @@
   </Layout>
   <SubComponents>
     <Component class="com.github.lgooddatepicker.components.DateTimePicker" name="inputDateTime">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new com.github.lgooddatepicker.components.DateTimePicker(DPs, TPs)"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>

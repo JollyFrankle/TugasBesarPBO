@@ -4,12 +4,18 @@
  */
 package view;
 
+import com.github.lgooddatepicker.components.DatePickerSettings;
+import com.github.lgooddatepicker.components.TimePickerSettings;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 /**
  *
  * @author jolly
  */
 public class TestDateTime extends javax.swing.JFrame {
-
+    private static TimePickerSettings TPs = new TimePickerSettings();
+    private static DatePickerSettings DPs = new DatePickerSettings();
     /**
      * Creates new form TestDateTime
      */
@@ -19,6 +25,11 @@ public class TestDateTime extends javax.swing.JFrame {
         // Set date and time:
         inputDateTime.datePicker.setDateToToday();
         inputDateTime.timePicker.setTimeToNow();
+        
+        DPs.setLocale(new Locale("id"));
+//        DPs.setFormatForDatesCommonEra(DateTimeFormatter.ofPattern("d MMMM yyyy", new Locale("id")));
+        TPs.setFormatForDisplayTime("HH.mm");
+        inputDateTime.getTimePicker().getSettings();
     }
 
     private String getFullDateTime(com.github.lgooddatepicker.components.DateTimePicker input) {
@@ -39,7 +50,7 @@ public class TestDateTime extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        inputDateTime = new com.github.lgooddatepicker.components.DateTimePicker();
+        inputDateTime = new com.github.lgooddatepicker.components.DateTimePicker(DPs, TPs);
         jButton1 = new javax.swing.JButton();
         outputDateTime = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();

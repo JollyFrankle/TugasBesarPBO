@@ -5,9 +5,8 @@
 
 package connection;
 
-import dao.CustomerPreparedDAO;
-import dao.PegawaiPreparedDAO;
-import dao.PegawaiPreparedDAOMultithread;
+import java.util.List;
+import java.util.ArrayList;
 import dao.TransaksiPreparedDAO;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -15,6 +14,8 @@ import java.util.Random;
 import model.Customer;
 import model.Pegawai;
 import model.Transaksi;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 // selamat pagi
 /**
@@ -23,70 +24,45 @@ import model.Transaksi;
  * Praktikum PBO kelas B
  */
 public class DAOTestKit {
+    private static final TransaksiPreparedDAO tDAO = new TransaksiPreparedDAO();
+    
     public static void main(String[] args) {
         // RUN THIS FILE: SHIFT+F6
         
-//        DbConnection db = new DbConnection();
-//        for(int i=0; i<100; i++) {
-//            db.makeConnection();
-//            System.out.println(DbConnection.ANSI_GREEN + "[OK] " + (i+1));
-//            db.closeConnection();
-//        }
+        List<Transaksi> listT = tDAO.searchTransaksi("");
         
-        CustomerPreparedDAO cDAO = new CustomerPreparedDAO();
+        JSONObject obj2 = new JSONObject();
+        
+        // Layanan:
+        String layanan[] = {"CUCI", "SETRIKA"};
+        JSONArray arr = new JSONArray().putAll(layanan);
+        System.out.println(JSONArray.class.toString());
+        
+        // Speed dan fasilitass
+        obj2.put("speed", "EXPRESS");
+        obj2.put("facility", arr);
+        
+        
+        System.out.println(obj2.toString());
         Customer C = new Customer(
                 1,
-                getRandomStr(15),
-                getRandomStr(10),
-                getRandomStr(12)
+                "nama2",
+                "alamat",
+                "0812"
         );
         
-        PegawaiPreparedDAOMultithread pDAO = new PegawaiPreparedDAOMultithread();
+        Transaksi T = new Transaksi(
+                0,
+                "BELUM_AKTIF",
+                "2022-01-02 00:19:02",
+                "2022-01-12 09:12:22",
+                null,
+                obj2,
+                C
+        );
         
-        
-        // Test here:
-//        cDAO.insertCustomer(C);
-//        cDAO.searchCustomer();
-//        cDAO.updateCustomer(C);
-//        cDAO.deleteCustomer(7);
-        
-        for(int i=0; i<5; i++) {
-            new Thread(() -> {
-                Pegawai P = new Pegawai(
-                    getRandomStr(8),
-                    getRandomStr(15),
-                    LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE),
-                    getRandomStr(12),
-                    getRandomStr(50)
-                );
-
-                new Thread(() -> {
-                    pDAO.insertPegawai(P);
-                    pDAO.deletePegawai(P.getId());
-                }).start();
-                new Thread(() -> {
-                    pDAO.searchPegawai();
-                }).start();
-                new Thread(() -> {
-                    pDAO.updatePegawai(P);
-                }).start();
-            }).start();
-        }
-        
-//        TransaksiPreparedDAO tDAO = new TransaksiPreparedDAO();
-//        Transaksi T = new Transaksi(
-//                4,
-//                "BELUM",
-//                LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE),
-//                LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE),
-//                null,
-//                "REGULER",
-//                C
-//        );
-//        tDAO.insertTransaksi(T);
-//        tDAO.searchTransaksi();
-//        tDAO.updateTransaksi(T);
-//        tDAO.deleteTransaksi(T.getIdTransaksi());
+        tDAO.insertTransaksi(T);
+        tDAO.searchTransaksi();
     }
     
     public static String getRandomStr(int targetLength) {
