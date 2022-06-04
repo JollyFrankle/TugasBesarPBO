@@ -4,42 +4,58 @@
  */
 package view;
 
-import com.github.lgooddatepicker.components.DatePickerSettings;
-import com.github.lgooddatepicker.components.TimePickerSettings;
+import com.github.lgooddatepicker.components.*;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 /**
  *
  * @author jolly
  */
 public class TestDateTime extends javax.swing.JFrame {
-    private static TimePickerSettings TPs = new TimePickerSettings();
-    private static DatePickerSettings DPs = new DatePickerSettings();
     /**
      * Creates new form TestDateTime
      */
     public TestDateTime() {
         initComponents();
         
-        // Set date and time:
-        inputDateTime.datePicker.setDateToToday();
-        inputDateTime.timePicker.setTimeToNow();
-        
-        DPs.setLocale(new Locale("id"));
-//        DPs.setFormatForDatesCommonEra(DateTimeFormatter.ofPattern("d MMMM yyyy", new Locale("id")));
-        TPs.setFormatForDisplayTime("HH.mm");
-        inputDateTime.getTimePicker().getSettings();
+        initDTInput(inputDateTime);
     }
 
-    private String getFullDateTime(com.github.lgooddatepicker.components.DateTimePicker input) {
+    private String getFullDateTime(DateTimePicker input) {
         try {
             // getDateTimeStrinct() kemudian ubah ke format "yyyy-MM-dd HH:mm:ss"
-            return input.getDateTimeStrict().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            return input.getDateTimeStrict().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         } catch (Exception e) {
             // Input date atau time belum diisi lengkap
             return null;
         }
+    }
+    
+    private void initDTInput(DateTimePicker input) {
+        DatePicker DP = input.getDatePicker();
+        TimePicker TP = input.getTimePicker();
+        
+        // Java passing by reference, jadi dengan melakukan ini, kita mendapatkan settings dari masing2 DatePicker dan TimePickernya, kemudian memodifikasinya kemudian.
+        DatePickerSettings thisDPs = DP.getSettings();
+        TimePickerSettings thisTPs = TP.getSettings();
+        
+        // Set settings:
+        thisDPs.setLocale(new java.util.Locale("id"));
+        thisDPs.setDateRangeLimits(LocalDate.now().minusYears(1), LocalDate.now().plusMonths(1));
+        thisTPs.use24HourClockFormat();
+        
+        // Set font:
+        java.awt.Font elementFont = input.getFont();
+        thisDPs.setFontVetoedDate(elementFont);
+        thisDPs.setFontValidDate(elementFont);
+        thisDPs.setFontInvalidDate(elementFont);
+        thisTPs.fontValidTime = elementFont;
+        thisTPs.fontInvalidTime = elementFont;
+        
+        // Set input datetime to now
+        DP.setDateToToday();
+        TP.setTimeToNow();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,7 +66,7 @@ public class TestDateTime extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        inputDateTime = new com.github.lgooddatepicker.components.DateTimePicker(DPs, TPs);
+        inputDateTime = new com.github.lgooddatepicker.components.DateTimePicker();
         jButton1 = new javax.swing.JButton();
         outputDateTime = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -59,6 +75,8 @@ public class TestDateTime extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Demo DateTime Picker");
+
+        inputDateTime.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
         jButton1.setText("Get DateTime");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -84,27 +102,26 @@ public class TestDateTime extends javax.swing.JFrame {
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
         jTextArea1.setText("Di palette sebelah kanan, ada sebuah kategori baru bernama\n\"Date Time Input\" (di bawah Swing Controls). Sama seperti kom-\nponen lain, langsung saja drag-and-drop komponen tersebut ke\ndalam JFrame, kemudian atur kodenya di belakang.\nDEMO: Coba lihat kode untuk tombol GetDateTime ini:");
+        jTextArea1.setAutoscrolls(false);
+        jTextArea1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(outputDateTime, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(inputDateTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1))))
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(outputDateTime)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(inputDateTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
