@@ -34,13 +34,4 @@ public class JobHistory {
     public void setAktivitas(String aktivitas){
         this.aktivitas = aktivitas;
     }
-    
-    
-    public void showDataPegawai(){
-        
-    }
-
-    public void hitungGajiPegawai(){
-        
-    }
 }

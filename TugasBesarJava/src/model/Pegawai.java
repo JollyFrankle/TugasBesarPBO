@@ -63,7 +63,15 @@ public class Pegawai {
         System.out.println("Job Desc: "+jobDesc);
     }
 
-    public void hitungGajiPegawai(){
-        
+    public int hitungGajiPegawai(){     // JobDesc menggunakan DropDown
+        switch(jobDesc){
+            case "Pencuci Pakaian":     // Pilihan 1 : Pencuci Pakaian
+                return 2500000;
+            case "Penyetrika Pakaian":  // Pilihan 2 : Penyetrika Pakaian
+                return 2000000;
+            case "Packing Pakaian":     // Pilihan 3 : Packing Pakaian
+                return 1000000;
+        }
+        return 0;
     }
 }
