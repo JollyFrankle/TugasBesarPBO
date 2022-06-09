@@ -6,7 +6,7 @@ package view;
 
 import dao.CustomerPreparedDAO;
 import java.util.List;
-import javax.swing.event.ListSelectionEvent;
+import javax.swing.table.TableColumn;
 import model.Customer;
 import table.TableTesting;
 
@@ -25,23 +25,28 @@ public class TestTable extends javax.swing.JFrame {
         
         TBL = new TableTesting(LIST);
         jTable1.setModel(TBL);
-        jTable1.getColumnModel().getColumn(0).setMaxWidth(-1);
+        TableColumn TC = new TableColumn();
+        TC.setHeaderValue("Agar");
+        jTable1.addColumn(TC);
+//        jTable1.getColumnModel().getColumn(0).setModelIndex(99);
+//        System.out.println(jTable1.getColumnName(0));
         
         int colWidth[] = {75, 300, 500, 300};
         int minWidth[] = {50, 200, 300, 150};
         int maxWidth[] = {75, 500, 0, 130};
         for(int i=0; i<colWidth.length; i++) {
             if(colWidth[i] > 0)
-                jTable1.getColumnModel().getColumn(i+1).setPreferredWidth(colWidth[i]);
+                jTable1.getColumnModel().getColumn(i).setPreferredWidth(colWidth[i]);
             if(minWidth[i] > 0)
-                jTable1.getColumnModel().getColumn(i+1).setMinWidth(minWidth[i]);
+                jTable1.getColumnModel().getColumn(i).setMinWidth(minWidth[i]);
             if(maxWidth[i] > 0)
-                jTable1.getColumnModel().getColumn(i+1).setMaxWidth(maxWidth[i]);
+                jTable1.getColumnModel().getColumn(i).setMaxWidth(maxWidth[i]);
         }
     }
     
     private Object getSelectedModel(javax.swing.JTable table) {
         if(table.getSelectedRow() != -1) {
+            System.out.println(table.getValueAt(table.getSelectedRow(), 0));
             return table.getValueAt(table.getSelectedRow(), 0);
         } else {
             return null;

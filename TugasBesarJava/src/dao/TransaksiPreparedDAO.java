@@ -23,8 +23,8 @@ public class TransaksiPreparedDAO {
         con = DBC.makeConnection();
         int rowCount = 0;
         
-        String sql = "INSERT INTO transaksi (idCustomer, status, tglMasuk, tglSelesai, tglAmbil, tipeLayanan) "
-                + "VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO transaksi (idCustomer, status, tglMasuk, tglSelesai, tglAmbil, tipeLayanan, itemLaundry) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         
         try{
             PreparedStatement st = con.prepareStatement(sql);
@@ -34,6 +34,7 @@ public class TransaksiPreparedDAO {
             st.setString(4, T.getTglSelesai());
             st.setString(5, T.getTglAmbil());
             st.setString(6, T.getTipeLayanan().toString());
+            st.setString(7, T.getListItemJSON());
             
             rowCount = st.executeUpdate();
             System.out.println(DbConnection.ANSI_GREEN + "[OK] [TransaksiPreparedDAO/insertTransaksi] Added " + rowCount + " row(s).");
@@ -80,6 +81,7 @@ public class TransaksiPreparedDAO {
                             rs.getString("c.alamat"), 
                             rs.getString("noHP")
                     );
+                    String itemL = rs.getString("t.itemLaundry");
                     Transaksi t = new Transaksi(
                             rs.getInt("t.id"),
                             rs.getString("t.status"), 
@@ -87,6 +89,7 @@ public class TransaksiPreparedDAO {
                             rs.getString("t.tglSelesai"), 
                             rs.getString("t.tglAmbil"), 
                             rs.getString("t.tipeLayanan"),
+                            itemL == null ? "[]" : itemL,
                             c
                     );
                     list.add(t);

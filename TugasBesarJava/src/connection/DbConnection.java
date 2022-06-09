@@ -24,7 +24,7 @@ public class DbConnection {
         try {
             CON = DriverManager.getConnection(URL + PATH, USER, PWD);
         } catch (Exception e) {
-            System.out.println(ANSI_RED + "[E] [DBcon/make]: " + e.toString());
+            System.out.println(ANSI_RED + "[E] [DBcon/make]: " + e.getMessage());
         }
         
         return CON;
@@ -34,7 +34,7 @@ public class DbConnection {
         try {
             CON.close();
         } catch (Exception e) {
-            System.out.println(ANSI_RED + "[E] [DBcon/close]: " + e.toString());
+            System.out.println(ANSI_RED + "[E] [DBcon/close]: " + e.getMessage());
         }
     }
 }
