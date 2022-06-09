@@ -84,7 +84,7 @@ public class CustomerPreparedDAO {
         return list;
     }
     
-    public List<Customer> searchCustomer() {
+    public List<Customer> showCustomer() {
         return searchCustomer("");
     }
     

@@ -45,7 +45,7 @@ public class Customer {
         this.noHP = noHP;
     }
     
-    
-
-    // BELUM ADA METHOD
+    public String showDataCustomer(){
+        return id + " | " + nama + " | " + alamat + " | " + noHP;
+    }
 }
