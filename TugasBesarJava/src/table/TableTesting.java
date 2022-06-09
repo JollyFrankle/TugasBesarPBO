@@ -15,7 +15,6 @@ import model.Customer;
  * Praktikum PBO kelas B
  */
 public class TableTesting extends AbstractTableModel {
-    private static final int BASE = 1;
     private List<Customer> list;
     
     public TableTesting(List<Customer> list) {
@@ -29,7 +28,7 @@ public class TableTesting extends AbstractTableModel {
     
     @Override
     public int getColumnCount() {
-        return BASE + 4;
+        return 4;
     }
     
     @Override
@@ -37,16 +36,15 @@ public class TableTesting extends AbstractTableModel {
         Customer activeRow = list.get(rowIndex);
         switch(columnIndex) {
             case 0:
-                // Nomor 0 sudah pasti visually hidden:
-                return activeRow;
-            case 1:
                 return activeRow.getId();
-            case 2:
+            case 1:
                 return activeRow.getNama();
-            case 3:
+            case 2:
                 return activeRow.getAlamat();
-            case 4:
+            case 3:
                 return activeRow.getNoHP();
+            case 99:
+                return activeRow;
             default:
                 return null;
         }
@@ -55,13 +53,13 @@ public class TableTesting extends AbstractTableModel {
     @Override
     public String getColumnName(int column) {
         switch(column) {
-            case 1:
+            case 0:
                 return "ID";
-            case 2:
+            case 1:
                 return "Nama";
-            case 3:
+            case 2:
                 return "Alamat";
-            case 4:
+            case 3:
                 return "No. HP";
             default:
                 return null;
