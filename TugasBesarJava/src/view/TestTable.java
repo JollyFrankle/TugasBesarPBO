@@ -25,11 +25,6 @@ public class TestTable extends javax.swing.JFrame {
         
         TBL = new TableTesting(LIST);
         jTable1.setModel(TBL);
-        TableColumn TC = new TableColumn();
-        TC.setHeaderValue("Agar");
-        jTable1.addColumn(TC);
-//        jTable1.getColumnModel().getColumn(0).setModelIndex(99);
-//        System.out.println(jTable1.getColumnName(0));
         
         int colWidth[] = {75, 300, 500, 300};
         int minWidth[] = {50, 200, 300, 150};
@@ -69,8 +64,6 @@ public class TestTable extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setAutoCreateRowSorter(true);
-        jTable1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -82,6 +75,7 @@ public class TestTable extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jTable1.setRowHeight(32);
         jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
