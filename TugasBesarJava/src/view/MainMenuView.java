@@ -53,8 +53,8 @@ public class MainMenuView extends javax.swing.JFrame {
 
         logo.setBackground(new java.awt.Color(195, 228, 248));
 
-        logoIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/washing-machine.png"))); // NOI18N
         logoIcon.setBackground(new java.awt.Color(195, 228, 248));
+        logoIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/washing-machine.png"))); // NOI18N
 
         javax.swing.GroupLayout logoLayout = new javax.swing.GroupLayout(logo);
         logo.setLayout(logoLayout);
@@ -75,14 +75,14 @@ public class MainMenuView extends javax.swing.JFrame {
 
         namaCorp.setBackground(new java.awt.Color(195, 228, 248));
 
-        clean.setText("CLEAN");
         clean.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
+        clean.setText("CLEAN");
 
-        and.setText("&");
         and.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        and.setText("&");
 
-        fresh.setText("FRESH");
         fresh.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
+        fresh.setText("FRESH");
 
         javax.swing.GroupLayout namaCorpLayout = new javax.swing.GroupLayout(namaCorp);
         namaCorp.setLayout(namaCorpLayout);
@@ -133,8 +133,8 @@ public class MainMenuView extends javax.swing.JFrame {
 
         search.setBackground(new java.awt.Color(195, 228, 248));
 
-        viewWhereAU.setText("MAIN MENU");
         viewWhereAU.setFont(new java.awt.Font("Eras Demi ITC", 1, 36)); // NOI18N
+        viewWhereAU.setText("MAIN MENU");
 
         javax.swing.GroupLayout searchLayout = new javax.swing.GroupLayout(search);
         search.setLayout(searchLayout);
@@ -166,12 +166,12 @@ public class MainMenuView extends javax.swing.JFrame {
         menuLayout.setHorizontalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuLayout.createSequentialGroup()
-                .addGap(320, 320, 320)
+                .addContainerGap(320, Short.MAX_VALUE)
                 .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(transaksiBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
-                .addGap(330, 330, 330))
+                .addContainerGap(330, Short.MAX_VALUE))
         );
         menuLayout.setVerticalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,8 +187,8 @@ public class MainMenuView extends javax.swing.JFrame {
 
         footer.setBackground(new java.awt.Color(169, 217, 246));
 
-        footerName.setText("Made by Love and Clean Heart's");
         footerName.setForeground(new java.awt.Color(102, 102, 102));
+        footerName.setText("Made by Love and Clean Heart's");
 
         javax.swing.GroupLayout footerLayout = new javax.swing.GroupLayout(footer);
         footer.setLayout(footerLayout);
@@ -214,7 +214,7 @@ public class MainMenuView extends javax.swing.JFrame {
             .addComponent(corpName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(footer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(menu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(menu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         BackgoundLayout.setVerticalGroup(
             BackgoundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
