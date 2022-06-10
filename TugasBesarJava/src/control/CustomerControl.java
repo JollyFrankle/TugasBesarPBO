@@ -3,20 +3,21 @@ package control;
 import dao.CustomerPreparedDAO;
 import java.util.List;
 import model.Customer;
+import table.TableCustomer;
 
 /**
  *
  * @author Tanto
  */
 public class CustomerControl {
-    private CustomerPreparedDAO cDao = new CustomerPreparedDAO();
+    private CustomerPreparedDAO cDAO = new CustomerPreparedDAO();
     
     public void insertDataCustomer(Customer c){
-        cDao.insertCustomer(c);
+        cDAO.insertCustomer(c);
     }
     
     public String showDataCustomer(){
-        List<Customer> dataCustomer = cDao.showCustomer();
+        List<Customer> dataCustomer = cDAO.showCustomer();
         
         String customerString = "";
         for(int i=0; i<dataCustomer.size(); i++){
@@ -37,23 +38,25 @@ public class CustomerControl {
 //        return computerString;
 //    }
     
-    public List<Customer> searchCustomer(String id){
-        List<Customer> c = null;
-        c = cDao.searchCustomer(id);
-        
-        return c;
+    public List<Customer> searchCustomer(String query){
+        return cDAO.searchCustomer(query);
     }
     
     public void updateDataCustomer(Customer c){
-        cDao.updateCustomer(c);
+        cDAO.updateCustomer(c);
     }
     
     public void deleteDataCustomer(int id){
-        cDao.deleteCustomer(id);
+        cDAO.deleteCustomer(id);
+    }
+    
+    public TableCustomer getTableCustomer(String query) {
+        TableCustomer tableC = new TableCustomer(cDAO.searchCustomer(query));
+        return tableC;
     }
     
     public List<Customer> showListAllCustomer(){
-        List<Customer> dataCustomer = cDao.showCustomer();
+        List<Customer> dataCustomer = cDAO.showCustomer();
         
         return dataCustomer;
     }
