@@ -2,22 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package table;
 
-import java.util.List;
-import model.Customer;
-import javax.swing.table.AbstractTableModel;
+import java.util.*;
+import model.Pegawai;
 
 /**
- * Nama : Calvin Andrean Suhedy
- * NPM : 200710824
- * Kelas : PBO B
+ *
+ * @author M S I
  */
-public class TableCustomer extends AbstractTableModel{
-    List<Customer> list;
+public class TablePegawai {
+    List<Pegawai> list;
     
-    public TableCustomer(List<Customer> list){
+    public TablePegawai(List<Pegawai> list){
         this.list = list;
     }
     
@@ -26,7 +23,7 @@ public class TableCustomer extends AbstractTableModel{
     }
     
     public int getColumnCount(){
-        return 4;
+        return 5;
     }
     
     public Object getValueAt(int rowIndex, int columnIndex){
@@ -36,11 +33,11 @@ public class TableCustomer extends AbstractTableModel{
             case 1:
                 return list.get(rowIndex).getNama();
             case 2:
-                return list.get(rowIndex).getAlamat();
+                return list.get(rowIndex).getTglLahir();
             case 3:
                 return list.get(rowIndex).getNoHP();
-            case 99:
-                return list.get(rowIndex);
+            case 4:
+                return list.get(rowIndex).getJobDesc();
             default:
                 return null;
         }
@@ -53,11 +50,13 @@ public class TableCustomer extends AbstractTableModel{
             case 1:
                 return "Nama";
             case 2:
-                return "Alamat";
+                return "Tanggal Lahir";
             case 3:
-                return "Nomor HP";
+                return "No HP";
+            case 4:
+                return "Job Description";
             default:
-                return null;           
+                return null;
         }
     }
 }
