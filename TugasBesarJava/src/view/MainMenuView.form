@@ -266,18 +266,11 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="253" max="32767" attributes="0"/>
-                              <Component id="jButton2" min="-2" pref="303" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jButton1" alignment="1" min="-2" pref="303" max="-2" attributes="0"/>
-                                  <Component id="transaksiBtn" min="-2" pref="303" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="jButton2" alignment="1" min="-2" pref="303" max="-2" attributes="0"/>
+                          <Component id="jButton1" alignment="1" min="-2" pref="303" max="-2" attributes="0"/>
+                          <Component id="transaksiBtn" min="-2" pref="303" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="249" max="32767" attributes="0"/>
                   </Group>
@@ -312,6 +305,7 @@
                 <Property name="text" type="java.lang.String" value="Transaksi"/>
               </Properties>
               <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="transaksiBtnMouseClicked"/>
                 <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="transaksiBtnMouseEntered"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="transaksiBtnActionPerformed"/>
               </Events>
@@ -329,6 +323,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Customer"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton2">
               <Properties>
@@ -343,6 +340,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Pegawai"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton2MouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
