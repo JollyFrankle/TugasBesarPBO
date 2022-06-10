@@ -19,7 +19,6 @@ public class TestTable extends javax.swing.JFrame {
     
     /**
      * Creates new form TestTable
-     * @param LIST
      */
     public TestTable(List<Customer> LIST) {
         initComponents();
@@ -45,9 +44,10 @@ public class TestTable extends javax.swing.JFrame {
         }
     }
     
-    private Object getTableSelectedObject(javax.swing.JTable table) {
+    private Object getSelectedModel(javax.swing.JTable table) {
         if(table.getSelectedRow() != -1) {
-            return table.getModel().getValueAt(table.getSelectedRow(), 0);
+            System.out.println(table.getValueAt(table.getSelectedRow(), 0));
+            return table.getValueAt(table.getSelectedRow(), 0);
         } else {
             return null;
         }
@@ -129,7 +129,7 @@ public class TestTable extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        Customer C = (Customer) getTableSelectedObject(jTable1);
+        Customer C = (Customer) getSelectedModel(jTable1);
         System.out.println(C.getNama());
     }//GEN-LAST:event_jTable1MouseClicked
 
