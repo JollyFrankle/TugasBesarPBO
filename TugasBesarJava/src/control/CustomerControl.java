@@ -26,16 +26,7 @@ public class CustomerControl {
         return customerString;
     }
     
-//    public String showDataDesktop(){
-//        List<Computer> dataComputer = cDao.showComputer();
-//        
-//        String computerString = "";
-//        for(int i=0; i<dataComputer.size(); i++){
-//            computerString += dataComputer.get(i).showDataDesktop();
-//        }
-//        
-//        return computerString;
-//    }
+    
     
     public List<Customer> searchCustomer(String id){
         List<Customer> c = null;

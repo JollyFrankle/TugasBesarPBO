@@ -294,7 +294,6 @@ public class MainMenuView extends javax.swing.JFrame {
         CustomerView cv = new CustomerView();
         this.dispose();
         cv.setVisible(true);
-        //test
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
