@@ -3,6 +3,7 @@ package control;
 import dao.CustomerPreparedDAO;
 import java.util.List;
 import model.Customer;
+import table.TableCustomer;
 
 /**
  *
@@ -26,7 +27,9 @@ public class CustomerControl {
         return customerString;
     }
     
-    
+    public TableCustomer getTableCustomer(String query) {
+        return new TableCustomer(cDao.searchCustomer(query));
+    }
     
     public List<Customer> searchCustomer(String id){
         List<Customer> c = null;
