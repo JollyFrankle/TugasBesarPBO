@@ -5,7 +5,6 @@ import java.sql.Connection;
 
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Customer;
@@ -77,7 +76,7 @@ public class CustomerPreparedDAO {
             System.out.println(DbConnection.ANSI_GREEN + "[OK] [CustomerPreparedDAO/searchCustomer] Fetched " + rowCount + " row(s).");
             rs.close();
             st.close();
-        } catch(SQLException e){
+        } catch(Exception e){
             System.out.println(DbConnection.ANSI_RED + "[E] [CustomerPreparedDAO/searchCustomer] Error: " + e.toString());
         }
         DBC.closeConnection();
@@ -105,7 +104,7 @@ public class CustomerPreparedDAO {
             rowCount = st.executeUpdate();
             System.out.println(DbConnection.ANSI_GREEN + "[OK] [CustomerPreparedDAO/updateCustomer] Updated " + rowCount + " row(s).");
             st.close();
-        }catch(SQLException e){
+        }catch(Exception e){
             System.out.println(DbConnection.ANSI_RED + "[E] [CustomerPreparedDAO/updateCustomer] Error: " + e.toString());
         }
         DBC.closeConnection();
@@ -125,7 +124,7 @@ public class CustomerPreparedDAO {
             rowCount = st.executeUpdate();
             System.out.println(DbConnection.ANSI_GREEN + "[OK] [CustomerPreparedDAO/deleteCustomer] Deleted " + rowCount + " row(s).");
             st.close();
-        }catch(SQLException e){
+        }catch(Exception e){
             System.out.println(DbConnection.ANSI_RED + "[E] [CustomerPreparedDAO/deleteCustomer] Error: " + e.toString());
         }
         DBC.closeConnection();

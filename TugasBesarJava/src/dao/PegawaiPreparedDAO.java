@@ -5,7 +5,6 @@ import java.sql.Connection;
 
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Pegawai;
@@ -37,7 +36,7 @@ public class PegawaiPreparedDAO {
             rowCount = st.executeUpdate();
             System.out.println(DbConnection.ANSI_GREEN + "[OK] [PegawaiPreparedDAO/insertPegawai] Added " + rowCount + " row(s).");
             st.close();
-        }catch(SQLException e){
+        }catch(Exception e){
             System.out.println(DbConnection.ANSI_RED + "[E] [PegawaiPreparedDAO/insertPegawai] Error: " + e.toString());
         }
         DBC.closeConnection();
@@ -79,7 +78,7 @@ public class PegawaiPreparedDAO {
             System.out.println(DbConnection.ANSI_GREEN + "[OK] [PegawaiPreparedDAO/searchPegawai] Fetched " + rowCount + " row(s).");
             rs.close();
             st.close();
-        } catch(SQLException e){
+        } catch(Exception e){
             System.out.println(DbConnection.ANSI_RED + "[E] [PegawaiPreparedDAO/searchPegawai] Error: " + e.toString());
         }
         DBC.closeConnection();
@@ -113,7 +112,7 @@ public class PegawaiPreparedDAO {
             rowCount = st.executeUpdate();
             System.out.println(DbConnection.ANSI_GREEN + "[OK] [PegawaiPreparedDAO/updatePegawai] Updated " + rowCount + " row(s).");
             st.close();
-        }catch(SQLException e){
+        }catch(Exception e){
             System.out.println(DbConnection.ANSI_RED + "[E] [PegawaiPreparedDAO/updatePegawai] Error: " + e.toString());
         }
         DBC.closeConnection();
@@ -134,7 +133,7 @@ public class PegawaiPreparedDAO {
             rowCount = st.executeUpdate();
             System.out.println(DbConnection.ANSI_GREEN + "[OK] [PegawaiPreparedDAO/deletePegawai] Deleted " + rowCount + " row(s).");
             st.close();
-        }catch(SQLException e){
+        }catch(Exception e){
             System.out.println(DbConnection.ANSI_RED + "[E] [PegawaiPreparedDAO/deletePegawai] Error: " + e.toString());
         }
         DBC.closeConnection();

@@ -5,7 +5,6 @@ import java.sql.Connection;
 
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Customer;
@@ -40,7 +39,7 @@ public class TransaksiPreparedDAO {
             rowCount = st.executeUpdate();
             System.out.println(DbConnection.ANSI_GREEN + "[OK] [TransaksiPreparedDAO/insertTransaksi] Added " + rowCount + " row(s).");
             st.close();
-        }catch(SQLException e){
+        }catch(Exception e){
             System.out.println(DbConnection.ANSI_RED + "[E] [TransaksiPreparedDAO/insertTransaksi] Error: " + e.toString());
         }
         DBC.closeConnection();
@@ -101,7 +100,7 @@ public class TransaksiPreparedDAO {
             System.out.println(DbConnection.ANSI_GREEN + "[OK] [TransaksiPreparedDAO/searchTransaksi] Fetched " + rowCount + " row(s).");
             rs.close();
             st.close();
-        } catch(SQLException e){
+        } catch(Exception e){
             System.out.println(DbConnection.ANSI_RED + "[E] [TransaksiPreparedDAO/searchTransaksi] Error: " + e.toString());
         }
         DBC.closeConnection();
@@ -139,7 +138,7 @@ public class TransaksiPreparedDAO {
             rowCount = st.executeUpdate();
             System.out.println(DbConnection.ANSI_GREEN + "[OK] [TransaksiPreparedDAO/updateTransaksi] Updated " + rowCount + " row(s).");
             st.close();
-        }catch(SQLException e){
+        }catch(Exception e){
             System.out.println(DbConnection.ANSI_RED + "[E] [TransaksiPreparedDAO/updateTransaksi] Error: " + e.toString());
         }
         DBC.closeConnection();
@@ -160,7 +159,7 @@ public class TransaksiPreparedDAO {
             
             System.out.println(DbConnection.ANSI_GREEN + "[OK] [TransaksiPreparedDAO/deleteTransaksi] Deleted " + rowCount + " row(s).");
             st.close();
-        }catch(SQLException e){
+        }catch(Exception e){
             System.out.println(DbConnection.ANSI_RED + "[E] [TransaksiPreparedDAO/deleteTransaksi] Error: " + e.toString());
         }
         DBC.closeConnection();
