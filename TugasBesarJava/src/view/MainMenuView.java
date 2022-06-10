@@ -150,7 +150,14 @@ public class MainMenuView extends javax.swing.JFrame {
         );
         searchLayout.setVerticalGroup(
             searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
             .addComponent(viewWhereAU, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+=======
+            .addGroup(searchLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(viewWhereAU)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+>>>>>>> 643287a67170a20346c8f6ef71eb32e692515d09
         );
 
         menu.setBackground(new java.awt.Color(195, 228, 248));
@@ -160,8 +167,13 @@ public class MainMenuView extends javax.swing.JFrame {
         transaksiBtn.setForeground(new java.awt.Color(255, 255, 255));
         transaksiBtn.setText("Transaksi");
         transaksiBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+<<<<<<< HEAD
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 transaksiBtnMouseEntered(evt);
+=======
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                transaksiBtnMouseClicked(evt);
+>>>>>>> 643287a67170a20346c8f6ef71eb32e692515d09
             }
         });
         transaksiBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -174,11 +186,31 @@ public class MainMenuView extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Gill Sans Ultra Bold", 0, 24)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Customer");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(255, 204, 153));
         jButton2.setFont(new java.awt.Font("Gill Sans Ultra Bold", 0, 24)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Pegawai");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
         menu.setLayout(menuLayout);
@@ -265,14 +297,49 @@ public class MainMenuView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< HEAD
     private void transaksiBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transaksiBtnMouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_transaksiBtnMouseEntered
 
+=======
+>>>>>>> 643287a67170a20346c8f6ef71eb32e692515d09
     private void transaksiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transaksiBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_transaksiBtnActionPerformed
 
+<<<<<<< HEAD
+=======
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void transaksiBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transaksiBtnMouseClicked
+        // TODO add your handling code here:
+        TransaksiView tv = new TransaksiView();
+        this.dispose();
+        tv.setVisible(true);
+    }//GEN-LAST:event_transaksiBtnMouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        CustomerView cv = new CustomerView();
+        this.dispose();
+        cv.setVisible(true);
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        PegawaiView pv = new PegawaiView();
+        this.dispose();
+        pv.setVisible(true);
+    }//GEN-LAST:event_jButton2MouseClicked
+
+>>>>>>> 643287a67170a20346c8f6ef71eb32e692515d09
     /**
      * @param args the command line arguments
      */
