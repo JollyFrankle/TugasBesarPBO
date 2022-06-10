@@ -76,12 +76,15 @@ public class MainMenuView extends javax.swing.JFrame {
         namaCorp.setBackground(new java.awt.Color(195, 228, 248));
 
         clean.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
+        clean.setForeground(new java.awt.Color(102, 102, 102));
         clean.setText("CLEAN");
 
         and.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        and.setForeground(new java.awt.Color(102, 102, 102));
         and.setText("&");
 
         fresh.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
+        fresh.setForeground(new java.awt.Color(102, 102, 102));
         fresh.setText("FRESH");
 
         javax.swing.GroupLayout namaCorpLayout = new javax.swing.GroupLayout(namaCorp);
@@ -133,7 +136,7 @@ public class MainMenuView extends javax.swing.JFrame {
 
         search.setBackground(new java.awt.Color(195, 228, 248));
 
-        viewWhereAU.setFont(new java.awt.Font("Eras Demi ITC", 1, 36)); // NOI18N
+        viewWhereAU.setFont(new java.awt.Font("Eras Demi ITC", 1, 55)); // NOI18N
         viewWhereAU.setText("MAIN MENU");
 
         javax.swing.GroupLayout searchLayout = new javax.swing.GroupLayout(search);
@@ -142,23 +145,39 @@ public class MainMenuView extends javax.swing.JFrame {
             searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(viewWhereAU, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(viewWhereAU)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         searchLayout.setVerticalGroup(
             searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(searchLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(viewWhereAU)
-                .addContainerGap(12, Short.MAX_VALUE))
+            .addComponent(viewWhereAU, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
         );
 
         menu.setBackground(new java.awt.Color(195, 228, 248));
 
+        transaksiBtn.setBackground(new java.awt.Color(255, 204, 153));
+        transaksiBtn.setFont(new java.awt.Font("Gill Sans Ultra Bold", 0, 24)); // NOI18N
+        transaksiBtn.setForeground(new java.awt.Color(255, 255, 255));
         transaksiBtn.setText("Transaksi");
+        transaksiBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                transaksiBtnMouseEntered(evt);
+            }
+        });
+        transaksiBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transaksiBtnActionPerformed(evt);
+            }
+        });
 
+        jButton1.setBackground(new java.awt.Color(255, 204, 153));
+        jButton1.setFont(new java.awt.Font("Gill Sans Ultra Bold", 0, 24)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Customer");
 
+        jButton2.setBackground(new java.awt.Color(255, 204, 153));
+        jButton2.setFont(new java.awt.Font("Gill Sans Ultra Bold", 0, 24)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Pegawai");
 
         javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
@@ -166,23 +185,27 @@ public class MainMenuView extends javax.swing.JFrame {
         menuLayout.setHorizontalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuLayout.createSequentialGroup()
-                .addContainerGap(320, Short.MAX_VALUE)
                 .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(transaksiBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
-                .addContainerGap(330, Short.MAX_VALUE))
+                    .addGroup(menuLayout.createSequentialGroup()
+                        .addContainerGap(253, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, menuLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(transaksiBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(249, Short.MAX_VALUE))
         );
         menuLayout.setVerticalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuLayout.createSequentialGroup()
                 .addGap(57, 57, 57)
-                .addComponent(transaksiBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
-                .addGap(315, 315, 315))
+                .addComponent(transaksiBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+                .addGap(73, 73, 73)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
+                .addGap(68, 68, 68)
+                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                .addGap(196, 196, 196))
         );
 
         footer.setBackground(new java.awt.Color(169, 217, 246));
@@ -223,8 +246,8 @@ public class MainMenuView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(footer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -241,6 +264,14 @@ public class MainMenuView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void transaksiBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transaksiBtnMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_transaksiBtnMouseEntered
+
+    private void transaksiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transaksiBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_transaksiBtnActionPerformed
 
     /**
      * @param args the command line arguments
