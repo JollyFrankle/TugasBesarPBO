@@ -6,12 +6,12 @@ package table;
 
 import java.util.*;
 import model.Pegawai;
-
+import javax.swing.table.AbstractTableModel;
 /**
  *
  * @author M S I
  */
-public class TablePegawai {
+public class TablePegawai extends AbstractTableModel{
     List<Pegawai> list;
     
     public TablePegawai(List<Pegawai> list){
