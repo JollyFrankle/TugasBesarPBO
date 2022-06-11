@@ -451,9 +451,9 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                      <Component id="viewWhereAU" min="-2" pref="222" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="viewWhereAU" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                       <Component id="cariText" max="32767" attributes="0"/>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Component id="cariBtn" min="-2" pref="117" max="-2" attributes="0"/>
@@ -483,7 +483,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="viewWhereAU">
               <Properties>
-                <Property name="text" type="java.lang.String" value="TRANSAKSI"/>
+                <Property name="text" type="java.lang.String" value="JOB HISTORY"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Eras Demi ITC" size="36" style="1"/>
                 </Property>

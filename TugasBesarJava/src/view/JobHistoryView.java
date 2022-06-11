@@ -298,7 +298,7 @@ public class JobHistoryView extends javax.swing.JFrame {
 
         search.setBackground(new java.awt.Color(195, 228, 248));
 
-        viewWhereAU.setText("TRANSAKSI");
+        viewWhereAU.setText("JOB HISTORY");
         viewWhereAU.setFont(new java.awt.Font("Eras Demi ITC", 1, 36)); // NOI18N
 
         cariText.addActionListener(new java.awt.event.ActionListener() {
@@ -314,9 +314,9 @@ public class JobHistoryView extends javax.swing.JFrame {
         searchLayout.setHorizontalGroup(
             searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(searchLayout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(viewWhereAU, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
+                .addComponent(viewWhereAU)
+                .addGap(6, 6, 6)
                 .addComponent(cariText)
                 .addGap(18, 18, 18)
                 .addComponent(cariBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)

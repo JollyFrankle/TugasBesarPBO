@@ -21,7 +21,7 @@ public class CustomerView extends javax.swing.JFrame {
     public CustomerView() {
         initComponents();
         
-        initTable();
+//        initTable();
     }
 
     private Object getTableSelectedObject(javax.swing.JTable table) {
@@ -32,21 +32,21 @@ public class CustomerView extends javax.swing.JFrame {
         }
     }
     
-    private void initTable() {
-        tblUtama.setModel(cCTRL.getTableCustomer(""));
-        
-        int colWidth[] = {75, 300, 500, 300};
-        int minWidth[] = {50, 200, 300, 150};
-        int maxWidth[] = {75, 500, 0, 130};
-        for(int i=0; i<colWidth.length; i++) {
-            if(colWidth[i] > 0)
-                tblUtama.getColumnModel().getColumn(i).setPreferredWidth(colWidth[i]);
-            if(minWidth[i] > 0)
-                tblUtama.getColumnModel().getColumn(i).setMinWidth(minWidth[i]);
-            if(maxWidth[i] > 0)
-                tblUtama.getColumnModel().getColumn(i).setMaxWidth(maxWidth[i]);
-        }
-    }
+//    private void initTable() {
+//        tblUtama.setModel(cCTRL.getTableCustomer(""));
+//        
+//        int colWidth[] = {75, 300, 500, 300};
+//        int minWidth[] = {50, 200, 300, 150};
+//        int maxWidth[] = {75, 500, 0, 130};
+//        for(int i=0; i<colWidth.length; i++) {
+//            if(colWidth[i] > 0)
+//                tblUtama.getColumnModel().getColumn(i).setPreferredWidth(colWidth[i]);
+//            if(minWidth[i] > 0)
+//                tblUtama.getColumnModel().getColumn(i).setMinWidth(minWidth[i]);
+//            if(maxWidth[i] > 0)
+//                tblUtama.getColumnModel().getColumn(i).setMaxWidth(maxWidth[i]);
+//        }
+//    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -77,23 +77,18 @@ public class CustomerView extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         tempKanan = new javax.swing.JPanel();
-        searchPanel = new javax.swing.JPanel();
+        search = new javax.swing.JPanel();
         viewWhereAU = new javax.swing.JLabel();
         cariText = new javax.swing.JTextField();
         cariBtn = new javax.swing.JButton();
-        contentPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblUtama = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
-        inputNama = new javax.swing.JTextField();
-        inputAlamat = new javax.swing.JTextField();
-        inputNoHP = new javax.swing.JTextField();
-        footerPanel = new javax.swing.JPanel();
+        menu = new javax.swing.JPanel();
+        footer = new javax.swing.JPanel();
         footerName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(195, 228, 248));
         setMinimumSize(new java.awt.Dimension(800, 700));
+        setPreferredSize(new java.awt.Dimension(800, 900));
 
         Backgound.setBackground(new java.awt.Color(195, 228, 248));
 
@@ -313,7 +308,7 @@ public class CustomerView extends javax.swing.JFrame {
 
         navBar.add(tempKanan);
 
-        searchPanel.setBackground(new java.awt.Color(195, 228, 248));
+        search.setBackground(new java.awt.Color(195, 228, 248));
 
         viewWhereAU.setText("CUSTOMER");
         viewWhereAU.setFont(new java.awt.Font("Eras Demi ITC", 1, 36)); // NOI18N
@@ -326,11 +321,11 @@ public class CustomerView extends javax.swing.JFrame {
 
         cariBtn.setText("Cari");
 
-        javax.swing.GroupLayout searchPanelLayout = new javax.swing.GroupLayout(searchPanel);
-        searchPanel.setLayout(searchPanelLayout);
-        searchPanelLayout.setHorizontalGroup(
-            searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(searchPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout searchLayout = new javax.swing.GroupLayout(search);
+        search.setLayout(searchLayout);
+        searchLayout.setHorizontalGroup(
+            searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(searchLayout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(viewWhereAU, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -339,122 +334,50 @@ public class CustomerView extends javax.swing.JFrame {
                 .addComponent(cariBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65))
         );
-        searchPanelLayout.setVerticalGroup(
-            searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchPanelLayout.createSequentialGroup()
+        searchLayout.setVerticalGroup(
+            searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cariBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(searchPanelLayout.createSequentialGroup()
+                    .addGroup(searchLayout.createSequentialGroup()
                         .addGap(0, 1, Short.MAX_VALUE)
-                        .addGroup(searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(cariText, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(viewWhereAU))))
                 .addContainerGap())
         );
 
-        contentPanel.setBackground(new java.awt.Color(195, 228, 248));
+        menu.setBackground(new java.awt.Color(195, 228, 248));
 
-        tblUtama.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        tblUtama.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tblUtama.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        tblUtama.setRowHeight(32);
-        tblUtama.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tblUtama.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tblUtama.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblUtamaMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tblUtama);
-
-        inputNama.setText("inputNama");
-
-        inputAlamat.setText("inputAlamat");
-        inputAlamat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputAlamatActionPerformed(evt);
-            }
-        });
-
-        inputNoHP.setText("inputNoHP");
-        inputNoHP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputNoHPActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(inputNama, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(inputAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(inputNoHP, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
+        menu.setLayout(menuLayout);
+        menuLayout.setHorizontalGroup(
+            menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(inputNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(inputAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(inputNoHP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(136, Short.MAX_VALUE))
+        menuLayout.setVerticalGroup(
+            menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 546, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
-        contentPanel.setLayout(contentPanelLayout);
-        contentPanelLayout.setHorizontalGroup(
-            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        contentPanelLayout.setVerticalGroup(
-            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        footerPanel.setBackground(new java.awt.Color(169, 217, 246));
+        footer.setBackground(new java.awt.Color(169, 217, 246));
 
         footerName.setText("Made by Love and Clean Heart's");
         footerName.setForeground(new java.awt.Color(102, 102, 102));
 
-        javax.swing.GroupLayout footerPanelLayout = new javax.swing.GroupLayout(footerPanel);
-        footerPanel.setLayout(footerPanelLayout);
-        footerPanelLayout.setHorizontalGroup(
-            footerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, footerPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout footerLayout = new javax.swing.GroupLayout(footer);
+        footer.setLayout(footerLayout);
+        footerLayout.setHorizontalGroup(
+            footerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, footerLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(footerName, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        footerPanelLayout.setVerticalGroup(
-            footerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, footerPanelLayout.createSequentialGroup()
+        footerLayout.setVerticalGroup(
+            footerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, footerLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(footerName)
                 .addContainerGap())
@@ -465,10 +388,10 @@ public class CustomerView extends javax.swing.JFrame {
         BackgoundLayout.setHorizontalGroup(
             BackgoundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(corpName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(navBar, javax.swing.GroupLayout.DEFAULT_SIZE, 816, Short.MAX_VALUE)
-            .addComponent(footerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(searchPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(contentPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(navBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(footer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(menu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         BackgoundLayout.setVerticalGroup(
             BackgoundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -477,11 +400,11 @@ public class CustomerView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(navBar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(footerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(footer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -503,15 +426,15 @@ public class CustomerView extends javax.swing.JFrame {
     }//GEN-LAST:event_cariTextActionPerformed
 
     private void tblUtamaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUtamaMouseClicked
-        Customer C = (Customer) getTableSelectedObject(tblUtama);
-        // on selected, display ke inputannya
-        // tetapkan ID:
-        this.selectedId = C.getId();
-        
-        // tetapkan input:
-        inputNama.setText(C.getNama());
-        inputAlamat.setText(C.getAlamat());
-        inputNoHP.setText(C.getNoHP());
+//        Customer C = (Customer) getTableSelectedObject(tblUtama);
+//        // on selected, display ke inputannya
+//        // tetapkan ID:
+//        this.selectedId = C.getId();
+//        
+//        // tetapkan input:
+//        inputNama.setText(C.getNama());
+//        inputAlamat.setText(C.getAlamat());
+//        inputNoHP.setText(C.getNoHP());
     }//GEN-LAST:event_tblUtamaMouseClicked
 
     private void inputAlamatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputAlamatActionPerformed
@@ -554,6 +477,7 @@ public class CustomerView extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new CustomerView().setVisible(true);
             }
@@ -566,30 +490,24 @@ public class CustomerView extends javax.swing.JFrame {
     private javax.swing.JButton cariBtn;
     private javax.swing.JTextField cariText;
     private javax.swing.JLabel clean;
-    private javax.swing.JPanel contentPanel;
     private javax.swing.JPanel corpName;
+    private javax.swing.JPanel footer;
     private javax.swing.JLabel footerName;
-    private javax.swing.JPanel footerPanel;
     private javax.swing.JLabel fresh;
-    private javax.swing.JTextField inputAlamat;
-    private javax.swing.JTextField inputNama;
-    private javax.swing.JTextField inputNoHP;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel logo;
     private javax.swing.JLabel logoIcon;
+    private javax.swing.JPanel menu;
     private javax.swing.JPanel namaCorp;
     private javax.swing.JPanel navBar;
     private javax.swing.JPanel panelCustomer;
     private javax.swing.JPanel panelPegawai;
     private javax.swing.JPanel panelTransaksi;
-    private javax.swing.JPanel searchPanel;
-    private javax.swing.JTable tblUtama;
+    private javax.swing.JPanel search;
     private javax.swing.JPanel tempKanan;
     private javax.swing.JPanel tempKiri;
     private javax.swing.JButton transaksiBtn;
