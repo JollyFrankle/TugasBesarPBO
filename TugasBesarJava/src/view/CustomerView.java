@@ -80,7 +80,6 @@ public class CustomerView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(195, 228, 248));
         setMinimumSize(new java.awt.Dimension(800, 700));
-        setPreferredSize(new java.awt.Dimension(1000, 900));
 
         Backgound.setBackground(new java.awt.Color(195, 228, 248));
 
@@ -168,11 +167,16 @@ public class CustomerView extends javax.swing.JFrame {
 
         navBar.setBackground(new java.awt.Color(195, 228, 248));
 
-        homeBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/house.png"))); // NOI18N
-        homeBtn.setText("Home");
         homeBtn.setBackground(new java.awt.Color(255, 204, 153));
         homeBtn.setFont(new java.awt.Font("Gill Sans Ultra Bold", 0, 24)); // NOI18N
         homeBtn.setForeground(new java.awt.Color(255, 255, 255));
+        homeBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/house.png"))); // NOI18N
+        homeBtn.setText("Home");
+        homeBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                homeBtnMouseClicked(evt);
+            }
+        });
         homeBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 homeBtnActionPerformed(evt);
@@ -250,7 +254,7 @@ public class CustomerView extends javax.swing.JFrame {
         searchLayout.setVerticalGroup(
             searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchLayout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cariBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cariText)
@@ -362,6 +366,13 @@ public class CustomerView extends javax.swing.JFrame {
     private void transaksiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transaksiBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_transaksiBtnActionPerformed
+
+    private void homeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeBtnMouseClicked
+        // TODO add your handling code here:
+        MainMenuView mv = new MainMenuView();
+        this.dispose();
+        mv.setVisible(true);
+    }//GEN-LAST:event_homeBtnMouseClicked
 
     /**
      * @param args the command line arguments
