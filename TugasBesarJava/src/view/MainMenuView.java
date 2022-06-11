@@ -77,15 +77,12 @@ public class MainMenuView extends javax.swing.JFrame {
         namaCorp.setBackground(new java.awt.Color(195, 228, 248));
 
         clean.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
-        clean.setForeground(new java.awt.Color(102, 102, 102));
         clean.setText("CLEAN");
 
         and.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        and.setForeground(new java.awt.Color(102, 102, 102));
         and.setText("&");
 
         fresh.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
-        fresh.setForeground(new java.awt.Color(102, 102, 102));
         fresh.setText("FRESH");
 
         javax.swing.GroupLayout namaCorpLayout = new javax.swing.GroupLayout(namaCorp);
@@ -299,9 +296,9 @@ public class MainMenuView extends javax.swing.JFrame {
 
     private void transaksiBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transaksiBtnMouseClicked
         // TODO add your handling code here:
-        TransaksiView tv = new TransaksiView();
-        this.dispose();
-        tv.setVisible(true);
+//        TransaksiView tv = new TransaksiView();
+//        this.dispose();
+//        tv.setVisible(true);
     }//GEN-LAST:event_transaksiBtnMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
@@ -313,9 +310,9 @@ public class MainMenuView extends javax.swing.JFrame {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
-        PegawaiView pv = new PegawaiView();
-        this.dispose();
-        pv.setVisible(true);
+//        PegawaiView pv = new PegawaiView();
+//        this.dispose();
+//        pv.setVisible(true);
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

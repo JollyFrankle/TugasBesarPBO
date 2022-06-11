@@ -66,17 +66,9 @@ public class CustomerView extends javax.swing.JFrame {
         and = new javax.swing.JLabel();
         fresh = new javax.swing.JLabel();
         navBar = new javax.swing.JPanel();
-        tempKiri = new javax.swing.JPanel();
-        panelTransaksi = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        transaksiBtn = new javax.swing.JButton();
-        panelCustomer = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        panelPegawai = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
-        tempKanan = new javax.swing.JPanel();
+        transaksiBtn = new javax.swing.JButton();
         search = new javax.swing.JPanel();
         viewWhereAU = new javax.swing.JLabel();
         cariText = new javax.swing.JTextField();
@@ -88,7 +80,7 @@ public class CustomerView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(195, 228, 248));
         setMinimumSize(new java.awt.Dimension(800, 700));
-        setPreferredSize(new java.awt.Dimension(800, 900));
+        setPreferredSize(new java.awt.Dimension(1000, 900));
 
         Backgound.setBackground(new java.awt.Color(195, 228, 248));
 
@@ -174,139 +166,56 @@ public class CustomerView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        navBar.setBackground(new java.awt.Color(169, 217, 246));
-        navBar.setLayout(new java.awt.GridLayout(1, 0));
+        navBar.setBackground(new java.awt.Color(195, 228, 248));
 
-        tempKiri.setBackground(new java.awt.Color(195, 228, 248));
-        tempKiri.setPreferredSize(new java.awt.Dimension(133, 100));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/employees.png"))); // NOI18N
+        jButton1.setText("Pegawai");
+        jButton1.setBackground(new java.awt.Color(255, 204, 153));
+        jButton1.setFont(new java.awt.Font("Gill Sans Ultra Bold", 0, 24)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout tempKiriLayout = new javax.swing.GroupLayout(tempKiri);
-        tempKiri.setLayout(tempKiriLayout);
-        tempKiriLayout.setHorizontalGroup(
-            tempKiriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 160, Short.MAX_VALUE)
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/checklist.png"))); // NOI18N
+        jButton2.setText("Transaksi");
+        jButton2.setBackground(new java.awt.Color(255, 204, 153));
+        jButton2.setFont(new java.awt.Font("Gill Sans Ultra Bold", 0, 24)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        transaksiBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/house.png"))); // NOI18N
+        transaksiBtn.setText("Home");
+        transaksiBtn.setBackground(new java.awt.Color(255, 204, 153));
+        transaksiBtn.setFont(new java.awt.Font("Gill Sans Ultra Bold", 0, 24)); // NOI18N
+        transaksiBtn.setForeground(new java.awt.Color(255, 255, 255));
+        transaksiBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transaksiBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout navBarLayout = new javax.swing.GroupLayout(navBar);
+        navBar.setLayout(navBarLayout);
+        navBarLayout.setHorizontalGroup(
+            navBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(navBarLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(transaksiBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        tempKiriLayout.setVerticalGroup(
-            tempKiriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 46, Short.MAX_VALUE)
+        navBarLayout.setVerticalGroup(
+            navBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(navBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(transaksiBtn))
         );
-
-        navBar.add(tempKiri);
-
-        panelTransaksi.setBackground(new java.awt.Color(195, 228, 248));
-        panelTransaksi.setPreferredSize(new java.awt.Dimension(133, 100));
-
-        jPanel6.setBackground(new java.awt.Color(169, 217, 246));
-
-        transaksiBtn.setText("Transaksi");
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(transaksiBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(transaksiBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout panelTransaksiLayout = new javax.swing.GroupLayout(panelTransaksi);
-        panelTransaksi.setLayout(panelTransaksiLayout);
-        panelTransaksiLayout.setHorizontalGroup(
-            panelTransaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelTransaksiLayout.createSequentialGroup()
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        panelTransaksiLayout.setVerticalGroup(
-            panelTransaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        navBar.add(panelTransaksi);
-
-        panelCustomer.setBackground(new java.awt.Color(195, 228, 248));
-        panelCustomer.setPreferredSize(new java.awt.Dimension(133, 100));
-
-        jPanel7.setBackground(new java.awt.Color(169, 217, 246));
-
-        jButton1.setText("Customer");
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout panelCustomerLayout = new javax.swing.GroupLayout(panelCustomer);
-        panelCustomer.setLayout(panelCustomerLayout);
-        panelCustomerLayout.setHorizontalGroup(
-            panelCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCustomerLayout.createSequentialGroup()
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        panelCustomerLayout.setVerticalGroup(
-            panelCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        navBar.add(panelCustomer);
-
-        panelPegawai.setBackground(new java.awt.Color(195, 228, 248));
-        panelPegawai.setPreferredSize(new java.awt.Dimension(133, 100));
-
-        jPanel8.setBackground(new java.awt.Color(169, 217, 246));
-
-        jButton2.setText("Pegawai");
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout panelPegawaiLayout = new javax.swing.GroupLayout(panelPegawai);
-        panelPegawai.setLayout(panelPegawaiLayout);
-        panelPegawaiLayout.setHorizontalGroup(
-            panelPegawaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelPegawaiLayout.createSequentialGroup()
-                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        panelPegawaiLayout.setVerticalGroup(
-            panelPegawaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        navBar.add(panelPegawai);
-
-        tempKanan.setBackground(new java.awt.Color(195, 228, 248));
-        tempKanan.setPreferredSize(new java.awt.Dimension(133, 100));
-
-        javax.swing.GroupLayout tempKananLayout = new javax.swing.GroupLayout(tempKanan);
-        tempKanan.setLayout(tempKananLayout);
-        tempKananLayout.setHorizontalGroup(
-            tempKananLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 160, Short.MAX_VALUE)
-        );
-        tempKananLayout.setVerticalGroup(
-            tempKananLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 46, Short.MAX_VALUE)
-        );
-
-        navBar.add(tempKanan);
 
         search.setBackground(new java.awt.Color(195, 228, 248));
 
@@ -329,22 +238,19 @@ public class CustomerView extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addComponent(viewWhereAU, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(cariText)
+                .addComponent(cariText, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(cariBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         searchLayout.setVerticalGroup(
             searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cariBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(searchLayout.createSequentialGroup()
-                        .addGap(0, 1, Short.MAX_VALUE)
-                        .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cariText, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(viewWhereAU))))
+                    .addComponent(cariText)
+                    .addComponent(viewWhereAU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -398,7 +304,7 @@ public class CustomerView extends javax.swing.JFrame {
             .addGroup(BackgoundLayout.createSequentialGroup()
                 .addComponent(corpName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(navBar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(navBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -444,6 +350,14 @@ public class CustomerView extends javax.swing.JFrame {
     private void inputNoHPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNoHPActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_inputNoHPActionPerformed
+
+    private void transaksiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transaksiBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_transaksiBtnActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -496,20 +410,12 @@ public class CustomerView extends javax.swing.JFrame {
     private javax.swing.JLabel fresh;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel logo;
     private javax.swing.JLabel logoIcon;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel namaCorp;
     private javax.swing.JPanel navBar;
-    private javax.swing.JPanel panelCustomer;
-    private javax.swing.JPanel panelPegawai;
-    private javax.swing.JPanel panelTransaksi;
     private javax.swing.JPanel search;
-    private javax.swing.JPanel tempKanan;
-    private javax.swing.JPanel tempKiri;
     private javax.swing.JButton transaksiBtn;
     private javax.swing.JLabel viewWhereAU;
     // End of variables declaration//GEN-END:variables
