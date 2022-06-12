@@ -13,6 +13,12 @@ public class Customer {
         this.noHP = noHP;
     }
     
+    public Customer(String nama, String alamat, String noHP){
+        this.nama = nama;
+        this.alamat = alamat;
+        this.noHP = noHP;
+    }
+    
     public int getId(){
         return id;
     }
