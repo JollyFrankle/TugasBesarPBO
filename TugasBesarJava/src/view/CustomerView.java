@@ -6,7 +6,10 @@ package view;
 
 import control.CustomerControl;
 import exception.InputKosongException;
+import java.util.List;
+import javax.swing.table.TableModel;
 import model.Customer;
+import table.TableCustomer;
 
 /**
  *
@@ -14,7 +17,9 @@ import model.Customer;
  */
 public class CustomerView extends javax.swing.JFrame {
     String action = null;
+    int selected;
     CustomerControl cCTRL = new CustomerControl();
+    List<Customer> listCustomer;
     /**
      * Creates new form test
      */
@@ -22,13 +27,20 @@ public class CustomerView extends javax.swing.JFrame {
         initComponents();
         setComponent(false);
         setEditDeleteBtn(false);
+        showCustomer();
         
 //        initTable();
     }
     
+    
+    
     public void setEditDeleteBtn(boolean value){
         editBtn.setEnabled(value);
         deleteBtn.setEnabled(value);
+    }
+    
+    public void showCustomer(){
+        tabelView.setModel(cCTRL.getTableCustomer(""));
     }
     
     public void clearText(){
@@ -287,6 +299,11 @@ public class CustomerView extends javax.swing.JFrame {
         editBtn.setText("Ubah");
         editBtn.setBorder(null);
         editBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editBtnActionPerformed(evt);
+            }
+        });
 
         cancelBtn.setBackground(new java.awt.Color(220, 53, 69));
         cancelBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -321,6 +338,11 @@ public class CustomerView extends javax.swing.JFrame {
         deleteBtn.setText("Hapus");
         deleteBtn.setBorder(null);
         deleteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
+            }
+        });
 
         namaLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         namaLabel.setText("Nama");
@@ -419,6 +441,11 @@ public class CustomerView extends javax.swing.JFrame {
             }
         ));
         tabelView.setRowHeight(32);
+        tabelView.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelViewMouseClicked(evt);
+            }
+        });
         scrollTabelPanel.setViewportView(tabelView);
 
         footer.setBackground(new java.awt.Color(125, 135, 147));
@@ -545,21 +572,21 @@ public class CustomerView extends javax.swing.JFrame {
     }//GEN-LAST:event_nohpInputActionPerformed
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
-        setEditDeleteBtn(true);
+        setEditDeleteBtn(false);
         setComponent(false);
         
         try{
-            Customer c = (Customer) cCTRL.searchCustomer(searchInput.getText());
-            if(c==null){
+            TableCustomer tabel = (TableCustomer) cCTRL.searchCustomer(searchInput.getText());
+            
+            if(tabel.getRowCount() != 0){
+                tabelView.setModel(tabel);
+            } else{
                 clearText();
                 setEditDeleteBtn(false);
-            } else{
-                namaInput.setText(c.getNama());
-                alamatInput.setText(c.getAlamat());
-                nohpInput.setText(c.getNoHP());
             }
         } catch(Exception e){
-            System.out.println("Error : " + e.getMessage());
+            System.out.println("Error searching...");
+            System.out.println(e);
         }
     }//GEN-LAST:event_searchBtnActionPerformed
 
@@ -567,7 +594,7 @@ public class CustomerView extends javax.swing.JFrame {
         try{
             inputKosongException();
             
-            Customer c = new Customer(namaInput.getText(), alamatInput.getText(), nohpInput.getText());
+            Customer c = new Customer(selected, namaInput.getText(), alamatInput.getText(), nohpInput.getText());
             if(action.equalsIgnoreCase("Tambah")){
                 cCTRL.insertDataCustomer(c);
             } else{
@@ -576,6 +603,10 @@ public class CustomerView extends javax.swing.JFrame {
         } catch(InputKosongException e){
             System.out.println("Error: " + e.getMessage());
         }
+       clearText();
+       showCustomer();
+       setComponent(false);
+       setEditDeleteBtn(false);
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
@@ -583,6 +614,50 @@ public class CustomerView extends javax.swing.JFrame {
         setEditDeleteBtn(false);
         clearText();    
     }//GEN-LAST:event_cancelBtnActionPerformed
+
+    private void tabelViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelViewMouseClicked
+        setEditDeleteBtn(true);
+        setComponent(false);
+        int indexCustomer = -1;
+        TableModel tableModel = tabelView.getModel();
+        
+        selected = Integer.parseInt(tableModel.getValueAt(tabelView.getSelectedRow(), 0).toString());
+        namaInput.setText(tableModel.getValueAt(tabelView.getSelectedRow(), 1).toString());
+        alamatInput.setText(tableModel.getValueAt(tabelView.getSelectedRow(), 2).toString());
+        nohpInput.setText(tableModel.getValueAt(tabelView.getSelectedRow(), 3).toString());
+        
+        listCustomer = cCTRL.showListAllCustomer();
+        int customer_id = (int) tableModel.getValueAt(tabelView.getSelectedRow(), 0);
+        for(Customer c : listCustomer){
+            if(c.getId() == customer_id){
+                indexCustomer = listCustomer.indexOf(c);
+            }
+        }
+        
+//        dropdownComputer.setSelectedIndex(indexComputer);
+        
+//        int pembeli_id = Integer.parseInt(tableModel.getValueAt(tabelView.getSelectedRow(),10).toString());
+        
+//        dropdownPembeli.setSelectedIndex(indexPembeli);
+    }//GEN-LAST:event_tabelViewMouseClicked
+
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        try{
+            cCTRL.deleteDataCustomer(selected);
+            clearText();
+            showCustomer();
+            setComponent(false);
+            setEditDeleteBtn(false);
+        } catch(Exception e){
+            System.out.println("Error deleting data...");
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_deleteBtnActionPerformed
+
+    private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
+        setComponent(true);
+        action = "Ubah";
+    }//GEN-LAST:event_editBtnActionPerformed
 
     /**
      * @param args the command line arguments
