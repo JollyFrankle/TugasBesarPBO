@@ -19,6 +19,7 @@ public class TestTable extends javax.swing.JFrame {
     
     /**
      * Creates new form TestTable
+     * @param LIST
      */
     public TestTable(List<Customer> LIST) {
         initComponents();
@@ -163,7 +164,7 @@ public class TestTable extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-//                new TestTable(new CustomerPreparedDAO().searchCustomer()).setVisible(true);
+                new TestTable(new CustomerPreparedDAO().showCustomer()).setVisible(true);
             }
         });
     }

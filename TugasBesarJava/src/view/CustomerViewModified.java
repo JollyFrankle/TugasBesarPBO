@@ -11,17 +11,18 @@ import model.Customer;
  *
  * @author Captbay
  */
-public class CustomerView extends javax.swing.JFrame {
+public class CustomerViewModified extends javax.swing.JFrame {
     private int selectedId = 0;
     /**
      * Creates new form loginPage
      */
     private CustomerControl cCTRL = new CustomerControl();
             
-    public CustomerView() {
+    public CustomerViewModified() {
         initComponents();
         
-//        initTable();
+        System.out.println(logoIcon.getIcon().getIconHeight());
+        initTable();
     }
 
     private Object getTableSelectedObject(javax.swing.JTable table) {
@@ -32,21 +33,21 @@ public class CustomerView extends javax.swing.JFrame {
         }
     }
     
-//    private void initTable() {
-//        tblUtama.setModel(cCTRL.getTableCustomer(""));
-//        
-//        int colWidth[] = {75, 300, 500, 300};
-//        int minWidth[] = {50, 200, 300, 150};
-//        int maxWidth[] = {75, 500, 0, 130};
-//        for(int i=0; i<colWidth.length; i++) {
-//            if(colWidth[i] > 0)
-//                tblUtama.getColumnModel().getColumn(i).setPreferredWidth(colWidth[i]);
-//            if(minWidth[i] > 0)
-//                tblUtama.getColumnModel().getColumn(i).setMinWidth(minWidth[i]);
-//            if(maxWidth[i] > 0)
-//                tblUtama.getColumnModel().getColumn(i).setMaxWidth(maxWidth[i]);
-//        }
-//    }
+    private void initTable() {
+        tblUtama.setModel(cCTRL.getTableCustomer(""));
+        
+        int colWidth[] = {75, 300, 500, 300};
+        int minWidth[] = {50, 200, 300, 150};
+        int maxWidth[] = {75, 500, 0, 130};
+        for(int i=0; i<colWidth.length; i++) {
+            if(colWidth[i] > 0)
+                tblUtama.getColumnModel().getColumn(i).setPreferredWidth(colWidth[i]);
+            if(minWidth[i] > 0)
+                tblUtama.getColumnModel().getColumn(i).setMinWidth(minWidth[i]);
+            if(maxWidth[i] > 0)
+                tblUtama.getColumnModel().getColumn(i).setMaxWidth(maxWidth[i]);
+        }
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -90,7 +91,7 @@ public class CustomerView extends javax.swing.JFrame {
         footer = new javax.swing.JPanel();
         footerName = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblUtama = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(195, 228, 248));
@@ -184,7 +185,6 @@ public class CustomerView extends javax.swing.JFrame {
 
         homeBtn.setBackground(new java.awt.Color(255, 204, 153));
         homeBtn.setFont(new java.awt.Font("Gill Sans Ultra Bold", 0, 24)); // NOI18N
-        homeBtn.setForeground(new java.awt.Color(255, 255, 255));
         homeBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/house.png"))); // NOI18N
         homeBtn.setText("Home");
         homeBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -195,13 +195,11 @@ public class CustomerView extends javax.swing.JFrame {
 
         pegawaiBtn.setBackground(new java.awt.Color(255, 204, 153));
         pegawaiBtn.setFont(new java.awt.Font("Gill Sans Ultra Bold", 0, 24)); // NOI18N
-        pegawaiBtn.setForeground(new java.awt.Color(255, 255, 255));
         pegawaiBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/employees.png"))); // NOI18N
         pegawaiBtn.setText("Pegawai");
 
         transaksiBtn.setBackground(new java.awt.Color(255, 204, 153));
         transaksiBtn.setFont(new java.awt.Font("Gill Sans Ultra Bold", 0, 24)); // NOI18N
-        transaksiBtn.setForeground(new java.awt.Color(255, 255, 255));
         transaksiBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/checklist.png"))); // NOI18N
         transaksiBtn.setText("Transaksi");
         transaksiBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -274,7 +272,7 @@ public class CustomerView extends javax.swing.JFrame {
 
         menu.setBackground(new java.awt.Color(195, 228, 248));
 
-        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("ID");
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -289,7 +287,7 @@ public class CustomerView extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("NAMA");
 
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
@@ -298,10 +296,10 @@ public class CustomerView extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("ALAMAT");
 
-        jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("NOMOR HANDPHONE");
 
         jButton1.setBackground(new java.awt.Color(0, 255, 102));
@@ -343,26 +341,26 @@ public class CustomerView extends javax.swing.JFrame {
                 .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(menuLayout.createSequentialGroup()
                         .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 359, Short.MAX_VALUE)
                         .addComponent(jButton4)
                         .addGap(18, 18, 18)
                         .addComponent(jButton5)
                         .addGap(32, 32, 32))
                     .addGroup(menuLayout.createSequentialGroup()
-                        .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
+                        .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField3)
+                            .addComponent(jTextField2)
+                            .addComponent(jTextField1)
                             .addGroup(menuLayout.createSequentialGroup()
                                 .addComponent(jButton1)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton2)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton3))
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         menuLayout.setVerticalGroup(
@@ -421,8 +419,8 @@ public class CustomerView extends javax.swing.JFrame {
         jScrollPane1.setBackground(new java.awt.Color(195, 228, 248));
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(195, 228, 248), 1, true));
 
-        jTable1.setBackground(new java.awt.Color(226, 241, 250));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblUtama.setBackground(new java.awt.Color(226, 241, 250));
+        tblUtama.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -433,7 +431,7 @@ public class CustomerView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblUtama);
 
         javax.swing.GroupLayout BackgoundLayout = new javax.swing.GroupLayout(Backgound);
         Backgound.setLayout(BackgoundLayout);
@@ -541,14 +539,18 @@ public class CustomerView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CustomerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerViewModified.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CustomerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerViewModified.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CustomerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerViewModified.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CustomerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerViewModified.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -558,7 +560,7 @@ public class CustomerView extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new CustomerView().setVisible(true);
+                new CustomerViewModified().setVisible(true);
             }
         });
     }
@@ -584,7 +586,6 @@ public class CustomerView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -596,6 +597,7 @@ public class CustomerView extends javax.swing.JFrame {
     private javax.swing.JPanel navBar;
     private javax.swing.JButton pegawaiBtn;
     private javax.swing.JPanel search;
+    private javax.swing.JTable tblUtama;
     private javax.swing.JButton transaksiBtn;
     private javax.swing.JLabel viewWhereAU;
     // End of variables declaration//GEN-END:variables
