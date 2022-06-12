@@ -28,128 +28,54 @@ public class MainMenuView extends javax.swing.JFrame {
 
         Backgound = new javax.swing.JPanel();
         corpName = new javax.swing.JPanel();
-        logo = new javax.swing.JPanel();
-        logoIcon = new javax.swing.JLabel();
-        namaCorp = new javax.swing.JPanel();
-        clean = new javax.swing.JLabel();
-        and = new javax.swing.JLabel();
-        fresh = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         transaksi = new javax.swing.JPanel();
         transaksiBtn = new javax.swing.JButton();
         customer = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        customerBtn = new javax.swing.JButton();
         pegawai = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        pegawaiBtn = new javax.swing.JButton();
         footer = new javax.swing.JPanel();
         footerName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(195, 228, 248));
+        setBackground(new java.awt.Color(35, 45, 59));
         setMinimumSize(new java.awt.Dimension(800, 700));
 
-        Backgound.setBackground(new java.awt.Color(195, 228, 248));
+        Backgound.setBackground(new java.awt.Color(35, 45, 59));
         Backgound.setPreferredSize(new java.awt.Dimension(800, 600));
 
-        corpName.setBackground(new java.awt.Color(195, 228, 248));
+        corpName.setBackground(new java.awt.Color(35, 45, 59));
 
-        logo.setBackground(new java.awt.Color(195, 228, 248));
-
-        logoIcon.setBackground(new java.awt.Color(195, 228, 248));
-        logoIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/washing-machine.png"))); // NOI18N
-
-        javax.swing.GroupLayout logoLayout = new javax.swing.GroupLayout(logo);
-        logo.setLayout(logoLayout);
-        logoLayout.setHorizontalGroup(
-            logoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 120, Short.MAX_VALUE)
-            .addGroup(logoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(logoIcon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
-        );
-        logoLayout.setVerticalGroup(
-            logoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(logoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(logoLayout.createSequentialGroup()
-                    .addComponent(logoIcon, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
-                    .addContainerGap()))
-        );
-
-        namaCorp.setBackground(new java.awt.Color(195, 228, 248));
-
-        clean.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
-        clean.setText("CLEAN");
-
-        and.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        and.setText("&");
-
-        fresh.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
-        fresh.setText("FRESH");
-
-        javax.swing.GroupLayout namaCorpLayout = new javax.swing.GroupLayout(namaCorp);
-        namaCorp.setLayout(namaCorpLayout);
-        namaCorpLayout.setHorizontalGroup(
-            namaCorpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(fresh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-            .addGroup(namaCorpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(and, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-                .addComponent(clean, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE))
-        );
-        namaCorpLayout.setVerticalGroup(
-            namaCorpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, namaCorpLayout.createSequentialGroup()
-                .addContainerGap(86, Short.MAX_VALUE)
-                .addComponent(fresh, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(namaCorpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(namaCorpLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(clean, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(and)
-                    .addContainerGap(49, Short.MAX_VALUE)))
-        );
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/logo luar.png"))); // NOI18N
 
         javax.swing.GroupLayout corpNameLayout = new javax.swing.GroupLayout(corpName);
         corpName.setLayout(corpNameLayout);
         corpNameLayout.setHorizontalGroup(
             corpNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(corpNameLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(namaCorp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, corpNameLayout.createSequentialGroup()
+                .addContainerGap(171, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addContainerGap(171, Short.MAX_VALUE))
         );
         corpNameLayout.setVerticalGroup(
             corpNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, corpNameLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(corpNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(corpNameLayout.createSequentialGroup()
-                        .addComponent(namaCorp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 13, Short.MAX_VALUE)))
-                .addContainerGap())
+            .addGroup(corpNameLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        transaksi.setBackground(new java.awt.Color(195, 228, 248));
+        transaksi.setBackground(new java.awt.Color(35, 45, 59));
 
-        transaksiBtn.setBackground(new java.awt.Color(255, 204, 153));
-        transaksiBtn.setFont(new java.awt.Font("Gill Sans Ultra Bold", 0, 24)); // NOI18N
+        transaksiBtn.setBackground(new java.awt.Color(125, 135, 147));
+        transaksiBtn.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
         transaksiBtn.setForeground(new java.awt.Color(255, 255, 255));
-        transaksiBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/checklist.png"))); // NOI18N
         transaksiBtn.setText("Transaksi");
+        transaksiBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         transaksiBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 transaksiBtnMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                transaksiBtnMouseEntered(evt);
-            }
-        });
-        transaksiBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                transaksiBtnActionPerformed(evt);
             }
         });
 
@@ -164,24 +90,19 @@ public class MainMenuView extends javax.swing.JFrame {
         );
         transaksiLayout.setVerticalGroup(
             transaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(transaksiBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(transaksiBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
         );
 
-        customer.setBackground(new java.awt.Color(195, 228, 248));
+        customer.setBackground(new java.awt.Color(35, 45, 59));
 
-        jButton1.setBackground(new java.awt.Color(255, 204, 153));
-        jButton1.setFont(new java.awt.Font("Gill Sans Ultra Bold", 0, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/customer.png"))); // NOI18N
-        jButton1.setText("Customer");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        customerBtn.setBackground(new java.awt.Color(125, 135, 147));
+        customerBtn.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
+        customerBtn.setForeground(new java.awt.Color(255, 255, 255));
+        customerBtn.setText("Customer");
+        customerBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        customerBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                customerBtnMouseClicked(evt);
             }
         });
 
@@ -191,24 +112,26 @@ public class MainMenuView extends javax.swing.JFrame {
             customerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(customerLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(customerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         customerLayout.setVerticalGroup(
             customerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(customerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        pegawai.setBackground(new java.awt.Color(195, 228, 248));
+        pegawai.setBackground(new java.awt.Color(35, 45, 59));
 
-        jButton2.setBackground(new java.awt.Color(255, 204, 153));
-        jButton2.setFont(new java.awt.Font("Gill Sans Ultra Bold", 0, 24)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/employees.png"))); // NOI18N
-        jButton2.setText("Pegawai");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        pegawaiBtn.setBackground(new java.awt.Color(125, 135, 147));
+        pegawaiBtn.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
+        pegawaiBtn.setForeground(new java.awt.Color(255, 255, 255));
+        pegawaiBtn.setText("Pegawai");
+        pegawaiBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pegawaiBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                pegawaiBtnMouseClicked(evt);
             }
         });
 
@@ -217,28 +140,27 @@ public class MainMenuView extends javax.swing.JFrame {
         pegawaiLayout.setHorizontalGroup(
             pegawaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pegawaiLayout.createSequentialGroup()
-                .addContainerGap(248, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(249, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pegawaiBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pegawaiLayout.setVerticalGroup(
             pegawaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pegawaiBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
         );
 
-        footer.setBackground(new java.awt.Color(169, 217, 246));
+        footer.setBackground(new java.awt.Color(125, 135, 147));
 
-        footerName.setForeground(new java.awt.Color(102, 102, 102));
-        footerName.setText("Made by Love and Clean Heart's");
+        footerName.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        footerName.setForeground(new java.awt.Color(255, 255, 255));
+        footerName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        footerName.setText("Made with ♥ by Kuli IT Clean Fresh Laundry");
 
         javax.swing.GroupLayout footerLayout = new javax.swing.GroupLayout(footer);
         footer.setLayout(footerLayout);
         footerLayout.setHorizontalGroup(
             footerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, footerLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(footerName, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(footerName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         footerLayout.setVerticalGroup(
             footerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,13 +184,13 @@ public class MainMenuView extends javax.swing.JFrame {
             BackgoundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BackgoundLayout.createSequentialGroup()
                 .addComponent(corpName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                 .addComponent(transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(customer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 24, Short.MAX_VALUE)
+                .addGap(18, 50, Short.MAX_VALUE)
                 .addComponent(pegawai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                 .addComponent(footer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -276,48 +198,36 @@ public class MainMenuView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Backgound, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Backgound, javax.swing.GroupLayout.DEFAULT_SIZE, 955, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Backgound, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Backgound, javax.swing.GroupLayout.DEFAULT_SIZE, 743, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void transaksiBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transaksiBtnMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_transaksiBtnMouseEntered
-
-    private void transaksiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transaksiBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_transaksiBtnActionPerformed
-
     private void transaksiBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transaksiBtnMouseClicked
         // TODO add your handling code here:
-//        TransaksiView tv = new TransaksiView();
-//        this.dispose();
-//        tv.setVisible(true);
+        TransaksiView tv = new TransaksiView();
+        this.dispose();
+        tv.setVisible(true);
     }//GEN-LAST:event_transaksiBtnMouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void customerBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerBtnMouseClicked
         // TODO add your handling code here:
         CustomerView cv = new CustomerView();
         this.dispose();
         cv.setVisible(true);
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_customerBtnMouseClicked
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+    private void pegawaiBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pegawaiBtnMouseClicked
         // TODO add your handling code here:
-//        PegawaiView pv = new PegawaiView();
-//        this.dispose();
-//        pv.setVisible(true);
-    }//GEN-LAST:event_jButton2MouseClicked
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        PegawaiView pv = new PegawaiView();
+        this.dispose();
+        pv.setVisible(true);
+    }//GEN-LAST:event_pegawaiBtnMouseClicked
 
     /**
      * @param args the command line arguments
@@ -371,19 +281,14 @@ public class MainMenuView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Backgound;
-    private javax.swing.JLabel and;
-    private javax.swing.JLabel clean;
     private javax.swing.JPanel corpName;
     private javax.swing.JPanel customer;
+    private javax.swing.JButton customerBtn;
     private javax.swing.JPanel footer;
     private javax.swing.JLabel footerName;
-    private javax.swing.JLabel fresh;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JPanel logo;
-    private javax.swing.JLabel logoIcon;
-    private javax.swing.JPanel namaCorp;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel pegawai;
+    private javax.swing.JButton pegawaiBtn;
     private javax.swing.JPanel transaksi;
     private javax.swing.JButton transaksiBtn;
     // End of variables declaration//GEN-END:variables
