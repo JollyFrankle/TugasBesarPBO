@@ -150,6 +150,11 @@ public class CustomerView extends javax.swing.JFrame {
         pegawaiBtn.setText("Pegawai");
         pegawaiBtn.setBorder(null);
         pegawaiBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pegawaiBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pegawaiBtnActionPerformed(evt);
+            }
+        });
 
         transaksiBtn.setBackground(new java.awt.Color(90, 98, 108));
         transaksiBtn.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -660,6 +665,12 @@ public class CustomerView extends javax.swing.JFrame {
         setComponent(true);
         action = "Ubah";
     }//GEN-LAST:event_editBtnActionPerformed
+
+    private void pegawaiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pegawaiBtnActionPerformed
+        PegawaiView2 pv = new PegawaiView2();
+        this.dispose();
+        pv.setVisible(true);
+    }//GEN-LAST:event_pegawaiBtnActionPerformed
 
     /**
      * @param args the command line arguments
