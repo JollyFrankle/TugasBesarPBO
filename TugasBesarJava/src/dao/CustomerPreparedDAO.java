@@ -47,6 +47,7 @@ public class CustomerPreparedDAO {
         String sql = "SELECT * FROM customer "
                 + "WHERE nama LIKE ? "
                 + "OR alamat LIKE ? "
+                + "OR id LIKE ? "
                 + "OR noHP LIKE ?;";
         List<Customer> list = new ArrayList();
         
@@ -56,6 +57,7 @@ public class CustomerPreparedDAO {
             st.setString(1, "%" + input + "%");
             st.setString(2, "%" + input + "%");
             st.setString(3, "%" + input + "%");
+            st.setString(4, "%" + input + "%");
             
             ResultSet rs = st.executeQuery();
             int rowCount = 0; // jumlah row yang didapatkan dari query tsb

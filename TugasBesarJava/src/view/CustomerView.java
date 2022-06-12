@@ -7,6 +7,7 @@ package view;
 import control.CustomerControl;
 import exception.InputKosongException;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 import model.Customer;
 import table.TableCustomer;
@@ -576,12 +577,13 @@ public class CustomerView extends javax.swing.JFrame {
         setComponent(false);
         
         try{
-            TableCustomer tabel = (TableCustomer) cCTRL.searchCustomer(searchInput.getText());
+            TableCustomer tabel = cCTRL.getTableCustomer(searchInput.getText());
             
             if(tabel.getRowCount() != 0){
                 tabelView.setModel(tabel);
             } else{
                 clearText();
+                JOptionPane.showConfirmDialog(null, "Data tidak ditemukan", "Konfirmasi", JOptionPane.DEFAULT_OPTION);
                 setEditDeleteBtn(false);
             }
         } catch(Exception e){
