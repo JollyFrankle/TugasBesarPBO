@@ -3,6 +3,7 @@ package control;
 import java.util.List;
 import dao.PegawaiPreparedDAO;
 import model.Pegawai;
+import table.TablePegawai;
 /**
  *
  * @author Tanto
@@ -29,9 +30,10 @@ public class PegawaiControl {
         dBao.deletePegawai(id);
     }
     
-//    public List<Pegawai> showListAllPegawai(){
-//        
-//    }
-    
+    public List<Pegawai> showListAllPegawai(){
+       List<Pegawai> data = dBao.searchPegawai();
+       
+       return data;
+    }    
     
 }
