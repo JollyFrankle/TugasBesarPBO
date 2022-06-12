@@ -4,18 +4,70 @@
  */
 package view;
 
+import control.CustomerControl;
+import exception.InputKosongException;
+import model.Customer;
+
 /**
  *
  * @author Captbay
  */
 public class CustomerView extends javax.swing.JFrame {
-
+    String action = null;
+    CustomerControl cCTRL = new CustomerControl();
     /**
      * Creates new form test
      */
     public CustomerView() {
         initComponents();
+        setComponent(false);
+        setEditDeleteBtn(false);
+        
+//        initTable();
     }
+    
+    public void setEditDeleteBtn(boolean value){
+        editBtn.setEnabled(value);
+        deleteBtn.setEnabled(value);
+    }
+    
+    public void clearText(){
+        namaInput.setText("");
+        alamatInput.setText("");
+        nohpInput.setText("");
+        searchInput.setText("");
+    }
+    
+    public void setComponent(boolean value){
+        namaInput.setEnabled(value);
+        alamatInput.setEnabled(value);
+        nohpInput.setEnabled(value);
+        
+        saveBtn.setEnabled(value);
+        cancelBtn.setEnabled(value);
+    }
+    
+    private Object getTableSelectedObject(javax.swing.JTable table) {
+        if(table.getSelectedRow() != -1) {
+            return table.getModel().getValueAt(table.getSelectedRow(), 99);
+        } else {
+            return null;
+        }
+    }
+    
+//    private void tblUtamaMouseClicked(java.awt.event.MouseEvent evt) {                                      
+//        Customer C = (Customer) getTableSelectedObject(tblUtama);
+//        // on selected, display ke inputannya
+//        // tetapkan ID:
+//        this.selectedId = C.getId();
+//        
+//        // tetapkan input:
+//        namaInput.setText(C.getNama());
+//        alamatInput.setText(C.getAlamat());
+//        nohpInput.setText(C.getNoHP());
+//    }  
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -170,6 +222,11 @@ public class CustomerView extends javax.swing.JFrame {
         searchBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-search.png"))); // NOI18N
         searchBtn.setBorder(null);
         searchBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        searchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout searchPanelLayout = new javax.swing.GroupLayout(searchPanel);
         searchPanel.setLayout(searchPanelLayout);
@@ -217,6 +274,11 @@ public class CustomerView extends javax.swing.JFrame {
         saveBtn.setText("Simpan");
         saveBtn.setBorder(null);
         saveBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        saveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveBtnActionPerformed(evt);
+            }
+        });
 
         editBtn.setBackground(new java.awt.Color(241, 196, 15));
         editBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -233,6 +295,11 @@ public class CustomerView extends javax.swing.JFrame {
         cancelBtn.setText("Batal");
         cancelBtn.setBorder(null);
         cancelBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cancelBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelBtnActionPerformed(evt);
+            }
+        });
 
         addBtn.setBackground(new java.awt.Color(25, 135, 84));
         addBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -449,7 +516,10 @@ public class CustomerView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
-        // TODO add your handling code here:
+        setComponent(true);
+        clearText();
+        searchInput.setText("");
+        action = "Tambah";
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void logoAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoAreaMouseClicked
@@ -458,13 +528,61 @@ public class CustomerView extends javax.swing.JFrame {
         MMV.setVisible(true);
     }//GEN-LAST:event_logoAreaMouseClicked
 
+    public void inputKosongException() throws InputKosongException{
+        if(namaInput.getText().isEmpty() || alamatInput.getText().isEmpty() || nohpInput.getText().isEmpty()){
+            throw new InputKosongException();
+        }
+    }
+    
     private void transaksiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transaksiBtnActionPerformed
-        // TODO add your handling code here:
+        TransaksiView tv = new TransaksiView();
+        this.dispose();
+        tv.setVisible(true);
     }//GEN-LAST:event_transaksiBtnActionPerformed
 
     private void nohpInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nohpInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nohpInputActionPerformed
+
+    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
+        setEditDeleteBtn(true);
+        setComponent(false);
+        
+        try{
+            Customer c = (Customer) cCTRL.searchCustomer(searchInput.getText());
+            if(c==null){
+                clearText();
+                setEditDeleteBtn(false);
+            } else{
+                namaInput.setText(c.getNama());
+                alamatInput.setText(c.getAlamat());
+                nohpInput.setText(c.getNoHP());
+            }
+        } catch(Exception e){
+            System.out.println("Error : " + e.getMessage());
+        }
+    }//GEN-LAST:event_searchBtnActionPerformed
+
+    private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
+        try{
+            inputKosongException();
+            
+            Customer c = new Customer(namaInput.getText(), alamatInput.getText(), nohpInput.getText());
+            if(action.equalsIgnoreCase("Tambah")){
+                cCTRL.insertDataCustomer(c);
+            } else{
+                cCTRL.updateDataCustomer(c);
+            }
+        } catch(InputKosongException e){
+            System.out.println("Error: " + e.getMessage());
+        }
+    }//GEN-LAST:event_saveBtnActionPerformed
+
+    private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
+        setComponent(false);
+        setEditDeleteBtn(false);
+        clearText();    
+    }//GEN-LAST:event_cancelBtnActionPerformed
 
     /**
      * @param args the command line arguments
