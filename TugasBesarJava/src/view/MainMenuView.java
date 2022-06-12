@@ -224,7 +224,7 @@ public class MainMenuView extends javax.swing.JFrame {
 
     private void pegawaiBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pegawaiBtnMouseClicked
         // TODO add your handling code here:
-        PegawaiView pv = new PegawaiView();
+        PegawaiView2 pv = new PegawaiView2();
         this.dispose();
         pv.setVisible(true);
     }//GEN-LAST:event_pegawaiBtnMouseClicked
