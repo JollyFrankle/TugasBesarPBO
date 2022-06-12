@@ -47,12 +47,16 @@ public class PegawaiView extends javax.swing.JFrame {
         cancelBtn = new javax.swing.JButton();
         addBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        idLabel = new javax.swing.JLabel();
+        idInput = new javax.swing.JTextField();
+        namaLabel = new javax.swing.JLabel();
+        namaInput = new javax.swing.JTextField();
+        tanggallahirLabel = new javax.swing.JLabel();
+        tgllahirInput = new javax.swing.JTextField();
+        nohpLabel = new javax.swing.JLabel();
+        nohpInput = new javax.swing.JTextField();
+        jobdecsLabel = new javax.swing.JLabel();
+        jobdecsInput = new javax.swing.JTextField();
         scrollTabelPanel = new javax.swing.JScrollPane();
         tabelView = new javax.swing.JTable();
         footer = new javax.swing.JPanel();
@@ -77,7 +81,6 @@ public class PegawaiView extends javax.swing.JFrame {
         customerBtn.setText("Customer");
         customerBtn.setBorder(null);
         customerBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        customerBtn.setEnabled(false);
 
         pegawaiBtn.setBackground(new java.awt.Color(90, 98, 108));
         pegawaiBtn.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -85,6 +88,7 @@ public class PegawaiView extends javax.swing.JFrame {
         pegawaiBtn.setText("Pegawai");
         pegawaiBtn.setBorder(null);
         pegawaiBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pegawaiBtn.setEnabled(false);
 
         transaksiBtn.setBackground(new java.awt.Color(90, 98, 108));
         transaksiBtn.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -141,7 +145,7 @@ public class PegawaiView extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Customer");
+        jLabel2.setText("Pegawai");
 
         javax.swing.GroupLayout namaViewLayout = new javax.swing.GroupLayout(namaView);
         namaView.setLayout(namaViewLayout);
@@ -255,26 +259,48 @@ public class PegawaiView extends javax.swing.JFrame {
         deleteBtn.setBorder(null);
         deleteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel4.setText("Nama");
+        idLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        idLabel.setText("ID Pegawai");
 
-        jTextField2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jTextField2.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(125, 135, 147)));
+        idInput.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        idInput.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(125, 135, 147)));
 
-        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel1.setText("Alamat");
+        namaLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        namaLabel.setText("Nama");
 
-        jTextField1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jTextField1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(125, 135, 147)));
+        namaInput.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        namaInput.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(125, 135, 147)));
 
-        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel3.setText("Nomor Handphone");
+        tanggallahirLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        tanggallahirLabel.setText("Tanggal Lahir");
 
-        jTextField3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jTextField3.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(125, 135, 147)));
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        tgllahirInput.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        tgllahirInput.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(125, 135, 147)));
+        tgllahirInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                tgllahirInputActionPerformed(evt);
+            }
+        });
+
+        nohpLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        nohpLabel.setText("Nomor Handphone");
+
+        nohpInput.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        nohpInput.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(125, 135, 147)));
+        nohpInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nohpInputActionPerformed(evt);
+            }
+        });
+
+        jobdecsLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jobdecsLabel.setText("Job Description");
+
+        jobdecsInput.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jobdecsInput.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(125, 135, 147)));
+        jobdecsInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jobdecsInputActionPerformed(evt);
             }
         });
 
@@ -285,21 +311,29 @@ public class PegawaiView extends javax.swing.JFrame {
             .addGroup(inputPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(inputPanelLayout.createSequentialGroup()
+                        .addComponent(nohpInput)
+                        .addGap(365, 365, 365))
+                    .addGroup(inputPanelLayout.createSequentialGroup()
+                        .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(namaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(idLabel)
+                                .addComponent(idInput, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+                                .addComponent(namaInput)
+                                .addComponent(tgllahirInput)
+                                .addComponent(tanggallahirLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(nohpLabel))
+                        .addContainerGap(365, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jobdecsInput)
+                            .addComponent(jobdecsLabel))
+                        .addGap(107, 107, 107)
                         .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(inputPanelLayout.createSequentialGroup()
-                        .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField3))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
             .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(inputPanelLayout.createSequentialGroup()
                     .addContainerGap()
@@ -314,21 +348,33 @@ public class PegawaiView extends javax.swing.JFrame {
             inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputPanelLayout.createSequentialGroup()
                 .addGap(71, 71, 71)
-                .addComponent(jLabel4)
+                .addComponent(idLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(idInput, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
+                .addComponent(namaLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(namaInput, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
+                .addComponent(tanggallahirLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(tgllahirInput, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(nohpLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nohpInput, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(inputPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(inputPanelLayout.createSequentialGroup()
+                        .addComponent(jobdecsLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jobdecsInput, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 26, Short.MAX_VALUE))))
             .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(inputPanelLayout.createSequentialGroup()
                     .addContainerGap()
@@ -336,7 +382,7 @@ public class PegawaiView extends javax.swing.JFrame {
                         .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(268, Short.MAX_VALUE)))
+                    .addContainerGap(351, Short.MAX_VALUE)))
         );
 
         tabelView.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -392,9 +438,9 @@ public class PegawaiView extends javax.swing.JFrame {
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
-                .addComponent(inputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(scrollTabelPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+                .addComponent(inputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scrollTabelPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(footer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -462,9 +508,17 @@ public class PegawaiView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_transaksiBtnActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void tgllahirInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tgllahirInputActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_tgllahirInputActionPerformed
+
+    private void nohpInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nohpInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nohpInputActionPerformed
+
+    private void jobdecsInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jobdecsInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jobdecsInputActionPerformed
 
     /**
      * @param args the command line arguments
@@ -512,21 +566,23 @@ public class PegawaiView extends javax.swing.JFrame {
     private javax.swing.JButton editBtn;
     private javax.swing.JPanel footer;
     private javax.swing.JPanel headerPanel;
+    private javax.swing.JTextField idInput;
+    private javax.swing.JLabel idLabel;
     private javax.swing.JPanel inputPanel;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jobdecsInput;
+    private javax.swing.JLabel jobdecsLabel;
     private javax.swing.JLabel logoArea;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel manuBarDetailPanel;
     private javax.swing.JPanel menuBar;
     private javax.swing.JLabel namaFooter;
+    private javax.swing.JTextField namaInput;
+    private javax.swing.JLabel namaLabel;
     private javax.swing.JPanel namaView;
     private javax.swing.JPanel navBar;
+    private javax.swing.JTextField nohpInput;
+    private javax.swing.JLabel nohpLabel;
     private javax.swing.JButton pegawaiBtn;
     private javax.swing.JButton saveBtn;
     private javax.swing.JScrollPane scrollPanel;
@@ -535,6 +591,8 @@ public class PegawaiView extends javax.swing.JFrame {
     private javax.swing.JTextField searchInput;
     private javax.swing.JPanel searchPanel;
     private javax.swing.JTable tabelView;
+    private javax.swing.JLabel tanggallahirLabel;
+    private javax.swing.JTextField tgllahirInput;
     private javax.swing.JButton transaksiBtn;
     // End of variables declaration//GEN-END:variables
 }
