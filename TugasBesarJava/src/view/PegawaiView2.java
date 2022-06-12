@@ -4,17 +4,71 @@
  */
 package view;
 
+import control.PegawaiControl;
+import exception.InputKosongException;
+import java.util.*;
+import javax.swing.table.TableModel;
+import model.Pegawai;
+import table.TablePegawai;
+
 /**
  *
  * @author Captbay
  */
 public class PegawaiView2 extends javax.swing.JFrame {
-
+    String action = null;
+    String selected;
+    PegawaiControl pc = new PegawaiControl();
+    List<Pegawai> listPegawai;
     /**
      * Creates new form test
      */
     public PegawaiView2() {
         initComponents();
+        setComponent(false);
+        setEditDeleteBtn(false);
+        showPegawai();
+    }
+    
+    public void setEditDeleteBtn(boolean value){
+        editBtn.setEnabled(value);
+        deleteBtn.setEnabled(value);
+    }
+    
+    public void showPegawai(){
+        tabelView.setModel(pc.getTablePegawai(""));
+    }
+    
+    public void clearText(){
+        idInput.setText("");
+        namaInput.setText("");
+        tgllahirInput.setText("");
+        nohpInput.setText("");
+        dropdownJobdesc.setSelectedItem(ABORT);
+        searchInput.setText("");
+    }
+    
+    public void setComponent(boolean value){
+        idInput.setEnabled(value);
+        namaInput.setEnabled(value);
+        tgllahirInput.setEnabled(value);
+        nohpInput.setEnabled(value);
+        dropdownJobdesc.setSelectedItem(ABORT);
+        saveBtn.setEnabled(value);
+        cancelBtn.setEnabled(value);
+    }
+    
+    public Object getTableSelectedObject(javax.swing.JTable table){
+        if(table.getSelectedRow() != -1){
+            return table.getModel().getValueAt(table.getSelectedRow(), 99);
+        } else
+            return null;
+    }
+    
+    public void inputKosongException() throws InputKosongException{
+        if(idInput.getText().isEmpty() || namaInput.getText().isEmpty() || tgllahirInput.getText().isEmpty() || nohpInput.getText().isEmpty()){
+            throw new InputKosongException();
+        }
     }
 
     /**
@@ -56,7 +110,7 @@ public class PegawaiView2 extends javax.swing.JFrame {
         nohpLabel = new javax.swing.JLabel();
         nohpInput = new javax.swing.JTextField();
         jobdecsLabel = new javax.swing.JLabel();
-        jobdecsInput = new javax.swing.JTextField();
+        dropdownJobdesc = new javax.swing.JComboBox<>();
         scrollTabelPanel = new javax.swing.JScrollPane();
         tabelView = new javax.swing.JTable();
         footer = new javax.swing.JPanel();
@@ -81,6 +135,11 @@ public class PegawaiView2 extends javax.swing.JFrame {
         customerBtn.setText("Customer");
         customerBtn.setBorder(null);
         customerBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        customerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customerBtnActionPerformed(evt);
+            }
+        });
 
         pegawaiBtn.setBackground(new java.awt.Color(90, 98, 108));
         pegawaiBtn.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -174,6 +233,11 @@ public class PegawaiView2 extends javax.swing.JFrame {
         searchBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-search.png"))); // NOI18N
         searchBtn.setBorder(null);
         searchBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        searchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout searchPanelLayout = new javax.swing.GroupLayout(searchPanel);
         searchPanel.setLayout(searchPanelLayout);
@@ -221,6 +285,11 @@ public class PegawaiView2 extends javax.swing.JFrame {
         saveBtn.setText("Simpan");
         saveBtn.setBorder(null);
         saveBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        saveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveBtnActionPerformed(evt);
+            }
+        });
 
         editBtn.setBackground(new java.awt.Color(241, 196, 15));
         editBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -229,6 +298,11 @@ public class PegawaiView2 extends javax.swing.JFrame {
         editBtn.setText("Ubah");
         editBtn.setBorder(null);
         editBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editBtnActionPerformed(evt);
+            }
+        });
 
         cancelBtn.setBackground(new java.awt.Color(220, 53, 69));
         cancelBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -237,6 +311,11 @@ public class PegawaiView2 extends javax.swing.JFrame {
         cancelBtn.setText("Batal");
         cancelBtn.setBorder(null);
         cancelBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cancelBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelBtnActionPerformed(evt);
+            }
+        });
 
         addBtn.setBackground(new java.awt.Color(25, 135, 84));
         addBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -258,18 +337,33 @@ public class PegawaiView2 extends javax.swing.JFrame {
         deleteBtn.setText("Hapus");
         deleteBtn.setBorder(null);
         deleteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
+            }
+        });
 
         idLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         idLabel.setText("ID Pegawai");
 
         idInput.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         idInput.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(125, 135, 147)));
+        idInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idInputActionPerformed(evt);
+            }
+        });
 
         namaLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         namaLabel.setText("Nama");
 
         namaInput.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         namaInput.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(125, 135, 147)));
+        namaInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                namaInputActionPerformed(evt);
+            }
+        });
 
         tanggallahirLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         tanggallahirLabel.setText("Tanggal Lahir");
@@ -296,13 +390,7 @@ public class PegawaiView2 extends javax.swing.JFrame {
         jobdecsLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jobdecsLabel.setText("Job Description");
 
-        jobdecsInput.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jobdecsInput.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(125, 135, 147)));
-        jobdecsInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jobdecsInputActionPerformed(evt);
-            }
-        });
+        dropdownJobdesc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pencuci Pakaian", "Penyetrika Pakaian", "Packing Pakaian" }));
 
         javax.swing.GroupLayout inputPanelLayout = new javax.swing.GroupLayout(inputPanel);
         inputPanel.setLayout(inputPanelLayout);
@@ -311,29 +399,31 @@ public class PegawaiView2 extends javax.swing.JFrame {
             .addGroup(inputPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(inputPanelLayout.createSequentialGroup()
-                        .addComponent(nohpInput)
-                        .addGap(365, 365, 365))
-                    .addGroup(inputPanelLayout.createSequentialGroup()
-                        .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(namaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(idLabel)
-                                .addComponent(idInput, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
-                                .addComponent(namaInput)
-                                .addComponent(tgllahirInput)
-                                .addComponent(tanggallahirLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(nohpLabel))
-                        .addContainerGap(365, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputPanelLayout.createSequentialGroup()
                         .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jobdecsInput)
-                            .addComponent(jobdecsLabel))
-                        .addGap(107, 107, 107)
+                            .addGroup(inputPanelLayout.createSequentialGroup()
+                                .addComponent(jobdecsLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(inputPanelLayout.createSequentialGroup()
+                                .addComponent(dropdownJobdesc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(115, 115, 115)))
                         .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(inputPanelLayout.createSequentialGroup()
+                        .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(nohpInput, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(namaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(idLabel)
+                                    .addComponent(idInput, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+                                    .addComponent(namaInput)
+                                    .addComponent(tgllahirInput)
+                                    .addComponent(tanggallahirLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(nohpLabel)))
+                        .addGap(0, 363, Short.MAX_VALUE)))
+                .addContainerGap())
             .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(inputPanelLayout.createSequentialGroup()
                     .addContainerGap()
@@ -366,15 +456,15 @@ public class PegawaiView2 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(inputPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 45, Short.MAX_VALUE)
                         .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(inputPanelLayout.createSequentialGroup()
                         .addComponent(jobdecsLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jobdecsInput, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 26, Short.MAX_VALUE))))
+                        .addComponent(dropdownJobdesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(inputPanelLayout.createSequentialGroup()
                     .addContainerGap()
@@ -398,6 +488,11 @@ public class PegawaiView2 extends javax.swing.JFrame {
             }
         ));
         tabelView.setRowHeight(32);
+        tabelView.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelViewMouseClicked(evt);
+            }
+        });
         scrollTabelPanel.setViewportView(tabelView);
 
         footer.setBackground(new java.awt.Color(125, 135, 147));
@@ -496,6 +591,11 @@ public class PegawaiView2 extends javax.swing.JFrame {
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         // TODO add your handling code here:
+        setEditDeleteBtn(false);
+        setComponent(true);
+        clearText();
+        searchInput.setText("");
+        action = "Tambah";
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void logoAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoAreaMouseClicked
@@ -506,6 +606,9 @@ public class PegawaiView2 extends javax.swing.JFrame {
 
     private void transaksiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transaksiBtnActionPerformed
         // TODO add your handling code here:
+        TransaksiView tv = new TransaksiView();
+        this.dispose();
+        tv.setVisible(true);
     }//GEN-LAST:event_transaksiBtnActionPerformed
 
     private void tgllahirInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tgllahirInputActionPerformed
@@ -516,9 +619,101 @@ public class PegawaiView2 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nohpInputActionPerformed
 
-    private void jobdecsInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jobdecsInputActionPerformed
+    private void namaInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaInputActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jobdecsInputActionPerformed
+    }//GEN-LAST:event_namaInputActionPerformed
+
+    private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
+        // TODO add your handling code here:
+        setComponent(true);
+        action = "Ubah";
+    }//GEN-LAST:event_editBtnActionPerformed
+
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        // TODO add your handling code here:
+        try{
+            pc.deleteDataPegawai(selected);
+            clearText();
+            showPegawai();
+            setComponent(false);
+            setEditDeleteBtn(false);
+        } catch(Exception e){
+            System.out.println("Error deleting data...");
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_deleteBtnActionPerformed
+
+    private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
+        // TODO add your handling code here:
+        try{
+            inputKosongException();
+            
+            Pegawai p = new Pegawai(idInput.getText(), namaInput.getText(), tgllahirInput.getText(), nohpInput.getText(), dropdownJobdesc.getSelectedItem().toString());
+            if(action.equalsIgnoreCase("Tambah")){
+                pc.InsertDataPegawai(p);
+            } else
+                pc.updateDataPegawai(p);
+        } catch(InputKosongException e){
+            System.out.println("Error: " + e.getMessage());
+        }
+       clearText();
+       showPegawai();
+       setComponent(false);
+       setEditDeleteBtn(false);
+    }//GEN-LAST:event_saveBtnActionPerformed
+
+    private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
+        // TODO add your handling code here:
+        setComponent(false);
+        setEditDeleteBtn(false);
+        clearText();
+    }//GEN-LAST:event_cancelBtnActionPerformed
+
+    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
+        // TODO add your handling code here:
+        setEditDeleteBtn(false);
+        setComponent(false);
+        
+        try{
+            TablePegawai tabel = (TablePegawai) pc.searchPegawai(searchInput.getText());
+            
+            if(tabel.getRowCount() != 0){
+                tabelView.setModel(tabel);
+            } else{
+                clearText();
+                setEditDeleteBtn(false);
+            }
+        } catch(Exception e){
+            System.out.println("Error searching...");
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_searchBtnActionPerformed
+
+    private void idInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idInputActionPerformed
+
+    private void customerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerBtnActionPerformed
+        // TODO add your handling code here:
+        CustomerView cv = new CustomerView();
+        this.dispose();
+        cv.setVisible(true);
+    }//GEN-LAST:event_customerBtnActionPerformed
+
+    private void tabelViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelViewMouseClicked
+        // TODO add your handling code here:
+        setEditDeleteBtn(true);
+        setComponent(false);
+        
+        Pegawai selectedP = (Pegawai) getTableSelectedObject(tabelView);
+        selected = selectedP.getId();
+        
+        idInput.setText(selectedP.getId());
+        namaInput.setText(selectedP.getNama());
+        tgllahirInput.setText(selectedP.getTglLahir());
+        nohpInput.setText(selectedP.getNoHP());
+        dropdownJobdesc.setSelectedItem(selectedP.getJobDesc());
+    }//GEN-LAST:event_tabelViewMouseClicked
 
     /**
      * @param args the command line arguments
@@ -559,6 +754,7 @@ public class PegawaiView2 extends javax.swing.JFrame {
     private javax.swing.JButton cancelBtn;
     private javax.swing.JButton customerBtn;
     private javax.swing.JButton deleteBtn;
+    private javax.swing.JComboBox<String> dropdownJobdesc;
     private javax.swing.JButton editBtn;
     private javax.swing.JPanel footer;
     private javax.swing.JPanel headerPanel;
@@ -566,7 +762,6 @@ public class PegawaiView2 extends javax.swing.JFrame {
     private javax.swing.JLabel idLabel;
     private javax.swing.JPanel inputPanel;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jobdecsInput;
     private javax.swing.JLabel jobdecsLabel;
     private javax.swing.JLabel logoArea;
     private javax.swing.JPanel mainPanel;

@@ -7,7 +7,7 @@ public class Pegawai {
     private String noHP;
     private String jobDesc;
 
-    public Pegawai(String namaPegawai, String id, String tglLahir, String noHP, String jobDesc){
+    public Pegawai(String id, String namaPegawai, String tglLahir, String noHP, String jobDesc){
         this.namaPegawai = namaPegawai;
         this.id = id;
         this.tglLahir = tglLahir;
@@ -55,12 +55,8 @@ public class Pegawai {
         this.jobDesc = jobDesc;
     }
     
-    public void showDataPegawai(){
-        System.out.println("Nama Pegawai: "+namaPegawai);
-        System.out.println("ID Pegawai: "+id);
-        System.out.println("Tanggal Lahir: "+tglLahir);
-        System.out.println("No Handphone: "+noHP);
-        System.out.println("Job Desc: "+jobDesc);
+    public String showDataPegawai(){
+        return id + " | " + namaPegawai + " | " + tglLahir + " | " + noHP + " | " + noHP + " | " + jobDesc;
     }
 
     public int hitungGajiPegawai(){     // JobDesc menggunakan DropDown

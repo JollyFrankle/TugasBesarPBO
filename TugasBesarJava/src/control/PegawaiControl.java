@@ -11,15 +11,23 @@ import table.TablePegawai;
 public class PegawaiControl {
     private PegawaiPreparedDAO dBao = new PegawaiPreparedDAO();
     
-    public void InsertDataPegawaI(Pegawai p){
+    public void InsertDataPegawai(Pegawai p){
         dBao.insertPegawai(p);
     }
     
-    public Pegawai searchPegawai(String id){
-        Pegawai p = null;
-        p = (Pegawai) dBao.searchPegawai(id); //ragu
+    public String showDataPegawai(){
+        List<Pegawai> data = dBao.searchPegawai();
         
-        return p;
+        String pegawaiString = "";
+        for(int i=0; i<data.size(); i++){
+            pegawaiString += data.get(i).showDataPegawai();
+        }
+        
+        return pegawaiString;
+    }
+    
+    public TablePegawai searchPegawai(String input){
+        return new TablePegawai(dBao.searchPegawai(input));
     }
     
     public void updateDataPegawai(Pegawai p){
@@ -35,5 +43,9 @@ public class PegawaiControl {
        
        return data;
     }    
+    
+    public TablePegawai getTablePegawai(String query){
+        return new TablePegawai(dBao.searchPegawai(query));
+    }
     
 }

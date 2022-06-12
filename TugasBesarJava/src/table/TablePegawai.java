@@ -38,6 +38,8 @@ public class TablePegawai extends AbstractTableModel{
                 return list.get(rowIndex).getNoHP();
             case 4:
                 return list.get(rowIndex).getJobDesc();
+            case 99:
+                return list.get(rowIndex);
             default:
                 return null;
         }
