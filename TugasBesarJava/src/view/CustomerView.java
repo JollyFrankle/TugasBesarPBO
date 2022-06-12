@@ -21,7 +21,7 @@ public class CustomerView extends javax.swing.JFrame {
     public CustomerView() {
         initComponents();
         
-//        initTable();
+        initTable();
     }
 
     private Object getTableSelectedObject(javax.swing.JTable table) {
@@ -32,21 +32,21 @@ public class CustomerView extends javax.swing.JFrame {
         }
     }
     
-//    private void initTable() {
-//        tblUtama.setModel(cCTRL.getTableCustomer(""));
-//        
-//        int colWidth[] = {75, 300, 500, 300};
-//        int minWidth[] = {50, 200, 300, 150};
-//        int maxWidth[] = {75, 500, 0, 130};
-//        for(int i=0; i<colWidth.length; i++) {
-//            if(colWidth[i] > 0)
-//                tblUtama.getColumnModel().getColumn(i).setPreferredWidth(colWidth[i]);
-//            if(minWidth[i] > 0)
-//                tblUtama.getColumnModel().getColumn(i).setMinWidth(minWidth[i]);
-//            if(maxWidth[i] > 0)
-//                tblUtama.getColumnModel().getColumn(i).setMaxWidth(maxWidth[i]);
-//        }
-//    }
+    private void initTable() {
+        tblUtama.setModel(cCTRL.getTableCustomer(""));
+        
+        int colWidth[] = {75, 300, 500, 300};
+        int minWidth[] = {50, 200, 300, 150};
+        int maxWidth[] = {75, 500, 0, 130};
+        for(int i=0; i<colWidth.length; i++) {
+            if(colWidth[i] > 0)
+                tblUtama.getColumnModel().getColumn(i).setPreferredWidth(colWidth[i]);
+            if(minWidth[i] > 0)
+                tblUtama.getColumnModel().getColumn(i).setMinWidth(minWidth[i]);
+            if(maxWidth[i] > 0)
+                tblUtama.getColumnModel().getColumn(i).setMaxWidth(maxWidth[i]);
+        }
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,13 +74,11 @@ public class CustomerView extends javax.swing.JFrame {
         cariText = new javax.swing.JTextField();
         cariBtn = new javax.swing.JButton();
         menu = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        inputNama = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        inputAlamat = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        inputNoHp = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -90,7 +88,7 @@ public class CustomerView extends javax.swing.JFrame {
         footer = new javax.swing.JPanel();
         footerName = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblUtama = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(195, 228, 248));
@@ -274,29 +272,8 @@ public class CustomerView extends javax.swing.JFrame {
 
         menu.setBackground(new java.awt.Color(195, 228, 248));
 
-        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel1.setText("ID");
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-
         jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel2.setText("NAMA");
-
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
-            }
-        });
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel3.setText("ALAMAT");
@@ -342,20 +319,18 @@ public class CustomerView extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(menuLayout.createSequentialGroup()
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(inputNoHp, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 353, Short.MAX_VALUE)
                         .addComponent(jButton4)
                         .addGap(18, 18, 18)
                         .addComponent(jButton5)
                         .addGap(32, 32, 32))
                     .addGroup(menuLayout.createSequentialGroup()
                         .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inputAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inputNama, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
                             .addGroup(menuLayout.createSequentialGroup()
                                 .addComponent(jButton1)
                                 .addGap(18, 18, 18)
@@ -372,27 +347,25 @@ public class CustomerView extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(inputNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton4)
-                        .addComponent(jButton5))
+                .addComponent(inputAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(menuLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addGap(8, 8, 8)
+                        .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton4)
+                            .addComponent(jButton5)))
+                    .addGroup(menuLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(inputNoHp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
@@ -421,8 +394,8 @@ public class CustomerView extends javax.swing.JFrame {
         jScrollPane1.setBackground(new java.awt.Color(195, 228, 248));
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(195, 228, 248), 1, true));
 
-        jTable1.setBackground(new java.awt.Color(226, 241, 250));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblUtama.setBackground(new java.awt.Color(226, 241, 250));
+        tblUtama.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -433,7 +406,7 @@ public class CustomerView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblUtama);
 
         javax.swing.GroupLayout BackgoundLayout = new javax.swing.GroupLayout(Backgound);
         Backgound.setLayout(BackgoundLayout);
@@ -481,20 +454,16 @@ public class CustomerView extends javax.swing.JFrame {
     }//GEN-LAST:event_cariTextActionPerformed
 
     private void tblUtamaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUtamaMouseClicked
-//        Customer C = (Customer) getTableSelectedObject(tblUtama);
-//        // on selected, display ke inputannya
-//        // tetapkan ID:
-//        this.selectedId = C.getId();
-//        
-//        // tetapkan input:
-//        inputNama.setText(C.getNama());
-//        inputAlamat.setText(C.getAlamat());
-//        inputNoHP.setText(C.getNoHP());
+        Customer C = (Customer) getTableSelectedObject(tblUtama);
+        // on selected, display ke inputannya
+        // tetapkan ID:
+        this.selectedId = C.getId();
+        
+        // tetapkan input:
+        inputNama.setText(C.getNama());
+        inputAlamat.setText(C.getAlamat());
+        inputNoHp.setText(C.getNoHP());
     }//GEN-LAST:event_tblUtamaMouseClicked
-
-    private void inputAlamatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputAlamatActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputAlamatActionPerformed
 
     private void inputNoHPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNoHPActionPerformed
         // TODO add your handling code here:
@@ -508,21 +477,13 @@ public class CustomerView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_transaksiBtnActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
+    private void inputAlamatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -574,21 +535,18 @@ public class CustomerView extends javax.swing.JFrame {
     private javax.swing.JLabel footerName;
     private javax.swing.JLabel fresh;
     private javax.swing.JButton homeBtn;
+    private javax.swing.JTextField inputAlamat;
+    private javax.swing.JTextField inputNama;
+    private javax.swing.JTextField inputNoHp;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JPanel logo;
     private javax.swing.JLabel logoIcon;
     private javax.swing.JPanel menu;
@@ -596,6 +554,7 @@ public class CustomerView extends javax.swing.JFrame {
     private javax.swing.JPanel navBar;
     private javax.swing.JButton pegawaiBtn;
     private javax.swing.JPanel search;
+    private javax.swing.JTable tblUtama;
     private javax.swing.JButton transaksiBtn;
     private javax.swing.JLabel viewWhereAU;
     // End of variables declaration//GEN-END:variables
