@@ -626,6 +626,7 @@ public class PegawaiView2 extends javax.swing.JFrame {
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
         // TODO add your handling code here:
         setComponent(true);
+        idInput.setEnabled(false);
         action = "Ubah";
     }//GEN-LAST:event_editBtnActionPerformed
 
