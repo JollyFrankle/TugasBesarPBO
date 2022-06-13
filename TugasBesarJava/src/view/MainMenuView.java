@@ -29,6 +29,7 @@ public class MainMenuView extends javax.swing.JFrame {
         Backgound = new javax.swing.JPanel();
         corpName = new javax.swing.JPanel();
         namaDetailView = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         transaksi = new javax.swing.JPanel();
         transaksiBtn = new javax.swing.JButton();
         customer = new javax.swing.JPanel();
@@ -39,6 +40,7 @@ public class MainMenuView extends javax.swing.JFrame {
         footerName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Main Menu - Clean Fresh Laundry");
         setBackground(new java.awt.Color(35, 45, 59));
         setMinimumSize(new java.awt.Dimension(800, 700));
 
@@ -49,6 +51,17 @@ public class MainMenuView extends javax.swing.JFrame {
 
         namaDetailView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/logo luar.png"))); // NOI18N
 
+        jButton1.setBackground(new java.awt.Color(125, 135, 147));
+        jButton1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Credit");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout corpNameLayout = new javax.swing.GroupLayout(corpName);
         corpName.setLayout(corpNameLayout);
         corpNameLayout.setHorizontalGroup(
@@ -56,13 +69,20 @@ public class MainMenuView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, corpNameLayout.createSequentialGroup()
                 .addContainerGap(171, Short.MAX_VALUE)
                 .addComponent(namaDetailView)
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         corpNameLayout.setVerticalGroup(
             corpNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(corpNameLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(namaDetailView)
+                .addGroup(corpNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(corpNameLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(namaDetailView))
+                    .addGroup(corpNameLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -229,6 +249,11 @@ public class MainMenuView extends javax.swing.JFrame {
         pv.setVisible(true);
     }//GEN-LAST:event_pegawaiBtnMouseClicked
 
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        CreditView pv = new CreditView();
+        pv.setVisible(true);
+    }//GEN-LAST:event_jButton1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -286,6 +311,7 @@ public class MainMenuView extends javax.swing.JFrame {
     private javax.swing.JButton customerBtn;
     private javax.swing.JPanel footer;
     private javax.swing.JLabel footerName;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel namaDetailView;
     private javax.swing.JPanel pegawai;
     private javax.swing.JButton pegawaiBtn;
