@@ -101,7 +101,7 @@ public class CustomerView extends javax.swing.JFrame {
         manuBarDetailPanel = new javax.swing.JPanel();
         headerPanel = new javax.swing.JPanel();
         namaView = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        namaDetailView = new javax.swing.JLabel();
         searchPanel = new javax.swing.JPanel();
         searchInput = new javax.swing.JTextField();
         searchBtn = new javax.swing.JButton();
@@ -209,9 +209,9 @@ public class CustomerView extends javax.swing.JFrame {
 
         namaView.setOpaque(false);
 
-        jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Customer");
+        namaDetailView.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
+        namaDetailView.setForeground(new java.awt.Color(255, 255, 255));
+        namaDetailView.setText("Customer");
 
         javax.swing.GroupLayout namaViewLayout = new javax.swing.GroupLayout(namaView);
         namaView.setLayout(namaViewLayout);
@@ -219,14 +219,14 @@ public class CustomerView extends javax.swing.JFrame {
             namaViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(namaViewLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(namaDetailView, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(64, Short.MAX_VALUE))
         );
         namaViewLayout.setVerticalGroup(
             namaViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(namaViewLayout.createSequentialGroup()
                 .addContainerGap(24, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addComponent(namaDetailView)
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -719,11 +719,11 @@ public class CustomerView extends javax.swing.JFrame {
     private javax.swing.JPanel footer;
     private javax.swing.JPanel headerPanel;
     private javax.swing.JPanel inputPanel;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel logoArea;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel manuBarDetailPanel;
     private javax.swing.JPanel menuBar;
+    private javax.swing.JLabel namaDetailView;
     private javax.swing.JLabel namaFooter;
     private javax.swing.JTextField namaInput;
     private javax.swing.JLabel namaLabel;

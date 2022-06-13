@@ -28,7 +28,7 @@ public class MainMenuView extends javax.swing.JFrame {
 
         Backgound = new javax.swing.JPanel();
         corpName = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        namaDetailView = new javax.swing.JLabel();
         transaksi = new javax.swing.JPanel();
         transaksiBtn = new javax.swing.JButton();
         customer = new javax.swing.JPanel();
@@ -47,7 +47,7 @@ public class MainMenuView extends javax.swing.JFrame {
 
         corpName.setBackground(new java.awt.Color(35, 45, 59));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/logo luar.png"))); // NOI18N
+        namaDetailView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/logo luar.png"))); // NOI18N
 
         javax.swing.GroupLayout corpNameLayout = new javax.swing.GroupLayout(corpName);
         corpName.setLayout(corpNameLayout);
@@ -55,14 +55,14 @@ public class MainMenuView extends javax.swing.JFrame {
             corpNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, corpNameLayout.createSequentialGroup()
                 .addContainerGap(171, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addComponent(namaDetailView)
                 .addContainerGap(171, Short.MAX_VALUE))
         );
         corpNameLayout.setVerticalGroup(
             corpNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(corpNameLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(jLabel2)
+                .addComponent(namaDetailView)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -286,7 +286,7 @@ public class MainMenuView extends javax.swing.JFrame {
     private javax.swing.JButton customerBtn;
     private javax.swing.JPanel footer;
     private javax.swing.JLabel footerName;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel namaDetailView;
     private javax.swing.JPanel pegawai;
     private javax.swing.JButton pegawaiBtn;
     private javax.swing.JPanel transaksi;
