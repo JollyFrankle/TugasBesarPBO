@@ -588,7 +588,7 @@ public class CustomerView extends javax.swing.JFrame {
                 tabelView.setModel(tabel);
             } else{
                 clearText();
-                JOptionPane.showConfirmDialog(null, "Data tidak ditemukan", "Konfirmasi", JOptionPane.DEFAULT_OPTION);
+                JOptionPane.showConfirmDialog(null, "Data tidak ditemukan", "Warning", JOptionPane.DEFAULT_OPTION);
                 setEditDeleteBtn(false);
             }
         } catch(Exception e){
@@ -609,7 +609,8 @@ public class CustomerView extends javax.swing.JFrame {
             }
         } catch(InputKosongException e){
             System.out.println("Error: " + e.getMessage());
-        }
+            JOptionPane.showConfirmDialog(null, "Data tidak boleh kosong", "Warning", JOptionPane.DEFAULT_OPTION);
+        } 
        clearText();
        showCustomer();
        setComponent(false);
@@ -649,16 +650,25 @@ public class CustomerView extends javax.swing.JFrame {
     }//GEN-LAST:event_tabelViewMouseClicked
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-        try{
-            cCTRL.deleteDataCustomer(selected);
-            clearText();
-            showCustomer();
-            setComponent(false);
-            setEditDeleteBtn(false);
-        } catch(Exception e){
-            System.out.println("Error deleting data...");
-            System.out.println(e);
+        int getAnswer = JOptionPane.showConfirmDialog(rootPane, "Apakah anda yakin untuk menghapus data?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        switch(getAnswer){
+            case 0:
+                try{
+                    cCTRL.deleteDataCustomer(selected);
+                    clearText();
+                    showCustomer();
+                    setComponent(false);
+                    setEditDeleteBtn(false);
+                } catch(Exception e){
+                    System.out.println("Error deleting data...");
+                    System.out.println(e);
+                }
+                break;
+                
+            case 1:
+                break;
         }
+        
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed

@@ -7,6 +7,7 @@ package view;
 import control.PegawaiControl;
 import exception.InputKosongException;
 import java.util.*;
+import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 import model.Pegawai;
 import table.TablePegawai;
@@ -56,6 +57,7 @@ public class PegawaiView2 extends javax.swing.JFrame {
         dropdownJobdesc.setSelectedItem(ABORT);
         saveBtn.setEnabled(value);
         cancelBtn.setEnabled(value);
+        dropdownJobdesc.setEnabled(value);
     }
     
     public Object getTableSelectedObject(javax.swing.JTable table){
@@ -632,15 +634,22 @@ public class PegawaiView2 extends javax.swing.JFrame {
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         // TODO add your handling code here:
-        try{
-            pc.deleteDataPegawai(selected);
-            clearText();
-            showPegawai();
-            setComponent(false);
-            setEditDeleteBtn(false);
-        } catch(Exception e){
-            System.out.println("Error deleting data...");
-            System.out.println(e);
+        int getAnswer = JOptionPane.showConfirmDialog(rootPane, "Apakah yakin ingin menghapus data? ", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        switch(getAnswer){
+            case 0:
+                try{
+                    pc.deleteDataPegawai(selected);
+                    clearText();
+                    showPegawai();
+                    setComponent(false);
+                    setEditDeleteBtn(false);
+                } catch(Exception e){
+                    System.out.println("Error deleting data...");
+                    System.out.println(e);
+                }
+                break;
+            case 1:
+                break;
         }
     }//GEN-LAST:event_deleteBtnActionPerformed
 
@@ -655,7 +664,8 @@ public class PegawaiView2 extends javax.swing.JFrame {
             } else
                 pc.updateDataPegawai(p);
         } catch(InputKosongException e){
-            System.out.println("Error: " + e.getMessage());
+            JOptionPane.showConfirmDialog(null, "Input tidak boleh kosong", "Warning", JOptionPane.DEFAULT_OPTION);
+            System.out.println("Error: " + e.showMessage());
         }
        clearText();
        showPegawai();
