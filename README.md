@@ -3,7 +3,7 @@
 
 ## Deskripsi Aplikasi
 Clean Fresh Laundry adalah aplikasi yang dapat mempermudah jalannya transaksi-transaksi 
-cucian dengan fungsi yang tersedia seperti menambah, memperbarui, menghapus, pencarian, dan melihat transaksi dengan fitur CRUD bagi Admin dan Show Transaction Log bagi pelanggan dan pegawai.
+cucian dengan fungsi yang tersedia seperti menambah, memperbarui, menghapus, pencarian, dan melihat transaksi dengan fitur CRUDS bagi Admin dan Show Transaction Log bagi pelanggan dan pegawai.
 
 
 
@@ -13,7 +13,7 @@ cucian dengan fungsi yang tersedia seperti menambah, memperbarui, menghapus, pen
 
 ## Features
 
-- CRUD (Create, Read, Update, Delete)
+- CRUDS (Create, Read, Update, Delete, Search)
 - Transaksi Menu
 - Customer Menu
 - Pegawai Menu
