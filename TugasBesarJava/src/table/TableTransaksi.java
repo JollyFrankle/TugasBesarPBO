@@ -40,7 +40,7 @@ public class TableTransaksi extends AbstractTableModel{
             case 4:
                 return list.get(rowIndex).getTipeLayanan().getString("speed");
             case 5:
-                return String.format("%.2f", list.get(rowIndex).getTotalBerat()) + "kg";
+                return String.format(new java.util.Locale("id"), "%,.2f", list.get(rowIndex).getTotalBerat()) + "kg";
             case 6:
                 return list.get(rowIndex).getLastActivity();
             case 99:

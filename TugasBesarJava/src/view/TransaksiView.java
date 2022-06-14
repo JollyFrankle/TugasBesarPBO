@@ -31,6 +31,7 @@ public class TransaksiView extends javax.swing.JFrame {
     private final CustomerControl cCTRL = new CustomerControl();
     private final PegawaiControl pCTRL = new PegawaiControl();
     private int selectedId = 0;
+    private Transaksi selectedTransaksi = null;
 
     // Penampung:
     private List<Customer> listC;
@@ -43,8 +44,8 @@ public class TransaksiView extends javax.swing.JFrame {
         initComponents();
 
         initDTInput(inputTglMasuk, LocalDate.now().minusYears(1), LocalDate.now().plusMonths(1));
-        initDTInput(inputTglSelesai, LocalDate.now().minusYears(1), LocalDate.now().plusMonths(2));
-        initDTInput(inputTglAmbil, LocalDate.now().minusYears(1), LocalDate.now().plusMonths(2));
+        initDTInput(inputTglSelesai, LocalDate.now().minusMonths(1), LocalDate.now().plusMonths(2));
+        initDTInput(inputTglAmbil, LocalDate.now().minusMonths(1), LocalDate.now().plusMonths(3));
         inputTglMasuk.addDateTimeChangeListener((com.github.lgooddatepicker.zinternaltools.DateTimeChangeEvent event) -> {
             // tgl masuk berubah, recheck tgl ambil
             this.setTglSelesai();
@@ -97,6 +98,9 @@ public class TransaksiView extends javax.swing.JFrame {
         // tambahan button:
         btnResetTglMasuk.setEnabled(v);
         btnResetTglAmbil.setEnabled(v);
+        
+        // tombol ini hanya boleh diaktifkan scr manual:
+        jobHistoryBtn.setEnabled(false);
     }
     
     private void clearUserInput() {
@@ -162,6 +166,10 @@ public class TransaksiView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Data berdasarkan kueri pencarian tidak ditemukan!", "CFL - Notification", JOptionPane.WARNING_MESSAGE);
         }
     }
+    
+    public void publicDataReload() {
+        this.getTableData("", false);
+    }
 
     private Object getTableSelectedObject(javax.swing.JTable table) {
         if (table.getSelectedRow() != -1) {
@@ -225,36 +233,72 @@ public class TransaksiView extends javax.swing.JFrame {
     }
     
     private void setTotalHarga() {
-        float totalHarga = 0;
-        float beratPakaian = 0;
-        float beratSelimut = 0;
-        float beratBoneka = 0;
-        beratPakaian = Float.parseFloat(inputBeratPakaian.getValue().toString());
-        beratSelimut = Float.parseFloat(inputBeratSelimut.getValue().toString());
-        beratBoneka = Float.parseFloat(inputBeratBoneka.getValue().toString());
         if(ddKecepatan.getSelectedIndex() == -1 || (!cbFCuci.isSelected() && !cbFSetrika.isSelected())) {
             // Kecepatan belum dipilih ATAU (checkbox cuci dan checkbox setrika belum ada yang dicentang): belum bisa dihitung harga
             outTotalHarga.setText("-");
+            lblHargaPakaian.setText("");
+            lblHargaSelimut.setText("");
+            lblHargaBoneka.setText("");
         } else {
+            float totalHarga = 0;
+            float beratPakaian = Float.parseFloat(inputBeratPakaian.getValue().toString());
+            float beratSelimut = Float.parseFloat(inputBeratSelimut.getValue().toString());
+            float beratBoneka = Float.parseFloat(inputBeratBoneka.getValue().toString());
+            
             // Langsung kalkulasi seluruh nya
+            java.util.Locale locID = new java.util.Locale("id");
+            float hrgSatuanP = 0, hrgSatuanS = 0, hrgSatuanB = 0;
             if(ddKecepatan.getSelectedIndex() == 0){        // REGULAR
-                if(cbFCuci.isSelected() && cbFSetrika.isSelected()){
-                    totalHarga += 5000*beratPakaian + 7000*beratSelimut + 6000*beratBoneka;
-                } else if(!cbFCuci.isSelected() && cbFSetrika.isSelected()){
-                    totalHarga += 2000*beratPakaian + 2000*beratSelimut + 0*beratBoneka;
-                } else if(cbFCuci.isSelected() && !cbFSetrika.isSelected()){
-                    totalHarga += 3000*beratPakaian + 5000*beratSelimut + 6000*beratBoneka;
+                if(cbFCuci.isSelected()) {
+                    hrgSatuanP += 3000;
+                    hrgSatuanS += 5000;
+                    hrgSatuanB += 6000;
+                }
+                if(cbFSetrika.isSelected()) {
+                    hrgSatuanP += 2000;
+                    hrgSatuanS += 2000;
+                    hrgSatuanB += 2000;
                 }
             } else if(ddKecepatan.getSelectedIndex() == 1){     // EXPRESS
-                if(cbFCuci.isSelected() && cbFSetrika.isSelected()){
-                    totalHarga += 10000*beratPakaian + 14000*beratSelimut + 12000*beratBoneka;
-                } else if(!cbFCuci.isSelected() && cbFSetrika.isSelected()){
-                    totalHarga += 4000*beratPakaian + 4000*beratSelimut + 0*beratBoneka;
-                } else if(cbFCuci.isSelected() && !cbFSetrika.isSelected()){
-                    totalHarga += 6000*beratPakaian + 10000*beratSelimut + 12000*beratBoneka;
+                if(cbFCuci.isSelected()) {
+                    hrgSatuanP += 6000;
+                    hrgSatuanS += 10000;
+                    hrgSatuanB += 12000;
+                }
+                if(cbFSetrika.isSelected()) {
+                    hrgSatuanP += 4000;
+                    hrgSatuanS += 4000;
+                    hrgSatuanB += 4000;
                 }
             }
-            outTotalHarga.setText(""+totalHarga);
+            lblHargaPakaian.setText("Rp" + String.format(locID, "%,.0f", hrgSatuanP) + "/kg");
+            lblHargaSelimut.setText("Rp" + String.format(locID, "%,.0f", hrgSatuanS) + "/kg");
+            lblHargaBoneka.setText("Rp" + String.format(locID, "%,.0f", hrgSatuanB) + "/kg");
+            totalHarga += hrgSatuanP * beratPakaian;
+            totalHarga += hrgSatuanS * beratSelimut;
+            totalHarga += hrgSatuanB * beratBoneka;
+            
+//            if(ddKecepatan.getSelectedIndex() == 0){        // REGULAR
+//                if(cbFCuci.isSelected()){
+//                    hrgSatuanP += 5000;
+//                    hrgSatuanS += 7000;
+//                    hrgSatuanB += 6000;
+//                    totalHarga += 5000*beratPakaian + 7000*beratSelimut + 6000*beratBoneka;
+//                } else if(!cbFCuci.isSelected() && cbFSetrika.isSelected()){
+//                    totalHarga += 2000*beratPakaian + 2000*beratSelimut + 0*beratBoneka;
+//                } else if(cbFCuci.isSelected() && !cbFSetrika.isSelected()){
+//                    totalHarga += 3000*beratPakaian + 5000*beratSelimut + 6000*beratBoneka;
+//                }
+//            } else if(ddKecepatan.getSelectedIndex() == 1){     // EXPRESS
+//                if(cbFCuci.isSelected() && cbFSetrika.isSelected()){
+//                    totalHarga += 10000*beratPakaian + 14000*beratSelimut + 12000*beratBoneka;
+//                } else if(!cbFCuci.isSelected() && cbFSetrika.isSelected()){
+//                    totalHarga += 4000*beratPakaian + 4000*beratSelimut + 0*beratBoneka;
+//                } else if(cbFCuci.isSelected() && !cbFSetrika.isSelected()){
+//                    totalHarga += 6000*beratPakaian + 10000*beratSelimut + 12000*beratBoneka;
+//                }
+//            }
+            outTotalHarga.setText("Rp" + String.format(locID, "%,.0f", totalHarga));
         }
     }
     
@@ -369,6 +413,7 @@ public class TransaksiView extends javax.swing.JFrame {
         outTotalHarga = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        jobHistoryBtn = new javax.swing.JButton();
         scrollTabelPanel = new javax.swing.JScrollPane();
         tableTransaksi = new javax.swing.JTable();
         footer = new javax.swing.JPanel();
@@ -465,9 +510,9 @@ public class TransaksiView extends javax.swing.JFrame {
 
         namaView.setOpaque(false);
 
+        namaDetailView.setText("Transaksi");
         namaDetailView.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
         namaDetailView.setForeground(new java.awt.Color(255, 255, 255));
-        namaDetailView.setText("Transaksi");
 
         javax.swing.GroupLayout namaViewLayout = new javax.swing.GroupLayout(namaView);
         namaView.setLayout(namaViewLayout);
@@ -544,17 +589,17 @@ public class TransaksiView extends javax.swing.JFrame {
 
         jPanel2.setOpaque(false);
 
-        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel5.setText("Tanggal Ambil");
+        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel3.setText("Tanggal Selesai");
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel1.setText("Tanggal Masuk");
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel4.setText("Customer");
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
         addBtn.setBackground(new java.awt.Color(25, 135, 84));
         addBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -606,31 +651,31 @@ public class TransaksiView extends javax.swing.JFrame {
 
         ddCustomer.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        jLabel15.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel15.setText("Data Transaksi");
+        jLabel15.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
 
-        lblPegawai.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblPegawai.setText("Petugas Penginput Transaksi");
+        lblPegawai.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
         ddPegawai.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        jLabel18.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
         jLabel18.setText("(otomatis, berdasarkan kecepatan layanan)");
+        jLabel18.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
 
-        btnResetTglMasuk.setBackground(new java.awt.Color(33, 37, 41));
-        btnResetTglMasuk.setForeground(new java.awt.Color(255, 255, 255));
         btnResetTglMasuk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-backspace.png"))); // NOI18N
+        btnResetTglMasuk.setBackground(new java.awt.Color(33, 37, 41));
         btnResetTglMasuk.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnResetTglMasuk.setForeground(new java.awt.Color(255, 255, 255));
         btnResetTglMasuk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnResetTglMasukActionPerformed(evt);
             }
         });
 
-        btnResetTglAmbil.setBackground(new java.awt.Color(33, 37, 41));
-        btnResetTglAmbil.setForeground(new java.awt.Color(255, 255, 255));
         btnResetTglAmbil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-backspace.png"))); // NOI18N
+        btnResetTglAmbil.setBackground(new java.awt.Color(33, 37, 41));
         btnResetTglAmbil.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnResetTglAmbil.setForeground(new java.awt.Color(255, 255, 255));
         btnResetTglAmbil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnResetTglAmbilActionPerformed(evt);
@@ -717,26 +762,26 @@ public class TransaksiView extends javax.swing.JFrame {
 
         jPanel1.setOpaque(false);
 
-        cancelBtn.setBackground(new java.awt.Color(220, 53, 69));
-        cancelBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        cancelBtn.setForeground(new java.awt.Color(255, 255, 255));
         cancelBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-cancel.png"))); // NOI18N
         cancelBtn.setText("Batal");
+        cancelBtn.setBackground(new java.awt.Color(220, 53, 69));
         cancelBtn.setBorder(null);
         cancelBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cancelBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        cancelBtn.setForeground(new java.awt.Color(255, 255, 255));
         cancelBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelBtnActionPerformed(evt);
             }
         });
 
-        saveBtn.setBackground(new java.awt.Color(13, 110, 253));
-        saveBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        saveBtn.setForeground(new java.awt.Color(255, 255, 255));
         saveBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-save.png"))); // NOI18N
         saveBtn.setText("Simpan");
+        saveBtn.setBackground(new java.awt.Color(13, 110, 253));
         saveBtn.setBorder(null);
         saveBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        saveBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        saveBtn.setForeground(new java.awt.Color(255, 255, 255));
         saveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveBtnActionPerformed(evt);
@@ -748,12 +793,12 @@ public class TransaksiView extends javax.swing.JFrame {
 
         jPanel4.setOpaque(false);
 
-        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Pakaian");
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        inputBeratPakaian.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         inputBeratPakaian.setModel(new javax.swing.SpinnerNumberModel(Float.valueOf(0.0f), Float.valueOf(0.0f), Float.valueOf(20.0f), Float.valueOf(0.1f)));
+        inputBeratPakaian.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         inputBeratPakaian.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
                 inputBeratPakaianComponentAdded(evt);
@@ -770,13 +815,13 @@ public class TransaksiView extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("kg");
+        jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        lblHargaPakaian.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
         lblHargaPakaian.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblHargaPakaian.setText("Rp1.000/kg");
+        lblHargaPakaian.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -815,25 +860,25 @@ public class TransaksiView extends javax.swing.JFrame {
 
         jPanel7.setOpaque(false);
 
-        jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Selimut");
+        jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        inputBeratSelimut.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         inputBeratSelimut.setModel(new javax.swing.SpinnerNumberModel(Float.valueOf(0.0f), Float.valueOf(0.0f), Float.valueOf(20.0f), Float.valueOf(0.1f)));
+        inputBeratSelimut.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         inputBeratSelimut.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 beratStateChanged(evt);
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("kg");
+        jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        lblHargaSelimut.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
         lblHargaSelimut.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblHargaSelimut.setText("Rp1.000/kg");
+        lblHargaSelimut.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -871,25 +916,25 @@ public class TransaksiView extends javax.swing.JFrame {
 
         jPanel8.setOpaque(false);
 
-        jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Boneka");
+        jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        inputBeratBoneka.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         inputBeratBoneka.setModel(new javax.swing.SpinnerNumberModel(Float.valueOf(0.0f), Float.valueOf(0.0f), Float.valueOf(20.0f), Float.valueOf(0.1f)));
+        inputBeratBoneka.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         inputBeratBoneka.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 beratStateChanged(evt);
             }
         });
 
-        jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("kg");
+        jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        lblHargaBoneka.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
         lblHargaBoneka.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblHargaBoneka.setText("Rp1.000/kg");
+        lblHargaBoneka.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -926,21 +971,21 @@ public class TransaksiView extends javax.swing.JFrame {
 
         jPanel3.add(jPanel8);
 
+        jLabel11.setText("Rincian Item Laundry");
         jLabel11.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel11.setText("Daftar Item Laundry");
 
-        jLabel12.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel12.setText("Tipe Layanan");
+        jLabel12.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
 
-        jLabel13.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel13.setText("Kecepatan");
+        jLabel13.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        jLabel14.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel14.setText("Fasilitas");
+        jLabel14.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        ddKecepatan.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         ddKecepatan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "REGULAR", "EXPRESS" }));
         ddKecepatan.setSelectedIndex(-1);
+        ddKecepatan.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         ddKecepatan.setToolTipText("");
         ddKecepatan.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -948,30 +993,43 @@ public class TransaksiView extends javax.swing.JFrame {
             }
         });
 
-        cbFCuci.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         cbFCuci.setText("Cuci");
+        cbFCuci.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         cbFCuci.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 ddcbItemStateChanged(evt);
             }
         });
 
-        cbFSetrika.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         cbFSetrika.setText("Setrika");
+        cbFSetrika.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         cbFSetrika.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 ddcbItemStateChanged(evt);
             }
         });
 
+        outTotalHarga.setText("(jalankan program)");
         outTotalHarga.setFont(new java.awt.Font("Century Gothic", 1, 32)); // NOI18N
-        outTotalHarga.setText("Rp12.300");
 
-        jLabel17.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel17.setText("Total Harga");
+        jLabel17.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        jLabel16.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
         jLabel16.setText("REGULAR: selesai dalam 2 hari, EXPRESS: selesai dalam 6 jam");
+        jLabel16.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+
+        jobHistoryBtn.setBackground(new java.awt.Color(33, 37, 41));
+        jobHistoryBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jobHistoryBtn.setForeground(new java.awt.Color(255, 255, 255));
+        jobHistoryBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-save.png"))); // NOI18N
+        jobHistoryBtn.setText("Lihat Job History");
+        jobHistoryBtn.setBorder(null);
+        jobHistoryBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jobHistoryBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jobHistoryBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -998,17 +1056,20 @@ public class TransaksiView extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(outTotalHarga)
+                                    .addComponent(jLabel17)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel17))))
+                                    .addComponent(jobHistoryBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(16, 16, 16))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(71, 71, 71)
+                .addGap(16, 16, 16)
+                .addComponent(jobHistoryBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13)
@@ -1063,10 +1124,10 @@ public class TransaksiView extends javax.swing.JFrame {
 
         footer.setBackground(new java.awt.Color(125, 135, 147));
 
-        namaFooter.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        namaFooter.setForeground(new java.awt.Color(255, 255, 255));
         namaFooter.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         namaFooter.setText("Made with ♥ by Kuli IT Clean Fresh Laundry");
+        namaFooter.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        namaFooter.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout footerLayout = new javax.swing.GroupLayout(footer);
         footer.setLayout(footerLayout);
@@ -1099,7 +1160,7 @@ public class TransaksiView extends javax.swing.JFrame {
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
-                .addComponent(inputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+                .addComponent(inputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollTabelPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1228,13 +1289,15 @@ public class TransaksiView extends javax.swing.JFrame {
                     break;
             }
         }
-        // don't just trust database output: generate ulang tgl selesai
+        
+        // job history button:
+        selectedTransaksi = selectedT;
+        jobHistoryBtn.setEnabled(true);
     }//GEN-LAST:event_tableTransaksiMouseClicked
 
     private void beratStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_beratStateChanged
         // Berat berubah, recheck harga
         this.setTotalHarga();
-        
     }//GEN-LAST:event_beratStateChanged
 
     private void ddcbItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ddcbItemStateChanged
@@ -1255,7 +1318,7 @@ public class TransaksiView extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-        int userAns = JOptionPane.showConfirmDialog(rootPane, "Apakah Anda yakin ingin menghapus data ini?\r\nData yang sudah dihapus tidak dapat lagi dipulihkan.", "UGamerWorld - Konfirmasi tindakan", JOptionPane.YES_NO_OPTION);
+        int userAns = JOptionPane.showConfirmDialog(rootPane, "Apakah Anda yakin ingin menghapus data ini?\r\nData yang sudah dihapus tidak dapat lagi dipulihkan.", "CFL - Konfirmasi tindakan", JOptionPane.YES_NO_OPTION);
         if(userAns == 0) {
             // proceed
             tCTRL.deleteDataTransaksi(selectedId);
@@ -1270,7 +1333,7 @@ public class TransaksiView extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
-        String confirmDialogText = "";
+        String confirmDialogText;
         if(selectedId == 0) {
             // Attempted action: ADD
             confirmDialogText = "Apakah Anda yakin ingin menambahkan data baru?";
@@ -1278,7 +1341,7 @@ public class TransaksiView extends javax.swing.JFrame {
             // Attempted action: UPDATE
             confirmDialogText = "Apakah Anda yakin ingin memperbarui data?";
         }
-        int userAns = JOptionPane.showConfirmDialog(rootPane, confirmDialogText, "UGamerWorld - Konfirmasi tindakan", JOptionPane.YES_NO_OPTION);
+        int userAns = JOptionPane.showConfirmDialog(rootPane, confirmDialogText, "CFL - Konfirmasi tindakan", JOptionPane.YES_NO_OPTION);
         // userAns will return 0 if user answers YES, 1 if user answers NO
         if(userAns == 0) {
             try {
@@ -1287,16 +1350,16 @@ public class TransaksiView extends javax.swing.JFrame {
                 Customer selC = (Customer) ddCustomer.getSelectedItem();
                 
                 Transaksi inT = new Transaksi(
-                        // selectedId will default to "0" if user wants to add new data, else will contain currently selected item
-                        selectedId,
-                        inputTglMasuk.getDateTimeStrict(),
-                        inputTglSelesai.getDateTimeStrict(),
-                        inputTglAmbil.getDateTimePermissive(),
-                        getTipeLayanan(),
-                        Float.parseFloat(inputBeratPakaian.getValue().toString()),
-                        Float.parseFloat(inputBeratSelimut.getValue().toString()),
-                        Float.parseFloat(inputBeratBoneka.getValue().toString()),
-                        selC
+                    // selectedId will default to "0" if user wants to add new data, else will contain currently selected item
+                    selectedId,
+                    inputTglMasuk.getDateTimeStrict(),
+                    inputTglSelesai.getDateTimeStrict(),
+                    inputTglAmbil.getDateTimePermissive(),
+                    getTipeLayanan(),
+                    Float.parseFloat(inputBeratPakaian.getValue().toString()),
+                    Float.parseFloat(inputBeratSelimut.getValue().toString()),
+                    Float.parseFloat(inputBeratBoneka.getValue().toString()),
+                    selC
                 );
                 
                 if(selectedId == 0) {
@@ -1364,6 +1427,11 @@ public class TransaksiView extends javax.swing.JFrame {
     private void inputBeratPakaianMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputBeratPakaianMouseClicked
         System.out.println("\nComponent Added brokkkk\n");
     }//GEN-LAST:event_inputBeratPakaianMouseClicked
+
+    private void jobHistoryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jobHistoryBtnActionPerformed
+        JobHistoryView jhv = new JobHistoryView(selectedTransaksi, this);
+        jhv.setVisible(true);
+    }//GEN-LAST:event_jobHistoryBtnActionPerformed
 
     private void logoAreaMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_logoAreaMouseClicked
         MainMenuView MMV = new MainMenuView();
@@ -1465,6 +1533,7 @@ public class TransaksiView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JButton jobHistoryBtn;
     private javax.swing.JLabel lblHargaBoneka;
     private javax.swing.JLabel lblHargaPakaian;
     private javax.swing.JLabel lblHargaSelimut;

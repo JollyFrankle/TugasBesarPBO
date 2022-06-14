@@ -17,45 +17,42 @@ import table.TableCustomer;
  * @author Captbay
  */
 public class CustomerView extends javax.swing.JFrame {
-    String action = null;
-    int selected;
-    CustomerControl cCTRL = new CustomerControl();
-    List<Customer> listCustomer;
+    private String action = null;
+    private int selectedId;
+    private final CustomerControl cCTRL = new CustomerControl();
+    private List<Customer> listCustomer;
     /**
      * Creates new form test
      */
     public CustomerView() {
         initComponents();
-        setComponent(false);
+        setUserInputComponents(false);
+        setSaveCancelBtn(false);
         setEditDeleteBtn(false);
-        showCustomer();
-        
-//        initTable();
+        getTableData("", false);
     }
     
     
     
-    public void setEditDeleteBtn(boolean value){
+    private void setEditDeleteBtn(boolean value){
         editBtn.setEnabled(value);
         deleteBtn.setEnabled(value);
     }
     
-    public void showCustomer(){
-        tabelView.setModel(cCTRL.getTableCustomer(""));
-    }
-    
-    public void clearText(){
+    private void clearUserInput(){
         namaInput.setText("");
         alamatInput.setText("");
         nohpInput.setText("");
         searchInput.setText("");
     }
     
-    public void setComponent(boolean value){
+    private void setUserInputComponents(boolean value){
         namaInput.setEnabled(value);
         alamatInput.setEnabled(value);
         nohpInput.setEnabled(value);
-        
+    }
+    
+    private void setSaveCancelBtn(boolean value) {
         saveBtn.setEnabled(value);
         cancelBtn.setEnabled(value);
     }
@@ -68,20 +65,43 @@ public class CustomerView extends javax.swing.JFrame {
         }
     }
     
-//    private void tblUtamaMouseClicked(java.awt.event.MouseEvent evt) {                                      
-//        Customer C = (Customer) getTableSelectedObject(tblUtama);
-//        // on selected, display ke inputannya
-//        // tetapkan ID:
-//        this.selectedId = C.getId();
-//        
-//        // tetapkan input:
-//        namaInput.setText(C.getNama());
-//        alamatInput.setText(C.getAlamat());
-//        nohpInput.setText(C.getNoHP());
-//    }  
+    private void getTableData(String query, boolean strict) {
+        /*
+         * boolean strict:
+         * IF true: digunakan dalam melakukan pencarian: return "data tidak ditemukan"
+         * kalau tidak ada row yang didapat
+         * IF false: digunakan dalam inisialisasi awal
+         */
+        TableCustomer tblTx = cCTRL.getTableCustomer(query);
+        if (tblTx.getRowCount() > 0 || strict == false) {
+            tabelView.setModel(tblTx);
+            // Set width
+            int colWidth[] = {75, 200, 300, 200};
+            int minWidth[] = {50, 175, 250, 175};
+            int maxWidth[] = {75, 300, 0, 300};
+            for(int i=0; i<colWidth.length; i++) {
+                if(colWidth[i] > 0)
+                    tabelView.getColumnModel().getColumn(i).setPreferredWidth(colWidth[i]);
+                if(minWidth[i] > 0)
+                    tabelView.getColumnModel().getColumn(i).setMinWidth(minWidth[i]);
+                if(maxWidth[i] > 0)
+                    tabelView.getColumnModel().getColumn(i).setMaxWidth(maxWidth[i]);
+            }
+            
+            // reset user input
+            clearUserInput();
+            
+            // disable edit, delete, save, and cancel button in case user had viewed/edited something
+            setEditDeleteBtn(false);
+            setSaveCancelBtn(false);
+            
+            // disable user input
+            setUserInputComponents(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "Data berdasarkan kueri pencarian tidak ditemukan!", "CFL - Notification", JOptionPane.WARNING_MESSAGE);
+        }
+    }
     
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -107,17 +127,19 @@ public class CustomerView extends javax.swing.JFrame {
         searchBtn = new javax.swing.JButton();
         mainPanel = new javax.swing.JPanel();
         inputPanel = new javax.swing.JPanel();
-        saveBtn = new javax.swing.JButton();
-        editBtn = new javax.swing.JButton();
-        cancelBtn = new javax.swing.JButton();
-        addBtn = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         deleteBtn = new javax.swing.JButton();
+        editBtn = new javax.swing.JButton();
+        addBtn = new javax.swing.JButton();
         namaLabel = new javax.swing.JLabel();
         namaInput = new javax.swing.JTextField();
         alamatLabel = new javax.swing.JLabel();
         alamatInput = new javax.swing.JTextField();
         nohpLabel = new javax.swing.JLabel();
         nohpInput = new javax.swing.JTextField();
+        saveBtn = new javax.swing.JButton();
+        cancelBtn = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         scrollTabelPanel = new javax.swing.JScrollPane();
         tabelView = new javax.swing.JTable();
         footer = new javax.swing.JPanel();
@@ -272,7 +294,7 @@ public class CustomerView extends javax.swing.JFrame {
             headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerPanelLayout.createSequentialGroup()
                 .addComponent(namaView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(searchPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         headerPanelLayout.setVerticalGroup(
@@ -284,17 +306,20 @@ public class CustomerView extends javax.swing.JFrame {
         mainPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         inputPanel.setOpaque(false);
+        inputPanel.setLayout(new java.awt.GridLayout());
 
-        saveBtn.setBackground(new java.awt.Color(13, 110, 253));
-        saveBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        saveBtn.setForeground(new java.awt.Color(255, 255, 255));
-        saveBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-save.png"))); // NOI18N
-        saveBtn.setText("Simpan");
-        saveBtn.setBorder(null);
-        saveBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        saveBtn.addActionListener(new java.awt.event.ActionListener() {
+        jPanel1.setOpaque(false);
+
+        deleteBtn.setBackground(new java.awt.Color(220, 53, 69));
+        deleteBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        deleteBtn.setForeground(new java.awt.Color(255, 255, 255));
+        deleteBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-delete.png"))); // NOI18N
+        deleteBtn.setText("Hapus");
+        deleteBtn.setBorder(null);
+        deleteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveBtnActionPerformed(evt);
+                deleteBtnActionPerformed(evt);
             }
         });
 
@@ -311,19 +336,6 @@ public class CustomerView extends javax.swing.JFrame {
             }
         });
 
-        cancelBtn.setBackground(new java.awt.Color(220, 53, 69));
-        cancelBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        cancelBtn.setForeground(new java.awt.Color(255, 255, 255));
-        cancelBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-cancel.png"))); // NOI18N
-        cancelBtn.setText("Batal");
-        cancelBtn.setBorder(null);
-        cancelBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cancelBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelBtnActionPerformed(evt);
-            }
-        });
-
         addBtn.setBackground(new java.awt.Color(25, 135, 84));
         addBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         addBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -337,102 +349,130 @@ public class CustomerView extends javax.swing.JFrame {
             }
         });
 
-        deleteBtn.setBackground(new java.awt.Color(220, 53, 69));
-        deleteBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        deleteBtn.setForeground(new java.awt.Color(255, 255, 255));
-        deleteBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-delete.png"))); // NOI18N
-        deleteBtn.setText("Hapus");
-        deleteBtn.setBorder(null);
-        deleteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteBtnActionPerformed(evt);
-            }
-        });
-
         namaLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         namaLabel.setText("Nama");
 
         namaInput.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        namaInput.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(125, 135, 147)));
+        namaInput.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         alamatLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         alamatLabel.setText("Alamat");
 
         alamatInput.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        alamatInput.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(125, 135, 147)));
+        alamatInput.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        alamatInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                alamatInputActionPerformed(evt);
+            }
+        });
 
         nohpLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         nohpLabel.setText("Nomor Handphone");
 
         nohpInput.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        nohpInput.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(125, 135, 147)));
+        nohpInput.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         nohpInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nohpInputActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout inputPanelLayout = new javax.swing.GroupLayout(inputPanel);
-        inputPanel.setLayout(inputPanelLayout);
-        inputPanelLayout.setHorizontalGroup(
-            inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(inputPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputPanelLayout.createSequentialGroup()
+        saveBtn.setBackground(new java.awt.Color(13, 110, 253));
+        saveBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        saveBtn.setForeground(new java.awt.Color(255, 255, 255));
+        saveBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-save.png"))); // NOI18N
+        saveBtn.setText("Simpan");
+        saveBtn.setBorder(null);
+        saveBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        saveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveBtnActionPerformed(evt);
+            }
+        });
+
+        cancelBtn.setBackground(new java.awt.Color(220, 53, 69));
+        cancelBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        cancelBtn.setForeground(new java.awt.Color(255, 255, 255));
+        cancelBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-cancel.png"))); // NOI18N
+        cancelBtn.setText("Batal");
+        cancelBtn.setBorder(null);
+        cancelBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cancelBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(namaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nohpLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nohpInput)
+                    .addComponent(namaInput)
+                    .addComponent(alamatInput)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(inputPanelLayout.createSequentialGroup()
-                        .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(alamatLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(namaLabel)
-                            .addComponent(nohpLabel)
-                            .addComponent(namaInput, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
-                            .addComponent(alamatInput)
-                            .addComponent(nohpInput))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(inputPanelLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(369, Short.MAX_VALUE)))
+                    .addComponent(alamatLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(16, 16, 16))
         );
-        inputPanelLayout.setVerticalGroup(
-            inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputPanelLayout.createSequentialGroup()
-                .addGap(71, 71, 71)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
                 .addComponent(namaLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(namaInput, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(16, 16, 16)
                 .addComponent(alamatLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(alamatInput, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(16, 16, 16)
                 .addComponent(nohpLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nohpInput, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(inputPanelLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(268, Short.MAX_VALUE)))
+                    .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16))
         );
+
+        inputPanel.add(jPanel1);
+
+        jPanel2.setOpaque(false);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 407, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 357, Short.MAX_VALUE)
+        );
+
+        inputPanel.add(jPanel2);
 
         tabelView.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         tabelView.setModel(new javax.swing.table.DefaultTableModel(
@@ -447,6 +487,8 @@ public class CustomerView extends javax.swing.JFrame {
             }
         ));
         tabelView.setRowHeight(32);
+        tabelView.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tabelView.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tabelView.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabelViewMouseClicked(evt);
@@ -484,18 +526,18 @@ public class CustomerView extends javax.swing.JFrame {
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(inputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(mainPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(16, 16, 16)
                 .addComponent(scrollTabelPanel)
-                .addContainerGap())
+                .addGap(16, 16, 16))
             .addComponent(footer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addComponent(inputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(scrollTabelPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(16, 16, 16)
+                .addComponent(scrollTabelPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
+                .addGap(16, 16, 16)
                 .addComponent(footer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -523,7 +565,7 @@ public class CustomerView extends javax.swing.JFrame {
         menuBar.setLayout(menuBarLayout);
         menuBarLayout.setHorizontalGroup(
             menuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
+            .addComponent(scrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 812, Short.MAX_VALUE)
         );
         menuBarLayout.setVerticalGroup(
             menuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -549,8 +591,9 @@ public class CustomerView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
-        setComponent(true);
-        clearText();
+        setUserInputComponents(true);
+        setSaveCancelBtn(true);
+        clearUserInput();
         searchInput.setText("");
         action = "Tambah";
     }//GEN-LAST:event_addBtnActionPerformed
@@ -578,30 +621,15 @@ public class CustomerView extends javax.swing.JFrame {
     }//GEN-LAST:event_nohpInputActionPerformed
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
-        setEditDeleteBtn(false);
-        setComponent(false);
-        
-        try{
-            TableCustomer tabel = cCTRL.getTableCustomer(searchInput.getText());
-            
-            if(tabel.getRowCount() != 0){
-                tabelView.setModel(tabel);
-            } else{
-                clearText();
-                JOptionPane.showConfirmDialog(null, "Data tidak ditemukan", "Warning", JOptionPane.DEFAULT_OPTION);
-                setEditDeleteBtn(false);
-            }
-        } catch(Exception e){
-            System.out.println("Error searching...");
-            System.out.println(e);
-        }
+        getTableData(searchInput.getText(), true);
+        searchInput.setText("");
     }//GEN-LAST:event_searchBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         try{
             inputKosongException();
             
-            Customer c = new Customer(selected, namaInput.getText(), alamatInput.getText(), nohpInput.getText());
+            Customer c = new Customer(selectedId, namaInput.getText(), alamatInput.getText(), nohpInput.getText());
             if(action.equalsIgnoreCase("Tambah")){
                 cCTRL.insertDataCustomer(c);
             } else{
@@ -611,42 +639,30 @@ public class CustomerView extends javax.swing.JFrame {
             System.out.println("Error: " + e.getMessage());
             JOptionPane.showConfirmDialog(null, "Data tidak boleh kosong", "Warning", JOptionPane.DEFAULT_OPTION);
         } 
-       clearText();
-       showCustomer();
-       setComponent(false);
+       clearUserInput();
+       getTableData("", false);
+       setUserInputComponents(false);
+       setSaveCancelBtn(false);
        setEditDeleteBtn(false);
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
-        setComponent(false);
+        setUserInputComponents(false);
+        setSaveCancelBtn(false);
         setEditDeleteBtn(false);
-        clearText();    
+        clearUserInput();    
     }//GEN-LAST:event_cancelBtnActionPerformed
 
     private void tabelViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelViewMouseClicked
         setEditDeleteBtn(true);
-        setComponent(false);
-        int indexCustomer = -1;
-        TableModel tableModel = tabelView.getModel();
+        setUserInputComponents(false);
+        setSaveCancelBtn(false);
         
-        selected = Integer.parseInt(tableModel.getValueAt(tabelView.getSelectedRow(), 0).toString());
-        namaInput.setText(tableModel.getValueAt(tabelView.getSelectedRow(), 1).toString());
-        alamatInput.setText(tableModel.getValueAt(tabelView.getSelectedRow(), 2).toString());
-        nohpInput.setText(tableModel.getValueAt(tabelView.getSelectedRow(), 3).toString());
-        
-        listCustomer = cCTRL.showListAllCustomer();
-        int customer_id = (int) tableModel.getValueAt(tabelView.getSelectedRow(), 0);
-        for(Customer c : listCustomer){
-            if(c.getId() == customer_id){
-                indexCustomer = listCustomer.indexOf(c);
-            }
-        }
-        
-//        dropdownComputer.setSelectedIndex(indexComputer);
-        
-//        int pembeli_id = Integer.parseInt(tableModel.getValueAt(tabelView.getSelectedRow(),10).toString());
-        
-//        dropdownPembeli.setSelectedIndex(indexPembeli);
+        Customer selectedC = (Customer) getTableSelectedObject(tabelView);
+        selectedId = selectedC.getId();
+        namaInput.setText(selectedC.getNama());
+        alamatInput.setText(selectedC.getAlamat());
+        nohpInput.setText(selectedC.getNoHP());
     }//GEN-LAST:event_tabelViewMouseClicked
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
@@ -654,10 +670,11 @@ public class CustomerView extends javax.swing.JFrame {
         switch(getAnswer){
             case 0:
                 try{
-                    cCTRL.deleteDataCustomer(selected);
-                    clearText();
-                    showCustomer();
-                    setComponent(false);
+                    cCTRL.deleteDataCustomer(selectedId);
+                    clearUserInput();
+                    getTableData("", false);
+                    setUserInputComponents(false);
+                    setSaveCancelBtn(false);
                     setEditDeleteBtn(false);
                 } catch(Exception e){
                     System.out.println("Error deleting data...");
@@ -672,7 +689,8 @@ public class CustomerView extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
-        setComponent(true);
+        setUserInputComponents(true);
+        setSaveCancelBtn(true);
         action = "Ubah";
     }//GEN-LAST:event_editBtnActionPerformed
 
@@ -681,6 +699,10 @@ public class CustomerView extends javax.swing.JFrame {
         this.dispose();
         pv.setVisible(true);
     }//GEN-LAST:event_pegawaiBtnActionPerformed
+
+    private void alamatInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alamatInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_alamatInputActionPerformed
 
     /**
      * @param args the command line arguments
@@ -729,6 +751,8 @@ public class CustomerView extends javax.swing.JFrame {
     private javax.swing.JPanel footer;
     private javax.swing.JPanel headerPanel;
     private javax.swing.JPanel inputPanel;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel logoArea;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel manuBarDetailPanel;

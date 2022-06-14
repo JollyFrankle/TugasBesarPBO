@@ -4,11 +4,13 @@
  */
 package view;
 
+import com.github.lgooddatepicker.components.DatePicker;
 import control.PegawaiControl;
 import exception.InputKosongException;
-import java.util.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.table.TableModel;
 import model.Pegawai;
 import table.TablePegawai;
 
@@ -18,57 +20,121 @@ import table.TablePegawai;
  */
 public class PegawaiView2 extends javax.swing.JFrame {
     String action = null;
-    String selected;
+    String selectedId;
     PegawaiControl pc = new PegawaiControl();
     List<Pegawai> listPegawai;
     /**
-     * Creates new form test
+     * Creates new form
      */
     public PegawaiView2() {
         initComponents();
+        initDInput(inputTglLahir);
+        
         setComponent(false);
         setEditDeleteBtn(false);
-        showPegawai();
+        getTableData("", false);
     }
     
-    public void setEditDeleteBtn(boolean value){
+    private void setEditDeleteBtn(boolean value){
         editBtn.setEnabled(value);
         deleteBtn.setEnabled(value);
     }
     
-    public void showPegawai(){
-        tabelView.setModel(pc.getTablePegawai(""));
-    }
-    
-    public void clearText(){
+    private void clearText(){
         idInput.setText("");
         namaInput.setText("");
-        tgllahirInput.setText("");
+        inputTglLahir.setDate(null);
         nohpInput.setText("");
         searchInput.setText("");
         dropdownJobdesc.setSelectedIndex(-1);
     }
     
-    public void setComponent(boolean value){
+    private void setComponent(boolean value){
         idInput.setEnabled(value);
         namaInput.setEnabled(value);
-        tgllahirInput.setEnabled(value);
+        inputTglLahir.setEnabled(value);
         nohpInput.setEnabled(value);
         saveBtn.setEnabled(value);
         cancelBtn.setEnabled(value);
         dropdownJobdesc.setEnabled(value);
     }
     
-    public Object getTableSelectedObject(javax.swing.JTable table){
+    private Object getTableSelectedObject(javax.swing.JTable table){
         if(table.getSelectedRow() != -1){
             return table.getModel().getValueAt(table.getSelectedRow(), 99);
         } else
             return null;
     }
     
-    public void inputKosongException() throws InputKosongException{
-        if(idInput.getText().isEmpty() || namaInput.getText().isEmpty() || tgllahirInput.getText().isEmpty() || nohpInput.getText().isEmpty()){
+    private void inputKosongException() throws InputKosongException{
+        if(
+                idInput.getText().isEmpty() ||
+                namaInput.getText().isEmpty() ||
+                getFullDate(inputTglLahir) == null ||
+                nohpInput.getText().isEmpty()
+        ) {
             throw new InputKosongException();
+        }
+    }
+    
+    private String getFullDate(DatePicker input) {
+        try {
+            // getDateTimeStrinct() kemudian ubah ke format "yyyy-MM-dd HH:mm:ss"
+            return input.getDate().format(DateTimeFormatter.ISO_LOCAL_DATE);
+        } catch (Exception e) {
+            // Input date atau time belum diisi lengkap
+            return null;
+        }
+    }
+    
+    private void initDInput(DatePicker input) {
+        
+        // Java passing by reference, jadi dengan melakukan ini, kita mendapatkan settings dari masing2 DatePicker dan TimePickernya, kemudian memodifikasinya kemudian.
+        com.github.lgooddatepicker.components.DatePickerSettings thisDPs = input.getSettings();
+        
+        // Set settings:
+        thisDPs.setLocale(new java.util.Locale("id"));
+        
+        // Set font:
+        java.awt.Font elementFont = input.getFont();
+        thisDPs.setFontVetoedDate(elementFont);
+        thisDPs.setFontValidDate(elementFont);
+        thisDPs.setFontInvalidDate(elementFont);
+    }
+    
+    private void getTableData(String query, boolean strict) {
+        /*
+         * boolean strict:
+         * IF true: digunakan dalam melakukan pencarian: return "data tidak ditemukan"
+         * kalau tidak ada row yang didapat
+         * IF false: digunakan dalam inisialisasi awal
+         */
+        TablePegawai tbl = pc.getTablePegawai(query);
+        if (tbl.getRowCount() > 0 || strict == false) {
+            tabelView.setModel(tbl);
+            // Set width
+            int colWidth[] = {75, 175, 175, 200, 300};
+            int minWidth[] = {50, 150, 150, 175, 200};
+            int maxWidth[] = {75, 0, 225, 300, 0};
+            for(int i=0; i<colWidth.length; i++) {
+                if(colWidth[i] > 0)
+                    tabelView.getColumnModel().getColumn(i).setPreferredWidth(colWidth[i]);
+                if(minWidth[i] > 0)
+                    tabelView.getColumnModel().getColumn(i).setMinWidth(minWidth[i]);
+                if(maxWidth[i] > 0)
+                    tabelView.getColumnModel().getColumn(i).setMaxWidth(maxWidth[i]);
+            }
+            
+            // reset user input
+            clearText();
+            
+            // disable edit, delete, save, and cancel button in case user had viewed/edited something
+            setEditDeleteBtn(false);
+            
+            // disable user input
+            setComponent(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "Data berdasarkan kueri pencarian tidak ditemukan!", "CFL - Notification", JOptionPane.WARNING_MESSAGE);
         }
     }
 
@@ -97,21 +163,23 @@ public class PegawaiView2 extends javax.swing.JFrame {
         searchBtn = new javax.swing.JButton();
         mainPanel = new javax.swing.JPanel();
         inputPanel = new javax.swing.JPanel();
-        saveBtn = new javax.swing.JButton();
-        editBtn = new javax.swing.JButton();
-        cancelBtn = new javax.swing.JButton();
-        addBtn = new javax.swing.JButton();
-        deleteBtn = new javax.swing.JButton();
-        idLabel = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         idInput = new javax.swing.JTextField();
-        namaLabel = new javax.swing.JLabel();
-        namaInput = new javax.swing.JTextField();
-        tanggallahirLabel = new javax.swing.JLabel();
-        tgllahirInput = new javax.swing.JTextField();
-        nohpLabel = new javax.swing.JLabel();
         nohpInput = new javax.swing.JTextField();
-        jobdecsLabel = new javax.swing.JLabel();
+        nohpLabel = new javax.swing.JLabel();
         dropdownJobdesc = new javax.swing.JComboBox<>();
+        addBtn = new javax.swing.JButton();
+        namaLabel = new javax.swing.JLabel();
+        inputTglLahir = new com.github.lgooddatepicker.components.DatePicker();
+        tanggallahirLabel = new javax.swing.JLabel();
+        jobdecsLabel = new javax.swing.JLabel();
+        idLabel = new javax.swing.JLabel();
+        editBtn = new javax.swing.JButton();
+        namaInput = new javax.swing.JTextField();
+        deleteBtn = new javax.swing.JButton();
+        saveBtn = new javax.swing.JButton();
+        cancelBtn = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         scrollTabelPanel = new javax.swing.JScrollPane();
         tabelView = new javax.swing.JTable();
         footer = new javax.swing.JPanel();
@@ -266,7 +334,7 @@ public class PegawaiView2 extends javax.swing.JFrame {
             headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerPanelLayout.createSequentialGroup()
                 .addComponent(namaView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(searchPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         headerPanelLayout.setVerticalGroup(
@@ -278,19 +346,56 @@ public class PegawaiView2 extends javax.swing.JFrame {
         mainPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         inputPanel.setOpaque(false);
+        inputPanel.setLayout(new java.awt.GridLayout());
 
-        saveBtn.setBackground(new java.awt.Color(13, 110, 253));
-        saveBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        saveBtn.setForeground(new java.awt.Color(255, 255, 255));
-        saveBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-save.png"))); // NOI18N
-        saveBtn.setText("Simpan");
-        saveBtn.setBorder(null);
-        saveBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        saveBtn.addActionListener(new java.awt.event.ActionListener() {
+        jPanel1.setOpaque(false);
+
+        idInput.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        idInput.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        nohpInput.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        nohpInput.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        nohpInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveBtnActionPerformed(evt);
+                nohpInputActionPerformed(evt);
             }
         });
+
+        nohpLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        nohpLabel.setText("Nomor Handphone");
+
+        dropdownJobdesc.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        dropdownJobdesc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pencuci Pakaian", "Penyetrika Pakaian", "Packing Pakaian" }));
+        dropdownJobdesc.setSelectedIndex(-1);
+
+        addBtn.setBackground(new java.awt.Color(25, 135, 84));
+        addBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        addBtn.setForeground(new java.awt.Color(255, 255, 255));
+        addBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-add.png"))); // NOI18N
+        addBtn.setText("Tambah");
+        addBtn.setBorder(null);
+        addBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBtnActionPerformed(evt);
+            }
+        });
+
+        namaLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        namaLabel.setText("Nama");
+
+        inputTglLahir.setBorder(null);
+        inputTglLahir.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        inputTglLahir.setOpaque(false);
+
+        tanggallahirLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        tanggallahirLabel.setText("Tanggal Lahir");
+
+        jobdecsLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jobdecsLabel.setText("Job Description");
+
+        idLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        idLabel.setText("ID Pegawai");
 
         editBtn.setBackground(new java.awt.Color(241, 196, 15));
         editBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -305,29 +410,11 @@ public class PegawaiView2 extends javax.swing.JFrame {
             }
         });
 
-        cancelBtn.setBackground(new java.awt.Color(220, 53, 69));
-        cancelBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        cancelBtn.setForeground(new java.awt.Color(255, 255, 255));
-        cancelBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-cancel.png"))); // NOI18N
-        cancelBtn.setText("Batal");
-        cancelBtn.setBorder(null);
-        cancelBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cancelBtn.addActionListener(new java.awt.event.ActionListener() {
+        namaInput.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        namaInput.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        namaInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelBtnActionPerformed(evt);
-            }
-        });
-
-        addBtn.setBackground(new java.awt.Color(25, 135, 84));
-        addBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        addBtn.setForeground(new java.awt.Color(255, 255, 255));
-        addBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-add.png"))); // NOI18N
-        addBtn.setText("Tambah");
-        addBtn.setBorder(null);
-        addBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        addBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addBtnActionPerformed(evt);
+                namaInputActionPerformed(evt);
             }
         });
 
@@ -344,137 +431,113 @@ public class PegawaiView2 extends javax.swing.JFrame {
             }
         });
 
-        idLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        idLabel.setText("ID Pegawai");
-
-        idInput.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        idInput.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(125, 135, 147)));
-        idInput.addActionListener(new java.awt.event.ActionListener() {
+        saveBtn.setBackground(new java.awt.Color(13, 110, 253));
+        saveBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        saveBtn.setForeground(new java.awt.Color(255, 255, 255));
+        saveBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-save.png"))); // NOI18N
+        saveBtn.setText("Simpan");
+        saveBtn.setBorder(null);
+        saveBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        saveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                idInputActionPerformed(evt);
+                saveBtnActionPerformed(evt);
             }
         });
 
-        namaLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        namaLabel.setText("Nama");
-
-        namaInput.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        namaInput.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(125, 135, 147)));
-        namaInput.addActionListener(new java.awt.event.ActionListener() {
+        cancelBtn.setBackground(new java.awt.Color(220, 53, 69));
+        cancelBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        cancelBtn.setForeground(new java.awt.Color(255, 255, 255));
+        cancelBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-cancel.png"))); // NOI18N
+        cancelBtn.setText("Batal");
+        cancelBtn.setBorder(null);
+        cancelBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cancelBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                namaInputActionPerformed(evt);
+                cancelBtnActionPerformed(evt);
             }
         });
 
-        tanggallahirLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        tanggallahirLabel.setText("Tanggal Lahir");
-
-        tgllahirInput.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        tgllahirInput.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(125, 135, 147)));
-        tgllahirInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tgllahirInputActionPerformed(evt);
-            }
-        });
-
-        nohpLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        nohpLabel.setText("Nomor Handphone");
-
-        nohpInput.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        nohpInput.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(125, 135, 147)));
-        nohpInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nohpInputActionPerformed(evt);
-            }
-        });
-
-        jobdecsLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jobdecsLabel.setText("Job Description");
-
-        dropdownJobdesc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pencuci Pakaian", "Penyetrika Pakaian", "Packing Pakaian" }));
-
-        javax.swing.GroupLayout inputPanelLayout = new javax.swing.GroupLayout(inputPanel);
-        inputPanel.setLayout(inputPanelLayout);
-        inputPanelLayout.setHorizontalGroup(
-            inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(inputPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputPanelLayout.createSequentialGroup()
-                        .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(inputPanelLayout.createSequentialGroup()
-                                .addComponent(jobdecsLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(inputPanelLayout.createSequentialGroup()
-                                .addComponent(dropdownJobdesc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(115, 115, 115)))
-                        .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dropdownJobdesc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(idLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jobdecsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nohpLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nohpInput)
+                    .addComponent(inputTglLahir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(namaInput)
+                    .addComponent(tanggallahirLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(idInput)
+                    .addComponent(namaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(inputPanelLayout.createSequentialGroup()
-                        .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(nohpInput, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(namaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(idLabel)
-                                    .addComponent(idInput, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
-                                    .addComponent(namaInput)
-                                    .addComponent(tgllahirInput)
-                                    .addComponent(tanggallahirLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(nohpLabel)))
-                        .addGap(0, 363, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(inputPanelLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(369, Short.MAX_VALUE)))
+                        .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(16, 16, 16))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        inputPanelLayout.setVerticalGroup(
-            inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputPanelLayout.createSequentialGroup()
-                .addGap(71, 71, 71)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
                 .addComponent(idLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(idInput, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(16, 16, 16)
                 .addComponent(namaLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(namaInput, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(16, 16, 16)
                 .addComponent(tanggallahirLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tgllahirInput, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(inputTglLahir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
                 .addComponent(nohpLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nohpInput, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(inputPanelLayout.createSequentialGroup()
-                        .addGap(0, 45, Short.MAX_VALUE)
-                        .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(inputPanelLayout.createSequentialGroup()
-                        .addComponent(jobdecsLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dropdownJobdesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(inputPanelLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(351, Short.MAX_VALUE)))
+                .addGap(16, 16, 16)
+                .addComponent(jobdecsLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dropdownJobdesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16))
         );
+
+        inputPanel.add(jPanel1);
+
+        jPanel2.setOpaque(false);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 411, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 473, Short.MAX_VALUE)
+        );
+
+        inputPanel.add(jPanel2);
 
         tabelView.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         tabelView.setModel(new javax.swing.table.DefaultTableModel(
@@ -565,11 +628,11 @@ public class PegawaiView2 extends javax.swing.JFrame {
         menuBar.setLayout(menuBarLayout);
         menuBarLayout.setHorizontalGroup(
             menuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
+            .addComponent(scrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 822, Short.MAX_VALUE)
         );
         menuBarLayout.setVerticalGroup(
             menuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(scrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 862, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -612,10 +675,6 @@ public class PegawaiView2 extends javax.swing.JFrame {
         tv.setVisible(true);
     }//GEN-LAST:event_transaksiBtnActionPerformed
 
-    private void tgllahirInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tgllahirInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tgllahirInputActionPerformed
-
     private void nohpInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nohpInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nohpInputActionPerformed
@@ -634,21 +693,17 @@ public class PegawaiView2 extends javax.swing.JFrame {
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         // TODO add your handling code here:
         int getAnswer = JOptionPane.showConfirmDialog(rootPane, "Apakah yakin ingin menghapus data? ", "Konfirmasi", JOptionPane.YES_NO_OPTION);
-        switch(getAnswer){
-            case 0:
-                try{
-                    pc.deleteDataPegawai(selected);
-                    clearText();
-                    showPegawai();
-                    setComponent(false);
-                    setEditDeleteBtn(false);
-                } catch(Exception e){
-                    System.out.println("Error deleting data...");
-                    System.out.println(e);
-                }
-                break;
-            case 1:
-                break;
+        if(getAnswer == 0){
+            try{
+                pc.deleteDataPegawai(selectedId);
+                clearText();
+                getTableData("", false);
+                setComponent(false);
+                setEditDeleteBtn(false);
+            } catch(Exception e){
+                System.out.println("Error deleting data...");
+                System.out.println(e);
+            }
         }
     }//GEN-LAST:event_deleteBtnActionPerformed
 
@@ -657,7 +712,7 @@ public class PegawaiView2 extends javax.swing.JFrame {
         try{
             inputKosongException();
             
-            Pegawai p = new Pegawai(idInput.getText(), namaInput.getText(), tgllahirInput.getText(), nohpInput.getText(), dropdownJobdesc.getSelectedItem().toString());
+            Pegawai p = new Pegawai(idInput.getText(), namaInput.getText(), getFullDate(inputTglLahir), nohpInput.getText(), dropdownJobdesc.getSelectedItem().toString());
             if(action.equalsIgnoreCase("Tambah")){
                 pc.InsertDataPegawai(p);
             } else
@@ -667,7 +722,7 @@ public class PegawaiView2 extends javax.swing.JFrame {
             System.out.println("Error: " + e.toString());
         }
        clearText();
-       showPegawai();
+       getTableData("", false);
        setComponent(false);
        setEditDeleteBtn(false);
     }//GEN-LAST:event_saveBtnActionPerformed
@@ -680,29 +735,9 @@ public class PegawaiView2 extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelBtnActionPerformed
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
-        // TODO add your handling code here:
-        setEditDeleteBtn(false);
-        setComponent(false);
-        
-        try{
-            TablePegawai tabel = (TablePegawai) pc.searchPegawai(searchInput.getText());
-            
-            if(tabel.getRowCount() != 0){
-                tabelView.setModel(tabel);
-            } else{
-                clearText();
-                setEditDeleteBtn(false);
-                JOptionPane.showConfirmDialog(null, "Tidak ditemukan", "Warning", JOptionPane.DEFAULT_OPTION);
-            }
-        } catch(Exception e){
-            System.out.println("Error searching...");
-            System.out.println(e);
-        }
+        getTableData(searchInput.getText(), true);
+        searchInput.setText("");
     }//GEN-LAST:event_searchBtnActionPerformed
-
-    private void idInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_idInputActionPerformed
 
     private void customerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerBtnActionPerformed
         // TODO add your handling code here:
@@ -717,11 +752,11 @@ public class PegawaiView2 extends javax.swing.JFrame {
         setComponent(false);
         
         Pegawai selectedP = (Pegawai) getTableSelectedObject(tabelView);
-        selected = selectedP.getId();
+        selectedId = selectedP.getId();
         
         idInput.setText(selectedP.getId());
         namaInput.setText(selectedP.getNama());
-        tgllahirInput.setText(selectedP.getTglLahir());
+        inputTglLahir.setDate(LocalDate.parse(selectedP.getTglLahir(), DateTimeFormatter.ISO_LOCAL_DATE));
         nohpInput.setText(selectedP.getNoHP());
         dropdownJobdesc.setSelectedItem(selectedP.getJobDesc());
     }//GEN-LAST:event_tabelViewMouseClicked
@@ -772,6 +807,9 @@ public class PegawaiView2 extends javax.swing.JFrame {
     private javax.swing.JTextField idInput;
     private javax.swing.JLabel idLabel;
     private javax.swing.JPanel inputPanel;
+    private com.github.lgooddatepicker.components.DatePicker inputTglLahir;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel jobdecsLabel;
     private javax.swing.JLabel logoArea;
     private javax.swing.JPanel mainPanel;
@@ -794,7 +832,6 @@ public class PegawaiView2 extends javax.swing.JFrame {
     private javax.swing.JPanel searchPanel;
     private javax.swing.JTable tabelView;
     private javax.swing.JLabel tanggallahirLabel;
-    private javax.swing.JTextField tgllahirInput;
     private javax.swing.JButton transaksiBtn;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,7 +4,9 @@
  */
 package table;
 
-import java.util.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import model.Pegawai;
 import javax.swing.table.AbstractTableModel;
 /**
@@ -33,7 +35,7 @@ public class TablePegawai extends AbstractTableModel{
             case 1:
                 return list.get(rowIndex).getNama();
             case 2:
-                return list.get(rowIndex).getTglLahir();
+                return LocalDate.parse(list.get(rowIndex).getTglLahir(), DateTimeFormatter.ISO_LOCAL_DATE).format(DateTimeFormatter.ofPattern("d MMMM yyyy", new java.util.Locale("id")));
             case 3:
                 return list.get(rowIndex).getNoHP();
             case 4:
