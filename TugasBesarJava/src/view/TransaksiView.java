@@ -1293,9 +1293,9 @@ public class TransaksiView extends javax.swing.JFrame {
                         inputTglSelesai.getDateTimeStrict(),
                         inputTglAmbil.getDateTimePermissive(),
                         getTipeLayanan(),
-                        (Float) inputBeratPakaian.getValue(),
-                        (Float) inputBeratSelimut.getValue(),
-                        (Float) inputBeratBoneka.getValue(),
+                        Float.parseFloat(inputBeratPakaian.getValue().toString()),
+                        Float.parseFloat(inputBeratSelimut.getValue().toString()),
+                        Float.parseFloat(inputBeratBoneka.getValue().toString()),
                         selC
                 );
                 
