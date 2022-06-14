@@ -93,6 +93,10 @@ public class TransaksiView extends javax.swing.JFrame {
         ddKecepatan.setEnabled(v);
         cbFCuci.setEnabled(v);
         cbFSetrika.setEnabled(v);
+        
+        // tambahan button:
+        btnResetTglMasuk.setEnabled(v);
+        btnResetTglAmbil.setEnabled(v);
     }
     
     private void clearUserInput() {
@@ -309,6 +313,8 @@ public class TransaksiView extends javax.swing.JFrame {
         lblPegawai = new javax.swing.JLabel();
         ddPegawai = new javax.swing.JComboBox<>();
         jLabel18 = new javax.swing.JLabel();
+        btnResetTglMasuk = new javax.swing.JButton();
+        btnResetTglAmbil = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         cancelBtn = new javax.swing.JButton();
         saveBtn = new javax.swing.JButton();
@@ -317,14 +323,17 @@ public class TransaksiView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         inputBeratPakaian = new javax.swing.JSpinner();
         jLabel6 = new javax.swing.JLabel();
+        lblHargaPakaian = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         inputBeratSelimut = new javax.swing.JSpinner();
         jLabel8 = new javax.swing.JLabel();
+        lblHargaSelimut = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         inputBeratBoneka = new javax.swing.JSpinner();
         jLabel10 = new javax.swing.JLabel();
+        lblHargaBoneka = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -359,6 +368,11 @@ public class TransaksiView extends javax.swing.JFrame {
         customerBtn.setText("Customer");
         customerBtn.setBorder(null);
         customerBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        customerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customerBtnActionPerformed(evt);
+            }
+        });
 
         pegawaiBtn.setBackground(new java.awt.Color(90, 98, 108));
         pegawaiBtn.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -366,6 +380,11 @@ public class TransaksiView extends javax.swing.JFrame {
         pegawaiBtn.setText("Pegawai");
         pegawaiBtn.setBorder(null);
         pegawaiBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pegawaiBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pegawaiBtnActionPerformed(evt);
+            }
+        });
 
         transaksiBtn.setBackground(new java.awt.Color(90, 98, 108));
         transaksiBtn.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -562,16 +581,36 @@ public class TransaksiView extends javax.swing.JFrame {
 
         ddCustomer.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        jLabel15.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel15.setText("Data Transaksi");
+        jLabel15.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
 
-        lblPegawai.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblPegawai.setText("Petugas Penginput Transaksi");
+        lblPegawai.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
         ddPegawai.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        jLabel18.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
         jLabel18.setText("(otomatis, berdasarkan kecepatan layanan)");
+        jLabel18.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+
+        btnResetTglMasuk.setBackground(new java.awt.Color(33, 37, 41));
+        btnResetTglMasuk.setForeground(new java.awt.Color(255, 255, 255));
+        btnResetTglMasuk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-backspace.png"))); // NOI18N
+        btnResetTglMasuk.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnResetTglMasuk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetTglMasukActionPerformed(evt);
+            }
+        });
+
+        btnResetTglAmbil.setBackground(new java.awt.Color(33, 37, 41));
+        btnResetTglAmbil.setForeground(new java.awt.Color(255, 255, 255));
+        btnResetTglAmbil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-backspace.png"))); // NOI18N
+        btnResetTglAmbil.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnResetTglAmbil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetTglAmbilActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -584,23 +623,29 @@ public class TransaksiView extends javax.swing.JFrame {
                     .addComponent(inputTglSelesai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(inputTglMasuk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnResetTglAmbil))
                     .addComponent(ddCustomer, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblPegawai, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ddPegawai, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 64, Short.MAX_VALUE))
+                        .addGap(0, 67, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(btnResetTglMasuk)))
                 .addGap(16, 16, 16))
         );
         jPanel2Layout.setVerticalGroup(
@@ -617,9 +662,11 @@ public class TransaksiView extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ddCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
-                .addComponent(jLabel1)
-                .addGap(8, 8, 8)
+                .addGap(12, 12, 12)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(btnResetTglMasuk))
+                .addGap(3, 3, 3)
                 .addComponent(inputTglMasuk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -628,40 +675,43 @@ public class TransaksiView extends javax.swing.JFrame {
                 .addGap(8, 8, 8)
                 .addComponent(inputTglSelesai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(inputTglAmbil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
-                .addComponent(lblPegawai)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ddPegawai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(inputTglAmbil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16)
+                        .addComponent(lblPegawai)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ddPegawai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnResetTglAmbil))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
 
         inputPanel.add(jPanel2);
 
         jPanel1.setOpaque(false);
 
-        cancelBtn.setBackground(new java.awt.Color(220, 53, 69));
-        cancelBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        cancelBtn.setForeground(new java.awt.Color(255, 255, 255));
         cancelBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-cancel.png"))); // NOI18N
         cancelBtn.setText("Batal");
+        cancelBtn.setBackground(new java.awt.Color(220, 53, 69));
         cancelBtn.setBorder(null);
         cancelBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cancelBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        cancelBtn.setForeground(new java.awt.Color(255, 255, 255));
         cancelBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelBtnActionPerformed(evt);
             }
         });
 
-        saveBtn.setBackground(new java.awt.Color(13, 110, 253));
-        saveBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        saveBtn.setForeground(new java.awt.Color(255, 255, 255));
         saveBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-save.png"))); // NOI18N
         saveBtn.setText("Simpan");
+        saveBtn.setBackground(new java.awt.Color(13, 110, 253));
         saveBtn.setBorder(null);
         saveBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        saveBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        saveBtn.setForeground(new java.awt.Color(255, 255, 255));
         saveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveBtnActionPerformed(evt);
@@ -669,36 +719,45 @@ public class TransaksiView extends javax.swing.JFrame {
         });
 
         jPanel3.setOpaque(false);
-        jPanel3.setLayout(new java.awt.GridLayout());
+        jPanel3.setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel4.setOpaque(false);
 
-        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Pakaian");
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        inputBeratPakaian.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         inputBeratPakaian.setModel(new javax.swing.SpinnerNumberModel(Float.valueOf(0.0f), Float.valueOf(0.0f), Float.valueOf(20.0f), Float.valueOf(0.1f)));
+        inputBeratPakaian.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         inputBeratPakaian.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 beratStateChanged(evt);
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("kg");
+        jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+
+        lblHargaPakaian.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        lblHargaPakaian.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblHargaPakaian.setText("Rp1.000/kg");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(lblHargaPakaian, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(inputBeratPakaian, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                        .addContainerGap()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(inputBeratPakaian, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6)))
                 .addGap(8, 8, 8))
@@ -712,28 +771,34 @@ public class TransaksiView extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inputBeratPakaian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addGap(0, 7, Short.MAX_VALUE))
+                .addGap(4, 4, 4)
+                .addComponent(lblHargaPakaian)
+                .addGap(0, 16, Short.MAX_VALUE))
         );
 
         jPanel3.add(jPanel4);
 
         jPanel7.setOpaque(false);
 
-        jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Selimut");
+        jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        inputBeratSelimut.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         inputBeratSelimut.setModel(new javax.swing.SpinnerNumberModel(Float.valueOf(0.0f), Float.valueOf(0.0f), Float.valueOf(20.0f), Float.valueOf(0.1f)));
+        inputBeratSelimut.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         inputBeratSelimut.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 beratStateChanged(evt);
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("kg");
+        jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+
+        lblHargaSelimut.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        lblHargaSelimut.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblHargaSelimut.setText("Rp1.000/kg");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -744,10 +809,14 @@ public class TransaksiView extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(inputBeratSelimut, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                        .addComponent(inputBeratSelimut, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8)))
                 .addGap(8, 8, 8))
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblHargaSelimut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -758,42 +827,53 @@ public class TransaksiView extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inputBeratSelimut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addGap(0, 7, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblHargaSelimut)
+                .addGap(0, 14, Short.MAX_VALUE))
         );
 
         jPanel3.add(jPanel7);
 
         jPanel8.setOpaque(false);
 
-        jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Boneka");
+        jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        inputBeratBoneka.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         inputBeratBoneka.setModel(new javax.swing.SpinnerNumberModel(Float.valueOf(0.0f), Float.valueOf(0.0f), Float.valueOf(20.0f), Float.valueOf(0.1f)));
+        inputBeratBoneka.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         inputBeratBoneka.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 beratStateChanged(evt);
             }
         });
 
-        jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("kg");
+        jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+
+        lblHargaBoneka.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        lblHargaBoneka.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblHargaBoneka.setText("Rp1.000/kg");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblHargaBoneka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(8, 8, 8)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(inputBeratBoneka, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(inputBeratBoneka, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel10)))
-                .addGap(0, 0, 0))
+                        .addComponent(jLabel10))))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -804,26 +884,28 @@ public class TransaksiView extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inputBeratBoneka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
-                .addGap(0, 7, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblHargaBoneka)
+                .addGap(0, 14, Short.MAX_VALUE))
         );
 
         jPanel3.add(jPanel8);
 
-        jLabel11.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel11.setText("Daftar Item Laundry");
+        jLabel11.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
 
-        jLabel12.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel12.setText("Tipe Layanan");
+        jLabel12.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
 
-        jLabel13.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel13.setText("Kecepatan");
+        jLabel13.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        jLabel14.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel14.setText("Fasilitas");
+        jLabel14.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        ddKecepatan.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         ddKecepatan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "REGULAR", "EXPRESS" }));
         ddKecepatan.setSelectedIndex(-1);
+        ddKecepatan.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         ddKecepatan.setToolTipText("");
         ddKecepatan.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -831,30 +913,30 @@ public class TransaksiView extends javax.swing.JFrame {
             }
         });
 
-        cbFCuci.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         cbFCuci.setText("Cuci");
+        cbFCuci.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         cbFCuci.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 ddcbItemStateChanged(evt);
             }
         });
 
-        cbFSetrika.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         cbFSetrika.setText("Setrika");
+        cbFSetrika.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         cbFSetrika.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 ddcbItemStateChanged(evt);
             }
         });
 
-        outTotalHarga.setFont(new java.awt.Font("Century Gothic", 1, 32)); // NOI18N
         outTotalHarga.setText("Rp12.300");
+        outTotalHarga.setFont(new java.awt.Font("Century Gothic", 1, 32)); // NOI18N
 
-        jLabel17.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel17.setText("Total Harga");
+        jLabel17.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        jLabel16.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
         jLabel16.setText("REGULAR: selesai dalam 2 hari, EXPRESS: selesai dalam 6 jam");
+        jLabel16.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -875,7 +957,7 @@ public class TransaksiView extends javax.swing.JFrame {
                             .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
                             .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
@@ -892,10 +974,6 @@ public class TransaksiView extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(71, 71, 71)
-                .addComponent(jLabel11)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13)
@@ -909,7 +987,11 @@ public class TransaksiView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbFCuci)
                     .addComponent(cbFSetrika))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(jLabel17)
                 .addGap(0, 0, 0)
                 .addComponent(outTotalHarga)
@@ -935,6 +1017,8 @@ public class TransaksiView extends javax.swing.JFrame {
         ));
         tableTransaksi.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         tableTransaksi.setRowHeight(32);
+        tableTransaksi.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tableTransaksi.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tableTransaksi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableTransaksiMouseClicked(evt);
@@ -980,7 +1064,7 @@ public class TransaksiView extends javax.swing.JFrame {
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
-                .addComponent(inputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(inputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollTabelPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1217,6 +1301,26 @@ public class TransaksiView extends javax.swing.JFrame {
         searchInput.setText("");
     }//GEN-LAST:event_searchBtnActionPerformed
 
+    private void btnResetTglMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetTglMasukActionPerformed
+        inputTglMasuk.setDateTimeStrict(null);
+    }//GEN-LAST:event_btnResetTglMasukActionPerformed
+
+    private void btnResetTglAmbilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetTglAmbilActionPerformed
+        inputTglAmbil.setDateTimeStrict(null);
+    }//GEN-LAST:event_btnResetTglAmbilActionPerformed
+
+    private void customerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerBtnActionPerformed
+        CustomerView cv = new CustomerView();
+        this.dispose();
+        cv.setVisible(true);
+    }//GEN-LAST:event_customerBtnActionPerformed
+
+    private void pegawaiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pegawaiBtnActionPerformed
+        PegawaiView2 pv = new PegawaiView2();
+        this.dispose();
+        pv.setVisible(true);
+    }//GEN-LAST:event_pegawaiBtnActionPerformed
+
     private void logoAreaMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_logoAreaMouseClicked
         MainMenuView MMV = new MainMenuView();
         this.dispose();
@@ -1273,6 +1377,8 @@ public class TransaksiView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
+    private javax.swing.JButton btnResetTglAmbil;
+    private javax.swing.JButton btnResetTglMasuk;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JCheckBox cbFCuci;
     private javax.swing.JCheckBox cbFSetrika;
@@ -1315,6 +1421,9 @@ public class TransaksiView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JLabel lblHargaBoneka;
+    private javax.swing.JLabel lblHargaPakaian;
+    private javax.swing.JLabel lblHargaSelimut;
     private javax.swing.JLabel lblPegawai;
     private javax.swing.JLabel logoArea;
     private javax.swing.JPanel mainPanel;

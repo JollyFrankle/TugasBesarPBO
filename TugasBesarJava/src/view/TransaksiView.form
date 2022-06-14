@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.6" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -112,6 +112,9 @@
               <Color id="Hand Cursor"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="customerBtnActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="pegawaiBtn">
           <Properties>
@@ -132,6 +135,9 @@
               <Color id="Hand Cursor"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pegawaiBtnActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="transaksiBtn">
           <Properties>
@@ -380,7 +386,7 @@
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="inputPanel" max="32767" attributes="0"/>
+                              <Component id="inputPanel" pref="533" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="scrollTabelPanel" min="-2" pref="246" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -415,24 +421,32 @@
                                           <Component id="inputTglSelesai" max="32767" attributes="0"/>
                                           <Component id="inputTglMasuk" max="32767" attributes="0"/>
                                           <Component id="jLabel15" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="jLabel5" max="32767" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="btnResetTglAmbil" min="-2" max="-2" attributes="0"/>
+                                          </Group>
                                           <Component id="ddCustomer" alignment="0" max="32767" attributes="0"/>
                                           <Component id="jLabel4" alignment="0" max="32767" attributes="0"/>
                                           <Component id="lblPegawai" alignment="0" max="32767" attributes="0"/>
                                           <Component id="ddPegawai" alignment="0" max="32767" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jLabel18" max="32767" attributes="0"/>
+                                          </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="addBtn" min="-2" pref="121" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="editBtn" min="-2" pref="121" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="deleteBtn" min="-2" pref="121" max="-2" attributes="0"/>
-                                              <EmptySpace min="0" pref="64" max="32767" attributes="0"/>
+                                              <EmptySpace min="0" pref="67" max="32767" attributes="0"/>
                                           </Group>
                                           <Group type="102" attributes="0">
-                                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel1" max="32767" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jLabel18" max="32767" attributes="0"/>
+                                              <Component id="btnResetTglMasuk" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
@@ -454,9 +468,12 @@
                                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="ddCustomer" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnResetTglMasuk" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                                       <Component id="inputTglMasuk" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
@@ -466,14 +483,19 @@
                                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                                       <Component id="inputTglSelesai" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="inputTglAmbil" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                                      <Component id="lblPegawai" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="ddPegawai" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="87" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="inputTglAmbil" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                                              <Component id="lblPegawai" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="ddPegawai" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="btnResetTglAmbil" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace pref="96" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -615,11 +637,11 @@
                             </Component>
                             <Component class="javax.swing.JComboBox" name="ddCustomer">
                               <Properties>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Century Gothic" size="14" style="0"/>
-                                </Property>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                   <StringArray count="0"/>
+                                </Property>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Century Gothic" size="14" style="0"/>
                                 </Property>
                               </Properties>
                               <AuxValues>
@@ -628,27 +650,27 @@
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel15">
                               <Properties>
+                                <Property name="text" type="java.lang.String" value="Data Transaksi"/>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Century Gothic" size="14" style="1"/>
                                 </Property>
-                                <Property name="text" type="java.lang.String" value="Data Transaksi"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JLabel" name="lblPegawai">
                               <Properties>
+                                <Property name="text" type="java.lang.String" value="Petugas Penginput Transaksi"/>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Century Gothic" size="14" style="0"/>
                                 </Property>
-                                <Property name="text" type="java.lang.String" value="Petugas Penginput Transaksi"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JComboBox" name="ddPegawai">
                               <Properties>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Century Gothic" size="14" style="0"/>
-                                </Property>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                   <StringArray count="0"/>
+                                </Property>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Century Gothic" size="14" style="0"/>
                                 </Property>
                               </Properties>
                               <AuxValues>
@@ -657,11 +679,49 @@
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel18">
                               <Properties>
+                                <Property name="text" type="java.lang.String" value="(otomatis, berdasarkan kecepatan layanan)"/>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Century Gothic" size="12" style="2"/>
                                 </Property>
-                                <Property name="text" type="java.lang.String" value="(otomatis, berdasarkan kecepatan layanan)"/>
                               </Properties>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnResetTglMasuk">
+                              <Properties>
+                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="29" green="25" red="21" type="rgb"/>
+                                </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/assets/buttons/icon-backspace.png"/>
+                                </Property>
+                                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                                  <Color id="Hand Cursor"/>
+                                </Property>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnResetTglMasukActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnResetTglAmbil">
+                              <Properties>
+                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="29" green="25" red="21" type="rgb"/>
+                                </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/assets/buttons/icon-backspace.png"/>
+                                </Property>
+                                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                                  <Color id="Hand Cursor"/>
+                                </Property>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnResetTglAmbilActionPerformed"/>
+                              </Events>
                             </Component>
                           </SubComponents>
                         </Container>
@@ -689,7 +749,7 @@
                                                   <Component id="jLabel16" alignment="0" max="32767" attributes="0"/>
                                                   <Component id="jLabel13" alignment="0" max="32767" attributes="0"/>
                                                   <Component id="jLabel11" max="32767" attributes="0"/>
-                                                  <Component id="jPanel3" alignment="0" pref="439" max="32767" attributes="0"/>
+                                                  <Component id="jPanel3" alignment="0" pref="442" max="32767" attributes="0"/>
                                                   <Component id="jLabel12" alignment="0" max="32767" attributes="0"/>
                                                   <Group type="102" attributes="0">
                                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -714,10 +774,6 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
                                       <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-                                      <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                      <Component id="jPanel3" min="-2" pref="68" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                                       <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
@@ -732,7 +788,11 @@
                                           <Component id="cbFCuci" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="cbFSetrika" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="74" max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                                      <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="37" max="32767" attributes="0"/>
                                       <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                       <Component id="outTotalHarga" min="-2" max="-2" attributes="0"/>
@@ -749,24 +809,24 @@
                           <SubComponents>
                             <Component class="javax.swing.JButton" name="cancelBtn">
                               <Properties>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/assets/buttons/icon-cancel.png"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Batal"/>
                                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="45" green="35" red="dc" type="rgb"/>
+                                </Property>
+                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                  <Border info="null"/>
+                                </Property>
+                                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                                  <Color id="Hand Cursor"/>
                                 </Property>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Century Gothic" size="14" style="1"/>
                                 </Property>
                                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                </Property>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/assets/buttons/icon-cancel.png"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Batal"/>
-                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                                  <Border info="null"/>
-                                </Property>
-                                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Hand Cursor"/>
                                 </Property>
                               </Properties>
                               <Events>
@@ -775,24 +835,24 @@
                             </Component>
                             <Component class="javax.swing.JButton" name="saveBtn">
                               <Properties>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/assets/buttons/icon-save.png"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Simpan"/>
                                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="fd" green="6e" red="d" type="rgb"/>
+                                </Property>
+                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                  <Border info="null"/>
+                                </Property>
+                                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                                  <Color id="Hand Cursor"/>
                                 </Property>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Century Gothic" size="14" style="1"/>
                                 </Property>
                                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                </Property>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/assets/buttons/icon-save.png"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Simpan"/>
-                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                                  <Border info="null"/>
-                                </Property>
-                                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Hand Cursor"/>
                                 </Property>
                               </Properties>
                               <Events>
@@ -818,11 +878,18 @@
                                     <DimensionLayout dim="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jLabel2" max="32767" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="lblHargaPakaian" max="32767" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Group type="103" groupAlignment="1" attributes="0">
                                                   <Group type="102" attributes="0">
-                                                      <Component id="inputBeratPakaian" pref="116" max="32767" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="jLabel2" max="32767" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="inputBeratPakaian" pref="117" max="32767" attributes="0"/>
                                                       <EmptySpace max="-2" attributes="0"/>
                                                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                                                   </Group>
@@ -841,7 +908,9 @@
                                                   <Component id="inputBeratPakaian" alignment="3" min="-2" max="-2" attributes="0"/>
                                                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                                               </Group>
-                                              <EmptySpace min="0" pref="7" max="32767" attributes="0"/>
+                                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                              <Component id="lblHargaPakaian" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="0" pref="16" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                     </DimensionLayout>
@@ -849,20 +918,20 @@
                                   <SubComponents>
                                     <Component class="javax.swing.JLabel" name="jLabel2">
                                       <Properties>
+                                        <Property name="horizontalAlignment" type="int" value="0"/>
+                                        <Property name="text" type="java.lang.String" value="Pakaian"/>
                                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                           <Font name="Century Gothic" size="14" style="0"/>
                                         </Property>
-                                        <Property name="horizontalAlignment" type="int" value="0"/>
-                                        <Property name="text" type="java.lang.String" value="Pakaian"/>
                                       </Properties>
                                     </Component>
                                     <Component class="javax.swing.JSpinner" name="inputBeratPakaian">
                                       <Properties>
-                                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                          <Font name="Century Gothic" size="14" style="0"/>
-                                        </Property>
                                         <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
                                           <SpinnerModel initial="0.0" maximum="20.0" minimum="0.0" numberType="java.lang.Float" stepSize="0.1" type="number"/>
+                                        </Property>
+                                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                          <Font name="Century Gothic" size="14" style="0"/>
                                         </Property>
                                       </Properties>
                                       <Events>
@@ -871,11 +940,20 @@
                                     </Component>
                                     <Component class="javax.swing.JLabel" name="jLabel6">
                                       <Properties>
+                                        <Property name="horizontalAlignment" type="int" value="0"/>
+                                        <Property name="text" type="java.lang.String" value="kg"/>
                                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                           <Font name="Century Gothic" size="14" style="0"/>
                                         </Property>
+                                      </Properties>
+                                    </Component>
+                                    <Component class="javax.swing.JLabel" name="lblHargaPakaian">
+                                      <Properties>
+                                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                          <Font name="Century Gothic" size="12" style="2"/>
+                                        </Property>
                                         <Property name="horizontalAlignment" type="int" value="0"/>
-                                        <Property name="text" type="java.lang.String" value="kg"/>
+                                        <Property name="text" type="java.lang.String" value="Rp1.000/kg"/>
                                       </Properties>
                                     </Component>
                                   </SubComponents>
@@ -893,12 +971,17 @@
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="jLabel7" alignment="0" max="32767" attributes="0"/>
                                                   <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="inputBeratSelimut" pref="108" max="32767" attributes="0"/>
+                                                      <Component id="inputBeratSelimut" pref="109" max="32767" attributes="0"/>
                                                       <EmptySpace max="-2" attributes="0"/>
                                                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
                                               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="lblHargaSelimut" max="32767" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                     </DimensionLayout>
@@ -912,7 +995,9 @@
                                                   <Component id="inputBeratSelimut" alignment="3" min="-2" max="-2" attributes="0"/>
                                                   <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                                               </Group>
-                                              <EmptySpace min="0" pref="7" max="32767" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="lblHargaSelimut" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="0" pref="14" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                     </DimensionLayout>
@@ -920,20 +1005,20 @@
                                   <SubComponents>
                                     <Component class="javax.swing.JLabel" name="jLabel7">
                                       <Properties>
+                                        <Property name="horizontalAlignment" type="int" value="0"/>
+                                        <Property name="text" type="java.lang.String" value="Selimut"/>
                                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                           <Font name="Century Gothic" size="14" style="0"/>
                                         </Property>
-                                        <Property name="horizontalAlignment" type="int" value="0"/>
-                                        <Property name="text" type="java.lang.String" value="Selimut"/>
                                       </Properties>
                                     </Component>
                                     <Component class="javax.swing.JSpinner" name="inputBeratSelimut">
                                       <Properties>
-                                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                          <Font name="Century Gothic" size="14" style="0"/>
-                                        </Property>
                                         <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
                                           <SpinnerModel initial="0.0" maximum="20.0" minimum="0.0" numberType="java.lang.Float" stepSize="0.1" type="number"/>
+                                        </Property>
+                                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                          <Font name="Century Gothic" size="14" style="0"/>
                                         </Property>
                                       </Properties>
                                       <Events>
@@ -942,11 +1027,20 @@
                                     </Component>
                                     <Component class="javax.swing.JLabel" name="jLabel8">
                                       <Properties>
+                                        <Property name="horizontalAlignment" type="int" value="0"/>
+                                        <Property name="text" type="java.lang.String" value="kg"/>
                                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                           <Font name="Century Gothic" size="14" style="0"/>
                                         </Property>
+                                      </Properties>
+                                    </Component>
+                                    <Component class="javax.swing.JLabel" name="lblHargaSelimut">
+                                      <Properties>
+                                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                          <Font name="Century Gothic" size="12" style="2"/>
+                                        </Property>
                                         <Property name="horizontalAlignment" type="int" value="0"/>
-                                        <Property name="text" type="java.lang.String" value="kg"/>
+                                        <Property name="text" type="java.lang.String" value="Rp1.000/kg"/>
                                       </Properties>
                                     </Component>
                                   </SubComponents>
@@ -959,17 +1053,24 @@
                                   <Layout>
                                     <DimensionLayout dim="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="lblHargaBoneka" max="32767" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                          </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jLabel9" alignment="0" max="32767" attributes="0"/>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="inputBeratBoneka" pref="116" max="32767" attributes="0"/>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="jLabel9" max="32767" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="inputBeratBoneka" pref="117" max="32767" attributes="0"/>
                                                       <EmptySpace max="-2" attributes="0"/>
                                                       <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
-                                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                     </DimensionLayout>
@@ -983,7 +1084,9 @@
                                                   <Component id="inputBeratBoneka" alignment="3" min="-2" max="-2" attributes="0"/>
                                                   <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                                               </Group>
-                                              <EmptySpace min="0" pref="7" max="32767" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="lblHargaBoneka" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="0" pref="14" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                     </DimensionLayout>
@@ -991,20 +1094,20 @@
                                   <SubComponents>
                                     <Component class="javax.swing.JLabel" name="jLabel9">
                                       <Properties>
+                                        <Property name="horizontalAlignment" type="int" value="0"/>
+                                        <Property name="text" type="java.lang.String" value="Boneka"/>
                                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                           <Font name="Century Gothic" size="14" style="0"/>
                                         </Property>
-                                        <Property name="horizontalAlignment" type="int" value="0"/>
-                                        <Property name="text" type="java.lang.String" value="Boneka"/>
                                       </Properties>
                                     </Component>
                                     <Component class="javax.swing.JSpinner" name="inputBeratBoneka">
                                       <Properties>
-                                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                          <Font name="Century Gothic" size="14" style="0"/>
-                                        </Property>
                                         <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
                                           <SpinnerModel initial="0.0" maximum="20.0" minimum="0.0" numberType="java.lang.Float" stepSize="0.1" type="number"/>
+                                        </Property>
+                                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                          <Font name="Century Gothic" size="14" style="0"/>
                                         </Property>
                                       </Properties>
                                       <Events>
@@ -1013,11 +1116,20 @@
                                     </Component>
                                     <Component class="javax.swing.JLabel" name="jLabel10">
                                       <Properties>
+                                        <Property name="horizontalAlignment" type="int" value="0"/>
+                                        <Property name="text" type="java.lang.String" value="kg"/>
                                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                           <Font name="Century Gothic" size="14" style="0"/>
                                         </Property>
+                                      </Properties>
+                                    </Component>
+                                    <Component class="javax.swing.JLabel" name="lblHargaBoneka">
+                                      <Properties>
+                                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                          <Font name="Century Gothic" size="12" style="2"/>
+                                        </Property>
                                         <Property name="horizontalAlignment" type="int" value="0"/>
-                                        <Property name="text" type="java.lang.String" value="kg"/>
+                                        <Property name="text" type="java.lang.String" value="Rp1.000/kg"/>
                                       </Properties>
                                     </Component>
                                   </SubComponents>
@@ -1026,41 +1138,38 @@
                             </Container>
                             <Component class="javax.swing.JLabel" name="jLabel11">
                               <Properties>
+                                <Property name="text" type="java.lang.String" value="Daftar Item Laundry"/>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Century Gothic" size="14" style="1"/>
                                 </Property>
-                                <Property name="text" type="java.lang.String" value="Daftar Item Laundry"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel12">
                               <Properties>
+                                <Property name="text" type="java.lang.String" value="Tipe Layanan"/>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Century Gothic" size="14" style="1"/>
                                 </Property>
-                                <Property name="text" type="java.lang.String" value="Tipe Layanan"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel13">
                               <Properties>
+                                <Property name="text" type="java.lang.String" value="Kecepatan"/>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Century Gothic" size="14" style="0"/>
                                 </Property>
-                                <Property name="text" type="java.lang.String" value="Kecepatan"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel14">
                               <Properties>
+                                <Property name="text" type="java.lang.String" value="Fasilitas"/>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Century Gothic" size="14" style="0"/>
                                 </Property>
-                                <Property name="text" type="java.lang.String" value="Fasilitas"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JComboBox" name="ddKecepatan">
                               <Properties>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Century Gothic" size="14" style="0"/>
-                                </Property>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                   <StringArray count="2">
                                     <StringItem index="0" value="REGULAR"/>
@@ -1068,6 +1177,9 @@
                                   </StringArray>
                                 </Property>
                                 <Property name="selectedIndex" type="int" value="-1"/>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Century Gothic" size="14" style="0"/>
+                                </Property>
                                 <Property name="toolTipText" type="java.lang.String" value=""/>
                               </Properties>
                               <Events>
@@ -1079,10 +1191,10 @@
                             </Component>
                             <Component class="javax.swing.JCheckBox" name="cbFCuci">
                               <Properties>
+                                <Property name="text" type="java.lang.String" value="Cuci"/>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Century Gothic" size="14" style="0"/>
                                 </Property>
-                                <Property name="text" type="java.lang.String" value="Cuci"/>
                               </Properties>
                               <Events>
                                 <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="ddcbItemStateChanged"/>
@@ -1090,10 +1202,10 @@
                             </Component>
                             <Component class="javax.swing.JCheckBox" name="cbFSetrika">
                               <Properties>
+                                <Property name="text" type="java.lang.String" value="Setrika"/>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Century Gothic" size="14" style="0"/>
                                 </Property>
-                                <Property name="text" type="java.lang.String" value="Setrika"/>
                               </Properties>
                               <Events>
                                 <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="ddcbItemStateChanged"/>
@@ -1101,26 +1213,26 @@
                             </Component>
                             <Component class="javax.swing.JLabel" name="outTotalHarga">
                               <Properties>
+                                <Property name="text" type="java.lang.String" value="Rp12.300"/>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Century Gothic" size="32" style="1"/>
                                 </Property>
-                                <Property name="text" type="java.lang.String" value="Rp12.300"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel17">
                               <Properties>
+                                <Property name="text" type="java.lang.String" value="Total Harga"/>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Century Gothic" size="14" style="0"/>
                                 </Property>
-                                <Property name="text" type="java.lang.String" value="Total Harga"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel16">
                               <Properties>
+                                <Property name="text" type="java.lang.String" value="REGULAR: selesai dalam 2 hari, EXPRESS: selesai dalam 6 jam"/>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Century Gothic" size="12" style="2"/>
                                 </Property>
-                                <Property name="text" type="java.lang.String" value="REGULAR: selesai dalam 2 hari, EXPRESS: selesai dalam 6 jam"/>
                               </Properties>
                             </Component>
                           </SubComponents>
@@ -1148,6 +1260,10 @@
                               <Font name="Century Gothic" size="14" style="0"/>
                             </Property>
                             <Property name="rowHeight" type="int" value="32"/>
+                            <Property name="selectionMode" type="int" value="0"/>
+                            <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
+                              <JTableSelectionModel selectionMode="0"/>
+                            </Property>
                           </Properties>
                           <Events>
                             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tableTransaksiMouseClicked"/>
