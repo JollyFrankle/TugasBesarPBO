@@ -664,7 +664,7 @@ public class PegawaiView2 extends javax.swing.JFrame {
                 pc.updateDataPegawai(p);
         } catch(InputKosongException e){
             JOptionPane.showConfirmDialog(null, "Input tidak boleh kosong", "Warning", JOptionPane.DEFAULT_OPTION);
-            System.out.println("Error: " + e.showMessage());
+            System.out.println("Error: " + e.toString());
         }
        clearText();
        showPegawai();

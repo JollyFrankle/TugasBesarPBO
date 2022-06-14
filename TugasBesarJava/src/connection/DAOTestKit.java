@@ -5,6 +5,7 @@
 
 package connection;
 
+import dao.JobHistoryPreparedDAO;
 import java.util.List;
 import java.util.ArrayList;
 import dao.TransaksiPreparedDAO;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
 import model.Customer;
+import model.JobHistory;
 import model.Pegawai;
 import model.Transaksi;
 import org.json.JSONArray;
@@ -33,6 +35,11 @@ public class DAOTestKit {
         for(Transaksi T : list) {
             System.out.println(T.getTglAmbil() + T.getLastActivity());
         }
+//        JobHistoryPreparedDAO jhDAO = new JobHistoryPreparedDAO();
+//        JobHistory J = new JobHistory(
+//                
+//        );
+//        jhDAO.insertJobHistory(J);
         
         
 //        List<Transaksi> listT;

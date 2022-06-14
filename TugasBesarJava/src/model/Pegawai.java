@@ -70,4 +70,9 @@ public class Pegawai {
         }
         return 0;
     }
+    
+    @Override
+    public String toString() {
+        return this.namaPegawai;
+    }
 }

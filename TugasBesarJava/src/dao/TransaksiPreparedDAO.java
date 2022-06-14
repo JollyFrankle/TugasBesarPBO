@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Customer;
 import model.JobHistory;
+import model.Pegawai;
 import model.Transaksi;
 
 /**
@@ -22,7 +23,7 @@ public class TransaksiPreparedDAO {
     private static final DbConnection DBC = new DbConnection();
     private Connection con;
     
-    public int insertTransaksi(Transaksi T){
+    public int insertTransaksi(Transaksi T, Pegawai P){
         con = DBC.makeConnection();
         int rowCount = 0;
         
@@ -30,7 +31,7 @@ public class TransaksiPreparedDAO {
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         
         try{
-            PreparedStatement st = con.prepareStatement(sql);
+            PreparedStatement st = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             st.setInt(1, T.getCustomer().getId());
             st.setString(2, T.getTglMasuk().format(Transaksi.DEFAULT_DTF));
             st.setString(3, T.getTglSelesai().format(Transaksi.DEFAULT_DTF));
@@ -41,8 +42,27 @@ public class TransaksiPreparedDAO {
             st.setFloat(8, T.getBeratBoneka());
             
             rowCount = st.executeUpdate();
-            System.out.println(DbConnection.ANSI_GREEN + "[OK] [TransaksiPreparedDAO/insertTransaksi] Added " + rowCount + " row(s).");
+            
+            int lastInsertId = 0;
+            ResultSet rs = st.getGeneratedKeys();
+            if(rs.next()) {
+                // https://stackoverflow.com/questions/5513180/java-preparedstatement-retrieving-last-inserted-id
+                lastInsertId = rs.getInt(1);
+            }
+
+            System.out.println(DbConnection.ANSI_GREEN + "[OK] [TransaksiPreparedDAO/insertTransaksi] Added " + rowCount + " row(s), with the last inserted id of " + lastInsertId + ".");
             st.close();
+            
+            // Kemudian tambahkan juga job history pertamanya
+            JobHistoryPreparedDAO jhDAO = new JobHistoryPreparedDAO();
+            JobHistory JH = new JobHistory(
+                    0,
+                    lastInsertId,
+                    P,
+                    LocalDateTime.now().format(Transaksi.DEFAULT_DTF),
+                    "Menerima dan mencatat transaksi dari customer ke dalam sistem."
+            );
+            jhDAO.insertJobHistory(JH);
         }catch(SQLException e){
             System.out.println(DbConnection.ANSI_RED + "[E] [TransaksiPreparedDAO/insertTransaksi] Error: " + e.toString());
         }
@@ -130,7 +150,8 @@ public class TransaksiPreparedDAO {
                 + "SET idCustomer = ?, "
                 + "tglMasuk = ?, "
                 + "tglSelesai = ?, "
-                + "tglAmbil = ?, "
+                + "tglAmbil = ?,"
+                + "tipeLayanan = ?, "
                 + "beratPakaian = ?, "
                 + "beratSelimut = ?, "
                 + "beratBoneka = ? "
@@ -141,7 +162,7 @@ public class TransaksiPreparedDAO {
             st.setInt(1, T.getCustomer().getId());
             st.setString(2, T.getTglMasuk().format(Transaksi.DEFAULT_DTF));
             st.setString(3, T.getTglSelesai().format(Transaksi.DEFAULT_DTF));
-            st.setString(4, T.getTglAmbil().format(Transaksi.DEFAULT_DTF));
+            st.setString(4, T.getTglAmbil() != null ? T.getTglAmbil().format(Transaksi.DEFAULT_DTF) : null);
             st.setString(5, T.getTipeLayanan().toString());
             st.setFloat(6, T.getBeratPakaian());
             st.setFloat(7, T.getBeratSelimut());

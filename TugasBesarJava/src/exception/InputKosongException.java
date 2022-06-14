@@ -4,7 +4,8 @@ import connection.DbConnection;
 
 public class InputKosongException extends Exception{
 
-    public String showMessage(){
-        return "Input tidak boleh kosong!";
+    @Override
+    public String toString(){
+        return "Masih ada input yang kosong!";
     }
 }

@@ -24,23 +24,25 @@ public class TableTransaksi extends AbstractTableModel{
     }
     
     public int getColumnCount(){
-        return 6;
+        return 7;
     }
     
     public Object getValueAt(int rowIndex, int columnIndex){
         switch(columnIndex){
             case 0:
-                return list.get(rowIndex).getId();
-            case 1:
                 return list.get(rowIndex).getCustomer().getNama();
-            case 2:
+            case 1:
                 return list.get(rowIndex).getTglMasuk().format(Transaksi.LOCAL_DTF);
-            case 3:
+            case 2:
                 return list.get(rowIndex).getTglSelesai().format(Transaksi.LOCAL_DTF);
+            case 3:
+                return list.get(rowIndex).getTglAmbil() != null ? list.get(rowIndex).getTglAmbil().format(Transaksi.LOCAL_DTF) : "(belum diambil)";
             case 4:
-                return list.get(rowIndex).getTglAmbil().format(Transaksi.LOCAL_DTF);
-            case 5:
                 return list.get(rowIndex).getTipeLayanan().getString("speed");
+            case 5:
+                return String.format("%.2f", list.get(rowIndex).getTotalBerat()) + "kg";
+            case 6:
+                return list.get(rowIndex).getLastActivity();
             case 99:
                 return list.get(rowIndex);
             default:
@@ -51,19 +53,19 @@ public class TableTransaksi extends AbstractTableModel{
     public String getColumnName(int column){
         switch(column){
             case 0:
-                return "ID";
-            case 1:
                 return "Nama Customer";
-            case 2:
+            case 1:
                 return "Tanggal Masuk";
-            case 3:
+            case 2:
                 return "Tanggal Selesai";
-            case 4:
+            case 3:
                 return "Tanggal Ambil";
-            case 5:
+            case 4:
                 return "Tipe Layanan";
+            case 5:
+                return "Total Berat";
             case 6:
-                return "List Item";
+                return "Aktivitas Terakhir";
             default:
                 return null;
         }

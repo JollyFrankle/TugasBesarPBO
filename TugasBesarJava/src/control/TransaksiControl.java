@@ -7,21 +7,23 @@ package control;
 
 import dao.TransaksiPreparedDAO;
 import java.util.*;
+import model.Pegawai;
 import model.Transaksi;
 import table.TableTransaksi;
 
 public class TransaksiControl {
     private TransaksiPreparedDAO tpDAO = new TransaksiPreparedDAO();
     
-    public void insertDataTransaksi(Transaksi t){
-        tpDAO.insertTransaksi(t);
+    public void insertDataTransaksi(Transaksi t, Pegawai p){
+        // Insert dibutuhkan juga siapa pegawai yang menerima dan mencatat ini ke sistem.
+        tpDAO.insertTransaksi(t, p);
     }
     
-    public void updateTransaksi(Transaksi t){
+    public void updateDataTransaksi(Transaksi t){
         tpDAO.updateTransaksi(t);
     }
     
-    public void deleteTransaksi(int id){
+    public void deleteDataTransaksi(int id){
         tpDAO.deleteTransaksi(id);
     }
     
