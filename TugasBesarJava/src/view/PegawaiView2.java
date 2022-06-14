@@ -45,8 +45,8 @@ public class PegawaiView2 extends javax.swing.JFrame {
         namaInput.setText("");
         tgllahirInput.setText("");
         nohpInput.setText("");
-        dropdownJobdesc.setSelectedItem(ABORT);
         searchInput.setText("");
+        dropdownJobdesc.setSelectedIndex(-1);
     }
     
     public void setComponent(boolean value){
@@ -54,7 +54,6 @@ public class PegawaiView2 extends javax.swing.JFrame {
         namaInput.setEnabled(value);
         tgllahirInput.setEnabled(value);
         nohpInput.setEnabled(value);
-        dropdownJobdesc.setSelectedItem(ABORT);
         saveBtn.setEnabled(value);
         cancelBtn.setEnabled(value);
         dropdownJobdesc.setEnabled(value);

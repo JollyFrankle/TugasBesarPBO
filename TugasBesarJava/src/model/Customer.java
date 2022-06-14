@@ -54,4 +54,9 @@ public class Customer {
     public String showDataCustomer(){
         return id + " | " + nama + " | " + alamat + " | " + noHP;
     }
+    
+    @Override
+    public String toString() {
+        return this.nama;
+    }
 }

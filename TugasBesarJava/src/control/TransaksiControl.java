@@ -25,10 +25,8 @@ public class TransaksiControl {
         tpDAO.deleteTransaksi(id);
     }
     
-    public Transaksi searchTransaksi(String input){
-        Transaksi t = (Transaksi) tpDAO.searchTransaksi(input);
-        
-        return t;
+    public TableTransaksi searchTransaksi(String input){
+        return new TableTransaksi(tpDAO.searchTransaksi(input));
     }
     
     public List<Transaksi> showDataTransaksi(){

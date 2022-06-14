@@ -1,96 +1,93 @@
 package model;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class Transaksi {
-    private int idTransaksi;
-    private String status;
-    private String tglMasuk;
-    private String tglSelesai;
-    private String tglAmbil;
+    // konstanta: DEFAULT_DTF itu y-M-d H:m:s
+    public static final DateTimeFormatter DEFAULT_DTF = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    public static final DateTimeFormatter LOCAL_DTF = DateTimeFormatter.ofPattern("E, d MMM yyyy, HH.mm.ss", new java.util.Locale("id"));
+    private int id;
+    private String lastActivity;
+    private LocalDateTime tglMasuk;
+    private LocalDateTime tglSelesai;
+    private LocalDateTime tglAmbil;
     private JSONObject tipeLayanan;
-    private List<ItemLaundry> listItem;
+    private float beratPakaian;
+    private float beratSelimut;
+    private float beratBoneka;
     private List<JobHistory> listHistory;
     private Customer customer;
 
-    public Transaksi(int idTransaksi, String status, String tglMasuk, String tglSelesai, String tglAmbil, JSONObject tipeLayanan, List<ItemLaundry> itemLaundry, Customer customer) {
-        this.idTransaksi = idTransaksi;
-        this.status = status;
+    public Transaksi(int id, String lastActivity, LocalDateTime tglMasuk, LocalDateTime tglSelesai, LocalDateTime tglAmbil, JSONObject tipeLayanan, float beratPakaian, float beratSelimut, float beratBoneka, Customer customer) {
+        this.id = id;
+        this.lastActivity = lastActivity;
         this.tglMasuk = tglMasuk;
         this.tglSelesai = tglSelesai;
         this.tglAmbil = tglAmbil;
         this.tipeLayanan = tipeLayanan;
-        this.listItem = itemLaundry;
+        this.beratPakaian = beratPakaian;
+        this.beratSelimut = beratSelimut;
+        this.beratBoneka = beratBoneka;
         this.customer = customer;
     }
     
-    public Transaksi(int idTransaksi, String status, String tglMasuk, String tglSelesai, String tglAmbil, String tipeLayanan, String itemLaundry, Customer customer) {
-        this.idTransaksi = idTransaksi;
-        this.status = status;
-        this.tglMasuk = tglMasuk;
-        this.tglSelesai = tglSelesai;
-        this.tglAmbil = tglAmbil;
+    public Transaksi(int id, String lastActivity, String tglMasuk, String tglSelesai, String tglAmbil, String tipeLayanan, float beratPakaian, float beratSelimut, float beratBoneka, Customer customer) {
+        this.id = id;
+        this.lastActivity = lastActivity;
+        this.tglMasuk = LocalDateTime.parse(tglMasuk, Transaksi.DEFAULT_DTF); 
+        this.tglSelesai = LocalDateTime.parse(tglSelesai, Transaksi.DEFAULT_DTF);
+        this.tglAmbil = LocalDateTime.parse(tglAmbil, Transaksi.DEFAULT_DTF);
         this.tipeLayanan = new JSONObject(tipeLayanan);
-        this.listItem = new ArrayList();
+        this.beratPakaian = beratPakaian;
+        this.beratSelimut = beratSelimut;
+        this.beratBoneka = beratBoneka;
         this.customer = customer;
-        
-        // Create JSON array from input:
-        JSONArray jArr = new JSONArray(itemLaundry);
-        
-        // iterate over jArr, masukkan ke list item laundry
-        for(int i=0; i<jArr.length(); i++) {
-            JSONObject jObj = jArr.getJSONObject(i);
-            ItemLaundry IL = new ItemLaundry(
-                    jObj.getString("jenis"),
-                    jObj.getInt("qty"),
-                    jObj.getDouble("berat")
-            );
-            this.listItem.add(IL);
-        }
     }
 
-    public int getIdTransaksi() {
-        return idTransaksi;
+    public int getId() {
+        return id;
     }
 
-    public void setIdTransaksi(int idTransaksi) {
-        this.idTransaksi = idTransaksi;
+    public void setId(int idTransaksi) {
+        this.id = idTransaksi;
     }
 
-    public String getStatus() {
-        return status;
+    public void setLastActivity(String lastActivity) {
+        this.lastActivity = lastActivity;
     }
-
-    public void setStatus(String status) {
-        this.status = status;
+    
+    public String getLastActivity() {
+        return lastActivity;
     }
-
-    public String getTglMasuk() {
+    
+    public LocalDateTime getTglMasuk() {
         return tglMasuk;
     }
 
-    public void setTglMasuk(String tglMasuk) {
-        this.tglMasuk = tglMasuk;
-    }
-
-    public String getTglSelesai() {
+//    public void setTglMasuk(String tglMasuk) {
+//        this.tglMasuk = tglMasuk;
+//    }
+    
+    public LocalDateTime getTglSelesai() {
         return tglSelesai;
     }
 
-    public void setTglSelesai(String tglSelesai) {
-        this.tglSelesai = tglSelesai;
-    }
-
-    public String getTglAmbil() {
+//    public void setTglSelesai(String tglSelesai) {
+//        this.tglSelesai = tglSelesai;
+//    }
+    
+    public LocalDateTime getTglAmbil() {
         return tglAmbil;
     }
 
-    public void setTglAmbil(String tglAmbil) {
-        this.tglAmbil = tglAmbil;
-    }
+//    public void setTglAmbil(String tglAmbil) {
+//        this.tglAmbil = tglAmbil;
+//    }
 
     public JSONObject getTipeLayanan() {
         return tipeLayanan;
@@ -100,32 +97,16 @@ public class Transaksi {
         this.tipeLayanan = tipeLayanan;
     }
 
-    public List<ItemLaundry> getListItem() {
-        return listItem;
-    }
-    
-    public String getListItemJSON() {
-        JSONArray jArr = new JSONArray();
-        for(ItemLaundry IL : listItem) {
-            JSONObject jObj = new JSONObject();
-            jObj.put("jenis", IL.getJenis());
-            jObj.put("qty", IL.getQty());
-            jObj.put("berat", IL.getBerat());
-            jArr.put(jObj);
-        }
-        return jArr.toString();
-    }
-
-    public void addItemLaundry(ItemLaundry item) {
-        this.listItem.add(item);
-    }
-
     public List<JobHistory> getListHistory() {
         return listHistory;
     }
 
     public void addJobHistory(JobHistory item) {
         this.listHistory.add(item);
+    }
+    
+    public void removeJobHistory(int index) {
+        this.listHistory.remove(index);
     }
 
     public Customer getCustomer() {
@@ -134,6 +115,30 @@ public class Transaksi {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public float getBeratPakaian() {
+        return beratPakaian;
+    }
+
+    public void setBeratPakaian(float beratPakaian) {
+        this.beratPakaian = beratPakaian;
+    }
+
+    public float getBeratSelimut() {
+        return beratSelimut;
+    }
+
+    public void setBeratSelimut(float beratSelimut) {
+        this.beratSelimut = beratSelimut;
+    }
+
+    public float getBeratBoneka() {
+        return beratBoneka;
+    }
+
+    public void setBeratBoneka(float beratBoneka) {
+        this.beratBoneka = beratBoneka;
     }
 
     public double hitungDurasi(){

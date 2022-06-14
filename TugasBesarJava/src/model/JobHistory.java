@@ -19,7 +19,7 @@ public class JobHistory {
         this.pegawai = pegawai;
     }
     
-    public String gettglLog(){
+    public String getTglLog(){
         return tglLog;
     }
     

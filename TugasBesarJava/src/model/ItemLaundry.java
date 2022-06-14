@@ -1,14 +1,22 @@
 package model;
 
 public class ItemLaundry {
+    private int index;
     private String jenis;
-    private int qty;
     private double berat;
 
-    public ItemLaundry(String jenis, int qty, double berat) {
+    public ItemLaundry(int index, String jenis, double berat) {
+        this.index = index;
         this.jenis = jenis;
-        this.qty = qty;
         this.berat = berat;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 
     public String getJenis() {
@@ -19,14 +27,6 @@ public class ItemLaundry {
         this.jenis = jenis;
     }
 
-    public int getQty() {
-        return qty;
-    }
-
-    public void setQty(int qty) {
-        this.qty = qty;
-    }
-
     public double getBerat() {
         return berat;
     }
@@ -34,6 +34,8 @@ public class ItemLaundry {
     public void setBerat(double berat) {
         this.berat = berat;
     }
+
+    
 
     public double getHargaSatuan(String kecepatan) {
         switch(kecepatan) {

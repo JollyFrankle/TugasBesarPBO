@@ -24,25 +24,25 @@ public class TableTransaksi extends AbstractTableModel{
     }
     
     public int getColumnCount(){
-        return 5;
+        return 6;
     }
     
     public Object getValueAt(int rowIndex, int columnIndex){
         switch(columnIndex){
             case 0:
-                return list.get(rowIndex).getIdTransaksi();
+                return list.get(rowIndex).getId();
             case 1:
                 return list.get(rowIndex).getCustomer().getNama();
             case 2:
-                return list.get(rowIndex).getTglMasuk();
+                return list.get(rowIndex).getTglMasuk().format(Transaksi.LOCAL_DTF);
             case 3:
-                return list.get(rowIndex).getTglSelesai();
+                return list.get(rowIndex).getTglSelesai().format(Transaksi.LOCAL_DTF);
             case 4:
-                return list.get(rowIndex).getTglAmbil();
+                return list.get(rowIndex).getTglAmbil().format(Transaksi.LOCAL_DTF);
             case 5:
-                return list.get(rowIndex).getTipeLayanan();
-            case 6:
-                return list.get(rowIndex).getListItemJSON();
+                return list.get(rowIndex).getTipeLayanan().getString("speed");
+            case 99:
+                return list.get(rowIndex);
             default:
                 return null;
         }
@@ -51,7 +51,7 @@ public class TableTransaksi extends AbstractTableModel{
     public String getColumnName(int column){
         switch(column){
             case 0:
-                return "ID Transaksi";
+                return "ID";
             case 1:
                 return "Nama Customer";
             case 2:

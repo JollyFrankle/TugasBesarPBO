@@ -29,49 +29,55 @@ public class DAOTestKit {
     public static void main(String[] args) {
         // RUN THIS FILE: SHIFT+F6
         
-        List<Transaksi> listT;
-        
-        JSONObject obj2 = new JSONObject();
-        
-        // Layanan:
-        String layanan[] = {"CUCI", "SETRIKA"};
-        JSONArray arr = new JSONArray().putAll(layanan);
-        
-        // Speed dan fasilitass
-        obj2.put("speed", "EXPRESS");
-        obj2.put("facility", arr);
-        
-        String jsonString = "[{\"id\":12, \"name\":\"Jolly\"}]";
-        JSONArray jArr = new JSONArray(jsonString);
-        for(int i=0; i<jArr.length(); i++) {
-            JSONObject jObj = jArr.getJSONObject(i);
-            System.out.println(jObj.get("id"));
+        List<Transaksi> list = tDAO.searchTransaksi();
+        for(Transaksi T : list) {
+            System.out.println(T.getTglAmbil() + T.getLastActivity());
         }
-        System.out.println(obj2.toString());
-        Customer C = new Customer(
-                1,
-                "nama2",
-                "alamat",
-                "0812"
-        );
         
-        Transaksi T = new Transaksi(
-                0,
-                "BELUM_AKTIF",
-                LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
-                "2022-01-12 09:12:22",
-                null,
-                "{\"facility\":[\"CUCI\",\"SETRIKA\"],\"speed\":\"EXPRESS\"}",
-                "[{\"jenis\":\"Pakaian\",\"qty\":8,\"berat\":2.7},{\"jenis\":\"Boneka\",\"qty\":2,\"berat\":0.56}]",
-                C
-        );
-        System.out.println(T.getListItemJSON());
+        
+//        List<Transaksi> listT;
 //        
-        tDAO.insertTransaksi(T);
-        listT = tDAO.searchTransaksi();
-        for(Transaksi TR : listT) {
-            System.out.println(TR.getListItemJSON());
-        }
+//        JSONObject obj2 = new JSONObject();
+//        
+//        // Layanan:
+//        String layanan[] = {"CUCI", "SETRIKA"};
+//        JSONArray arr = new JSONArray().putAll(layanan);
+//        
+//        // Speed dan fasilitass
+//        obj2.put("speed", "EXPRESS");
+//        obj2.put("facility", arr);
+//        
+//        String jsonString = "[{\"id\":12, \"name\":\"Jolly\"}]";
+//        JSONArray jArr = new JSONArray(jsonString);
+//        for(int i=0; i<jArr.length(); i++) {
+//            JSONObject jObj = jArr.getJSONObject(i);
+//            System.out.println(jObj.get("id"));
+//        }
+//        System.out.println(obj2.toString());
+//        Customer C = new Customer(
+//                1,
+//                "nama2",
+//                "alamat",
+//                "0812"
+//        );
+//        
+//        Transaksi T = new Transaksi(
+//                0,
+//                "BELUM_AKTIF",
+//                LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
+//                "2022-01-12 09:12:22",
+//                null,
+//                "{\"facility\":[\"CUCI\",\"SETRIKA\"],\"speed\":\"EXPRESS\"}",
+//                "[{\"jenis\":\"Pakaian\",\"qty\":8,\"berat\":2.7},{\"jenis\":\"Boneka\",\"qty\":2,\"berat\":0.56}]",
+//                C
+//        );
+//        System.out.println(T.getListItemJSON());
+////        
+//        tDAO.insertTransaksi(T);
+//        listT = tDAO.searchTransaksi();
+//        for(Transaksi TR : listT) {
+//            System.out.println(TR.getListItemJSON());
+//        }
     }
     
     public static String getRandomStr(int targetLength) {
