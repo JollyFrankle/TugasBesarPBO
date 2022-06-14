@@ -4,11 +4,17 @@
  */
 package view;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Captbay
  */
-public class CreditView extends javax.swing.JFrame {
+public class CreditView extends javax.swing.JFrame{
 
     /**
      * Creates new form loginPage
@@ -39,13 +45,12 @@ public class CreditView extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        labelToGithub = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Credit View - Clean Fresh Laundry");
         setBackground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(800, 700));
         setMinimumSize(new java.awt.Dimension(800, 700));
-        setPreferredSize(new java.awt.Dimension(800, 700));
 
         Backgound.setBackground(new java.awt.Color(255, 255, 255));
         Backgound.setPreferredSize(new java.awt.Dimension(800, 600));
@@ -73,10 +78,10 @@ public class CreditView extends javax.swing.JFrame {
 
         footer.setBackground(new java.awt.Color(125, 135, 147));
 
-        footerName.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        footerName.setForeground(new java.awt.Color(255, 255, 255));
         footerName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         footerName.setText("Made with ♥ by Kuli IT Clean Fresh Laundry");
+        footerName.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        footerName.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout footerLayout = new javax.swing.GroupLayout(footer);
         footer.setLayout(footerLayout);
@@ -92,23 +97,23 @@ public class CreditView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
         jLabel1.setText("NAMA PENGEMBANG");
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jLabel2.setText("Satyo Gusti Anugrah - 200710668");
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jLabel3.setText("Calvin Andrean Suhedy - 200710824");
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jLabel4.setText("Wahyu Sutanto Pamungkas - 200710844");
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
 
-        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jLabel5.setText("Jolly Hans Frankle - 200710932");
+        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
 
-        jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jLabel6.setText("I Putu Agestya Pramana - 200710994");
+        jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -116,23 +121,12 @@ public class CreditView extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel5))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -151,6 +145,14 @@ public class CreditView extends javax.swing.JFrame {
                 .addContainerGap(63, Short.MAX_VALUE))
         );
 
+        labelToGithub.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
+        labelToGithub.setText("CLICK ME");
+        labelToGithub.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelToGithubMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -160,6 +162,10 @@ public class CreditView extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelToGithub)
+                .addGap(334, 334, 334))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,7 +174,9 @@ public class CreditView extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(16, 16, 16)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(labelToGithub)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout BackgoundLayout = new javax.swing.GroupLayout(Backgound);
@@ -205,6 +213,17 @@ public class CreditView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void labelToGithubMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelToGithubMouseClicked
+        // TODO add your handling code here:
+        try{
+            Desktop.getDesktop().browse(new URI("http://www.github.com/JollyFrankle/tubespbo"));
+        } catch(IOException e){
+            JOptionPane.showConfirmDialog(null, "Error IO Exception", "Warning", JOptionPane.DEFAULT_OPTION);
+        } catch(URISyntaxException e1){
+            JOptionPane.showConfirmDialog(null, "Error Syntax Exception", "Warning", JOptionPane.DEFAULT_OPTION);
+        }
+    }//GEN-LAST:event_labelToGithubMouseClicked
 
     /**
      * @param args the command line arguments
@@ -285,6 +304,7 @@ public class CreditView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel labelToGithub;
     private javax.swing.JLabel namaDetailView;
     // End of variables declaration//GEN-END:variables
 }

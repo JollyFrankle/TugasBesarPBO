@@ -692,6 +692,7 @@ public class PegawaiView2 extends javax.swing.JFrame {
             } else{
                 clearText();
                 setEditDeleteBtn(false);
+                JOptionPane.showConfirmDialog(null, "Tidak ditemukan", "Warning", JOptionPane.DEFAULT_OPTION);
             }
         } catch(Exception e){
             System.out.println("Error searching...");
