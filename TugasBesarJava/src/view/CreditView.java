@@ -4,6 +4,7 @@
  */
 package view;
 
+import java.awt.Color;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
@@ -78,10 +79,10 @@ public class CreditView extends javax.swing.JFrame{
 
         footer.setBackground(new java.awt.Color(125, 135, 147));
 
-        footerName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        footerName.setText("Made with ♥ by Kuli IT Clean Fresh Laundry");
         footerName.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         footerName.setForeground(new java.awt.Color(255, 255, 255));
+        footerName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        footerName.setText("Made with ♥ by Kuli IT Clean Fresh Laundry");
 
         javax.swing.GroupLayout footerLayout = new javax.swing.GroupLayout(footer);
         footer.setLayout(footerLayout);
@@ -97,23 +98,23 @@ public class CreditView extends javax.swing.JFrame{
                 .addContainerGap())
         );
 
-        jLabel1.setText("NAMA PENGEMBANG");
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
+        jLabel1.setText("NAMA PENGEMBANG");
 
-        jLabel2.setText("Satyo Gusti Anugrah - 200710668");
         jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        jLabel2.setText("Satyo Gusti Anugrah - 200710668");
 
-        jLabel3.setText("Calvin Andrean Suhedy - 200710824");
         jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        jLabel3.setText("Calvin Andrean Suhedy - 200710824");
 
-        jLabel4.setText("Wahyu Sutanto Pamungkas - 200710844");
         jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        jLabel4.setText("Wahyu Sutanto Pamungkas - 200710844");
 
-        jLabel5.setText("Jolly Hans Frankle - 200710932");
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        jLabel5.setText("Jolly Hans Frankle - 200710932");
 
-        jLabel6.setText("I Putu Agestya Pramana - 200710994");
         jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        jLabel6.setText("I Putu Agestya Pramana - 200710994");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -147,9 +148,16 @@ public class CreditView extends javax.swing.JFrame{
 
         labelToGithub.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         labelToGithub.setText("CLICK ME");
+        labelToGithub.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         labelToGithub.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 labelToGithubMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                labelToGithubMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                labelToGithubMouseExited(evt);
             }
         });
 
@@ -216,6 +224,7 @@ public class CreditView extends javax.swing.JFrame{
 
     private void labelToGithubMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelToGithubMouseClicked
         // TODO add your handling code here:
+        
         try{
             Desktop.getDesktop().browse(new URI("http://www.github.com/JollyFrankle/tubespbo"));
         } catch(IOException e){
@@ -224,6 +233,14 @@ public class CreditView extends javax.swing.JFrame{
             JOptionPane.showConfirmDialog(null, "Error Syntax Exception", "Warning", JOptionPane.DEFAULT_OPTION);
         }
     }//GEN-LAST:event_labelToGithubMouseClicked
+
+    private void labelToGithubMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelToGithubMouseEntered
+        labelToGithub.setForeground(Color.red);
+    }//GEN-LAST:event_labelToGithubMouseEntered
+
+    private void labelToGithubMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelToGithubMouseExited
+        labelToGithub.setForeground(Color.BLACK);
+    }//GEN-LAST:event_labelToGithubMouseExited
 
     /**
      * @param args the command line arguments

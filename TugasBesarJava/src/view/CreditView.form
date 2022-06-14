@@ -138,14 +138,14 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="footerName">
               <Properties>
-                <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Made with &#x2665; by Kuli IT Clean Fresh Laundry"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="14" style="0"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="Made with &#x2665; by Kuli IT Clean Fresh Laundry"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -185,10 +185,10 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="NAMA PENGEMBANG"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="36" style="1"/>
                 </Property>
+                <Property name="text" type="java.lang.String" value="NAMA PENGEMBANG"/>
               </Properties>
             </Component>
             <Container class="javax.swing.JPanel" name="jPanel2">
@@ -230,42 +230,42 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabel2">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Satyo Gusti Anugrah - 200710668"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Century Gothic" size="24" style="0"/>
                     </Property>
+                    <Property name="text" type="java.lang.String" value="Satyo Gusti Anugrah - 200710668"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel3">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Calvin Andrean Suhedy - 200710824"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Century Gothic" size="24" style="0"/>
                     </Property>
+                    <Property name="text" type="java.lang.String" value="Calvin Andrean Suhedy - 200710824"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel4">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Wahyu Sutanto Pamungkas - 200710844"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Century Gothic" size="24" style="0"/>
                     </Property>
+                    <Property name="text" type="java.lang.String" value="Wahyu Sutanto Pamungkas - 200710844"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel5">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Jolly Hans Frankle - 200710932"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Century Gothic" size="24" style="0"/>
                     </Property>
+                    <Property name="text" type="java.lang.String" value="Jolly Hans Frankle - 200710932"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel6">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="I Putu Agestya Pramana - 200710994"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Century Gothic" size="24" style="0"/>
                     </Property>
+                    <Property name="text" type="java.lang.String" value="I Putu Agestya Pramana - 200710994"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -276,9 +276,14 @@
                   <Font name="sansserif" size="24" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="CLICK ME"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Hand Cursor"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="labelToGithubMouseClicked"/>
+                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="labelToGithubMouseEntered"/>
+                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="labelToGithubMouseExited"/>
               </Events>
             </Component>
           </SubComponents>
