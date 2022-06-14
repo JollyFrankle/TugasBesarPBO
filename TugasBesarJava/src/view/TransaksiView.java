@@ -101,6 +101,9 @@ public class TransaksiView extends javax.swing.JFrame {
         
         // tombol ini hanya boleh diaktifkan scr manual:
         jobHistoryBtn.setEnabled(false);
+        
+        btnSetDTMasukNow.setEnabled(v);
+        btnSetDTAmbilNow.setEnabled(v);
     }
     
     private void clearUserInput() {
@@ -384,6 +387,8 @@ public class TransaksiView extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         btnResetTglMasuk = new javax.swing.JButton();
         btnResetTglAmbil = new javax.swing.JButton();
+        btnSetDTMasukNow = new javax.swing.JButton();
+        btnSetDTAmbilNow = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         cancelBtn = new javax.swing.JButton();
         saveBtn = new javax.swing.JButton();
@@ -682,6 +687,28 @@ public class TransaksiView extends javax.swing.JFrame {
             }
         });
 
+        btnSetDTMasukNow.setBackground(new java.awt.Color(25, 135, 84));
+        btnSetDTMasukNow.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        btnSetDTMasukNow.setForeground(new java.awt.Color(255, 255, 255));
+        btnSetDTMasukNow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-calendar.png"))); // NOI18N
+        btnSetDTMasukNow.setText("Sekarang");
+        btnSetDTMasukNow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSetDTMasukNowActionPerformed(evt);
+            }
+        });
+
+        btnSetDTAmbilNow.setBackground(new java.awt.Color(25, 135, 84));
+        btnSetDTAmbilNow.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        btnSetDTAmbilNow.setForeground(new java.awt.Color(255, 255, 255));
+        btnSetDTAmbilNow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-calendar.png"))); // NOI18N
+        btnSetDTAmbilNow.setText("Sekarang");
+        btnSetDTAmbilNow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSetDTAmbilNowActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -692,9 +719,10 @@ public class TransaksiView extends javax.swing.JFrame {
                     .addComponent(inputTglAmbil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(inputTglSelesai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(inputTglMasuk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSetDTAmbilNow, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnResetTglAmbil))
                     .addComponent(ddCustomer, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -705,17 +733,20 @@ public class TransaksiView extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSetDTMasukNow, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnResetTglMasuk))
+                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 67, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnResetTglMasuk)))
+                        .addGap(0, 67, Short.MAX_VALUE)))
                 .addGap(16, 16, 16))
         );
         jPanel2Layout.setVerticalGroup(
@@ -735,8 +766,9 @@ public class TransaksiView extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(btnResetTglMasuk))
-                .addGap(3, 3, 3)
+                    .addComponent(btnSetDTMasukNow)
+                    .addComponent(btnResetTglMasuk, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inputTglMasuk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -744,18 +776,20 @@ public class TransaksiView extends javax.swing.JFrame {
                     .addComponent(jLabel18))
                 .addGap(8, 8, 8)
                 .addComponent(inputTglSelesai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(btnSetDTAmbilNow))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(inputTglAmbil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(16, 16, 16)
                         .addComponent(lblPegawai)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ddPegawai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnResetTglAmbil))
-                .addContainerGap(96, Short.MAX_VALUE))
+                    .addComponent(btnResetTglAmbil, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         inputPanel.add(jPanel2);
@@ -1433,6 +1467,16 @@ public class TransaksiView extends javax.swing.JFrame {
         jhv.setVisible(true);
     }//GEN-LAST:event_jobHistoryBtnActionPerformed
 
+    private void btnSetDTMasukNowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetDTMasukNowActionPerformed
+        inputTglMasuk.datePicker.setDateToToday();
+        inputTglMasuk.timePicker.setTimeToNow();
+    }//GEN-LAST:event_btnSetDTMasukNowActionPerformed
+
+    private void btnSetDTAmbilNowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetDTAmbilNowActionPerformed
+        inputTglAmbil.datePicker.setDateToToday();
+        inputTglAmbil.timePicker.setTimeToNow();
+    }//GEN-LAST:event_btnSetDTAmbilNowActionPerformed
+
     private void logoAreaMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_logoAreaMouseClicked
         MainMenuView MMV = new MainMenuView();
         this.dispose();
@@ -1491,6 +1535,8 @@ public class TransaksiView extends javax.swing.JFrame {
     private javax.swing.JButton addBtn;
     private javax.swing.JButton btnResetTglAmbil;
     private javax.swing.JButton btnResetTglMasuk;
+    private javax.swing.JButton btnSetDTAmbilNow;
+    private javax.swing.JButton btnSetDTMasukNow;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JCheckBox cbFCuci;
     private javax.swing.JCheckBox cbFSetrika;

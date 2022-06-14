@@ -19,6 +19,7 @@ import model.Customer;
 import model.JobHistory;
 import model.Pegawai;
 import model.Transaksi;
+import table.TabelJobHistory;
 import table.TableCustomer;
 import table.TableTransaksi;
 
@@ -34,10 +35,8 @@ public class JobHistoryView extends javax.swing.JFrame {
     CustomerControl cCTRL = new CustomerControl();
     PegawaiControl pCTRL = new PegawaiControl();
     JobHistoryControl jhCTRL = new JobHistoryControl();
-    JobHistoryPreparedDAO DAO = new JobHistoryPreparedDAO();
     
     List<Pegawai> listP = pCTRL.showListAllPegawai();
-    List<JobHistory> listJH;
     
     /**
      * Creates new form test
@@ -47,8 +46,6 @@ public class JobHistoryView extends javax.swing.JFrame {
     public JobHistoryView(Transaksi selectedT, TransaksiView parentView) {
         initComponents();
         this.selectedT = selectedT;
-        
-        listJH = DAO.getJobHistory(selectedT.getId());
         
         // on dispose: refresh parent view's data
         this.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -62,6 +59,9 @@ public class JobHistoryView extends javax.swing.JFrame {
         
         initDTInput(inputTanggal, LocalDate.now().minusMonths(1), LocalDate.now().plusMonths(3));
         
+        // Init detil customer dan transaksi di panel kanan:
+        initDetilTx();
+        
         // Disable save and cancel button - as theres no data displayed yet
         setSaveCancelBtn(false);
         // Disable all user inputs
@@ -72,6 +72,13 @@ public class JobHistoryView extends javax.swing.JFrame {
         displayToDD();
         // Clear all user input
         clearUserInput();
+    }
+    
+    private void initDetilTx() {
+        lblNamaCustomer.setText(selectedT.getCustomer().getNama());
+        lblTglMasuk.setText(selectedT.getTglMasuk().format(Transaksi.LOCAL_DTF));
+        lblTglSelesai.setText(selectedT.getTglSelesai().format(Transaksi.LOCAL_DTF));
+        lblTglAmbil.setText(selectedT.getTglAmbil() != null ? selectedT.getTglAmbil().format(Transaksi.LOCAL_DTF) : "(belum diambil)");
     }
     
     private void displayToDD() {
@@ -85,6 +92,7 @@ public class JobHistoryView extends javax.swing.JFrame {
         ddPegawai.setEnabled(v);
         inputTanggal.setEnabled(v);
         inputAktivitas.setEnabled(v);
+        btnSetDTNow.setEnabled(v);
     }
     
     private void clearUserInput() {
@@ -105,34 +113,29 @@ public class JobHistoryView extends javax.swing.JFrame {
          * kalau tidak ada row yang didapat
          * IF false: digunakan dalam inisialisasi awal
          */
-//        TableTransaksi tblTx = tCTRL.searchTransaksi(query);
-//        if (tblTx.getRowCount() > 0 || strict == false) {
-//            tableJobHistory.setModel(tblTx);
-//            // Set width
-//            int colWidth[] = {175, 175, 175, 175, 120, 75, 250};
-//            int minWidth[] = {150, 150, 150, 150, 120, 75, 250};
-//            int maxWidth[] = {300, 300, 300, 300, 200, 100, 0};
-//            for(int i=0; i<colWidth.length; i++) {
-//                if(colWidth[i] > 0)
-//                    tableJobHistory.getColumnModel().getColumn(i).setPreferredWidth(colWidth[i]);
-//                if(minWidth[i] > 0)
-//                    tableJobHistory.getColumnModel().getColumn(i).setMinWidth(minWidth[i]);
-//                if(maxWidth[i] > 0)
-//                    tableJobHistory.getColumnModel().getColumn(i).setMaxWidth(maxWidth[i]);
-//            }
-//            
-//            // reset user input
-//            clearUserInput();
-//            
-//            // disable edit, delete, save, and cancel button in case user had viewed/edited something
-//            setEditDeleteBtn(false);
-//            setSaveCancelBtn(false);
-//            
-//            // disable user input
-//            setUserInputComponents(false);
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Data berdasarkan kueri pencarian tidak ditemukan!", "CFL - Notification", JOptionPane.WARNING_MESSAGE);
-//        }
+        TabelJobHistory tbl = jhCTRL.searchJobHistory(selectedT.getId());
+        tableJobHistory.setModel(tbl);
+        // Set width
+        int colWidth[] = {175, 175, 175};
+        int minWidth[] = {150, 150, 150};
+        int maxWidth[] = {300, 300, 0};
+        for(int i=0; i<colWidth.length; i++) {
+            if(colWidth[i] > 0)
+                tableJobHistory.getColumnModel().getColumn(i).setPreferredWidth(colWidth[i]);
+            if(minWidth[i] > 0)
+                tableJobHistory.getColumnModel().getColumn(i).setMinWidth(minWidth[i]);
+            if(maxWidth[i] > 0)
+                tableJobHistory.getColumnModel().getColumn(i).setMaxWidth(maxWidth[i]);
+        }
+
+        // reset user input
+        clearUserInput();
+
+        // disable edit, delete, save, and cancel button in case user had viewed/edited something
+        setSaveCancelBtn(false);
+
+        // disable user input
+        setUserInputComponents(false);
     }
 
     private Object getTableSelectedObject(javax.swing.JTable table) {
@@ -233,7 +236,17 @@ public class JobHistoryView extends javax.swing.JFrame {
         addBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         inputAktivitas = new javax.swing.JTextArea();
+        btnSetDTNow = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        lblTglMasuk = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        lblNamaCustomer = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        lblTglSelesai = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        lblTglAmbil = new javax.swing.JLabel();
         scrollTabelPanel = new javax.swing.JScrollPane();
         tableJobHistory = new javax.swing.JTable();
         footer = new javax.swing.JPanel();
@@ -397,6 +410,17 @@ public class JobHistoryView extends javax.swing.JFrame {
         inputAktivitas.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jScrollPane1.setViewportView(inputAktivitas);
 
+        btnSetDTNow.setBackground(new java.awt.Color(25, 135, 84));
+        btnSetDTNow.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        btnSetDTNow.setForeground(new java.awt.Color(255, 255, 255));
+        btnSetDTNow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-calendar.png"))); // NOI18N
+        btnSetDTNow.setText("Sekarang");
+        btnSetDTNow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSetDTNowActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -404,22 +428,24 @@ public class JobHistoryView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(inputTanggal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(alamatLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSetDTNow))
+                    .addComponent(ddPegawai, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nohpLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(inputTanggal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(alamatLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ddPegawai, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(nohpLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(namaLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(namaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(16, 16, 16))
         );
         jPanel1Layout.setVerticalGroup(
@@ -429,12 +455,14 @@ public class JobHistoryView extends javax.swing.JFrame {
                 .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
+                .addGap(17, 17, 17)
                 .addComponent(namaLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ddPegawai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
-                .addComponent(alamatLabel)
+                .addGap(11, 11, 11)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(alamatLabel)
+                    .addComponent(btnSetDTNow))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inputTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
@@ -452,15 +480,82 @@ public class JobHistoryView extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel4.setText("Rincian Transaksi:");
+
+        jLabel5.setText("Nama Customer:");
+
+        lblTglMasuk.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblTglMasuk.setText("...");
+
+        jLabel6.setText("Tanggal Masuk:");
+
+        lblNamaCustomer.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblNamaCustomer.setText("...");
+
+        jLabel7.setText("Tanggal Selesai:");
+
+        lblTglSelesai.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblTglSelesai.setText("...");
+
+        jLabel8.setText("Tanggal Diambil:");
+
+        lblTglAmbil.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblTglAmbil.setText("...");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 461, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNamaCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addContainerGap())
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTglMasuk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(16, 16, 16))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTglSelesai, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
+                            .addComponent(lblTglAmbil, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 475, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblNamaCustomer)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblTglMasuk)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblTglSelesai)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblTglAmbil)
+                .addContainerGap(189, Short.MAX_VALUE))
         );
 
         inputPanel.add(jPanel2);
@@ -516,7 +611,7 @@ public class JobHistoryView extends javax.swing.JFrame {
             .addComponent(inputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 923, Short.MAX_VALUE)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(scrollTabelPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 891, Short.MAX_VALUE)
+                .addComponent(scrollTabelPanel)
                 .addGap(16, 16, 16))
             .addComponent(footer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -525,7 +620,7 @@ public class JobHistoryView extends javax.swing.JFrame {
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addComponent(inputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
-                .addComponent(scrollTabelPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                .addComponent(scrollTabelPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                 .addGap(16, 16, 16)
                 .addComponent(footer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -607,7 +702,7 @@ public class JobHistoryView extends javax.swing.JFrame {
                 
                 if(selectedId == 0) {
                     // Action tambah, karena selectedId = 0
-//                    jhCTRL.insertDataJobHistory(inJH);
+                    jhCTRL.insertDataJobHistory(inJH);
                     JOptionPane.showMessageDialog(this, "Berhasil menambahkan log pada job history!", "CFL - Notification", JOptionPane.INFORMATION_MESSAGE);
                 } // tidak ada action edit atau delete!
                 
@@ -647,13 +742,27 @@ public class JobHistoryView extends javax.swing.JFrame {
         setUserInputComponents(false);
         
         // Get selected data:
-        Transaksi selectedT = (Transaksi) getTableSelectedObject(tableJobHistory);
+        JobHistory selectedJH = (JobHistory) getTableSelectedObject(tableJobHistory);
         
         // Set the selected id --> having `0` means that we will be adding new data, not updating
-        selectedId = selectedT.getId();
+        selectedId = selectedJH.getId();
         
         // Display to input:
+        for(int i=0; i<listP.size(); i++) {
+            if(listP.get(i).getId().equals(selectedJH.getPegawai().getId())) {
+                ddPegawai.setSelectedIndex(i);
+                break;
+            }
+        }
+        
+        inputTanggal.setDateTimeStrict(selectedJH.getTglLog());
+        inputAktivitas.setText(selectedJH.getAktivitas());
     }//GEN-LAST:event_tableJobHistoryMouseClicked
+
+    private void btnSetDTNowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetDTNowActionPerformed
+        inputTanggal.datePicker.setDateToToday();
+        inputTanggal.timePicker.setTimeToNow();
+    }//GEN-LAST:event_btnSetDTNowActionPerformed
 
     /**
      * @param args the command line arguments
@@ -695,6 +804,7 @@ public class JobHistoryView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
     private javax.swing.JLabel alamatLabel;
+    private javax.swing.JButton btnSetDTNow;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JComboBox<Pegawai> ddPegawai;
     private javax.swing.JPanel footer;
@@ -705,10 +815,19 @@ public class JobHistoryView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblNamaCustomer;
+    private javax.swing.JLabel lblTglAmbil;
+    private javax.swing.JLabel lblTglMasuk;
+    private javax.swing.JLabel lblTglSelesai;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel manuBarDetailPanel;
     private javax.swing.JPanel menuBar;

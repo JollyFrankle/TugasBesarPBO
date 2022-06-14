@@ -49,7 +49,8 @@ public class JobHistoryPreparedDAO {
         con = DBC.makeConnection();
         
         String sql = "SELECT j.*, p.* FROM job_history j INNER JOIN pegawai p ON j.idPegawai = p.id "
-                + "WHERE j.id = ?;";
+                + "WHERE j.idTransaksi = ? "
+                + "ORDER BY j.tglLog ASC;";
         
         List<JobHistory> list = new ArrayList();
         
