@@ -196,14 +196,6 @@ public class JobHistoryView extends javax.swing.JFrame {
         ) {
             throw new IllegalArgumentException("Tanggal log yang dimasukkan (" + inputTanggal.getDateTimeStrict().format(Transaksi.LOCAL_DTF) + ")\r\ntidak boleh kurang dari tanggal masuk (" + selectedT.getTglMasuk().format(Transaksi.LOCAL_DTF)  + ").");
         }
-        
-        // Tgl log tidak boleh lebih dari tanggal ambil, kalau sudah diinput:
-        if(
-                selectedT.getTglAmbil() != null && 
-                inputTanggal.getDateTimeStrict().isAfter(selectedT.getTglAmbil())
-        ) {
-            throw new IllegalArgumentException("Tanggal log yang dimasukkan (" + inputTanggal.getDateTimeStrict().format(Transaksi.LOCAL_DTF) + ")\r\ntidak boleh lebih dari tanggal ambil (" + selectedT.getTglAmbil().format(Transaksi.LOCAL_DTF)  + ").");
-        }
     }
 
     /**
@@ -331,26 +323,26 @@ public class JobHistoryView extends javax.swing.JFrame {
         namaLabel.setText("Pegawai");
         namaLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        saveBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-save.png"))); // NOI18N
-        saveBtn.setText("Simpan");
         saveBtn.setBackground(new java.awt.Color(13, 110, 253));
-        saveBtn.setBorder(null);
-        saveBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         saveBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         saveBtn.setForeground(new java.awt.Color(255, 255, 255));
+        saveBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-save.png"))); // NOI18N
+        saveBtn.setText("Simpan");
+        saveBtn.setBorder(null);
+        saveBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         saveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveBtnActionPerformed(evt);
             }
         });
 
-        cancelBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-cancel.png"))); // NOI18N
-        cancelBtn.setText("Batal");
         cancelBtn.setBackground(new java.awt.Color(220, 53, 69));
-        cancelBtn.setBorder(null);
-        cancelBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cancelBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         cancelBtn.setForeground(new java.awt.Color(255, 255, 255));
+        cancelBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-cancel.png"))); // NOI18N
+        cancelBtn.setText("Batal");
+        cancelBtn.setBorder(null);
+        cancelBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cancelBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelBtnActionPerformed(evt);
@@ -419,6 +411,7 @@ public class JobHistoryView extends javax.swing.JFrame {
         btnSetDTNow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-calendar.png"))); // NOI18N
         btnSetDTNow.setText("Sekarang");
         btnSetDTNow.setBackground(new java.awt.Color(25, 135, 84));
+        btnSetDTNow.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSetDTNow.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnSetDTNow.setForeground(new java.awt.Color(255, 255, 255));
         btnSetDTNow.addActionListener(new java.awt.event.ActionListener() {
@@ -432,6 +425,7 @@ public class JobHistoryView extends javax.swing.JFrame {
 
         ddSelectActivity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selesai mencuci dan mengeringkan item", "Selesai menyeterika dan mengemas pakaian", "Telah menyimpan pakaian pada ..." }));
         ddSelectActivity.setSelectedIndex(-1);
+        ddSelectActivity.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         ddSelectActivity.setToolTipText("");
         ddSelectActivity.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -493,7 +487,7 @@ public class JobHistoryView extends javax.swing.JFrame {
                 .addComponent(nohpLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ddSelectActivity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -580,7 +574,7 @@ public class JobHistoryView extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTglAmbil)
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addContainerGap(200, Short.MAX_VALUE))
         );
 
         inputPanel.add(jPanel2);
@@ -645,7 +639,7 @@ public class JobHistoryView extends javax.swing.JFrame {
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addComponent(inputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
-                .addComponent(scrollTabelPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                .addComponent(scrollTabelPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
                 .addGap(16, 16, 16)
                 .addComponent(footer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -745,6 +739,8 @@ public class JobHistoryView extends javax.swing.JFrame {
                 getTableData();
             } catch (InputKosongException e) {
                 JOptionPane.showMessageDialog(this, e.toString());
+            } catch (IllegalArgumentException e) {
+                JOptionPane.showMessageDialog(this, e.getMessage());
             }
         } else {
             // Batal menambahkan/memperbarui data

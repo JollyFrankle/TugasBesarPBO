@@ -208,7 +208,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="inputPanel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                              <Component id="scrollTabelPanel" pref="126" max="32767" attributes="0"/>
+                              <Component id="scrollTabelPanel" pref="125" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                               <Component id="footer" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -291,7 +291,7 @@
                                       <Component id="nohpLabel1" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="ddSelectActivity" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="8" max="32767" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="saveBtn" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                                           <Component id="cancelBtn" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
@@ -338,24 +338,24 @@
                             </Component>
                             <Component class="javax.swing.JButton" name="saveBtn">
                               <Properties>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/assets/buttons/icon-save.png"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Simpan"/>
                                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="fd" green="6e" red="d" type="rgb"/>
-                                </Property>
-                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                                  <Border info="null"/>
-                                </Property>
-                                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Hand Cursor"/>
                                 </Property>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Century Gothic" size="14" style="1"/>
                                 </Property>
                                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/assets/buttons/icon-save.png"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Simpan"/>
+                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                  <Border info="null"/>
+                                </Property>
+                                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                                  <Color id="Hand Cursor"/>
                                 </Property>
                               </Properties>
                               <Events>
@@ -364,24 +364,24 @@
                             </Component>
                             <Component class="javax.swing.JButton" name="cancelBtn">
                               <Properties>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/assets/buttons/icon-cancel.png"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Batal"/>
                                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="45" green="35" red="dc" type="rgb"/>
-                                </Property>
-                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                                  <Border info="null"/>
-                                </Property>
-                                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Hand Cursor"/>
                                 </Property>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Century Gothic" size="14" style="1"/>
                                 </Property>
                                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/assets/buttons/icon-cancel.png"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Batal"/>
+                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                  <Border info="null"/>
+                                </Property>
+                                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                                  <Color id="Hand Cursor"/>
                                 </Property>
                               </Properties>
                               <Events>
@@ -518,6 +518,9 @@
                                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="54" green="87" red="19" type="rgb"/>
                                 </Property>
+                                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                                  <Color id="Hand Cursor"/>
+                                </Property>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Century Gothic" size="12" style="0"/>
                                 </Property>
@@ -531,10 +534,10 @@
                             </Component>
                             <Component class="javax.swing.JLabel" name="nohpLabel1">
                               <Properties>
+                                <Property name="text" type="java.lang.String" value="Tambahkan aktivitas secara otomatis:"/>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Century Gothic" size="12" style="2"/>
                                 </Property>
-                                <Property name="text" type="java.lang.String" value="Tambahkan aktivitas secara otomatis:"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JComboBox" name="ddSelectActivity">
@@ -547,6 +550,9 @@
                                   </StringArray>
                                 </Property>
                                 <Property name="selectedIndex" type="int" value="-1"/>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Century Gothic" size="14" style="0"/>
+                                </Property>
                                 <Property name="toolTipText" type="java.lang.String" value=""/>
                               </Properties>
                               <Events>
@@ -623,7 +629,7 @@
                                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="lblTglAmbil" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="199" max="32767" attributes="0"/>
+                                      <EmptySpace pref="200" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>

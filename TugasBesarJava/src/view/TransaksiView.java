@@ -693,6 +693,7 @@ public class TransaksiView extends javax.swing.JFrame {
         btnSetDTMasukNow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-calendar.png"))); // NOI18N
         btnSetDTMasukNow.setText("Sekarang");
         btnSetDTMasukNow.setBackground(new java.awt.Color(25, 135, 84));
+        btnSetDTMasukNow.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSetDTMasukNow.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnSetDTMasukNow.setForeground(new java.awt.Color(255, 255, 255));
         btnSetDTMasukNow.addActionListener(new java.awt.event.ActionListener() {
@@ -704,6 +705,7 @@ public class TransaksiView extends javax.swing.JFrame {
         btnSetDTAmbilNow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-calendar.png"))); // NOI18N
         btnSetDTAmbilNow.setText("Sekarang");
         btnSetDTAmbilNow.setBackground(new java.awt.Color(25, 135, 84));
+        btnSetDTAmbilNow.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSetDTAmbilNow.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnSetDTAmbilNow.setForeground(new java.awt.Color(255, 255, 255));
         btnSetDTAmbilNow.addActionListener(new java.awt.event.ActionListener() {
@@ -1277,6 +1279,10 @@ public class TransaksiView extends javax.swing.JFrame {
         // Set user input to be editable
         this.setUserInputComponents(true);
         // DO NOT re-set the selectedId as we've already set it once the user clicked on the table row
+        // disable edit tgl masuk:
+        inputTglMasuk.setEnabled(false);
+        btnSetDTMasukNow.setEnabled(false);
+        btnResetTglMasuk.setEnabled(false);
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void tableTransaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableTransaksiMouseClicked
