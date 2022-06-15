@@ -147,6 +147,7 @@ public class CustomerView extends javax.swing.JFrame {
         namaFooter = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("CFL - Customer Panel");
         setMinimumSize(new java.awt.Dimension(900, 900));
 
         navBar.setBackground(new java.awt.Color(35, 45, 59));

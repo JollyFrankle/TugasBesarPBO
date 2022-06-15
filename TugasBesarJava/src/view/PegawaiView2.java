@@ -186,6 +186,7 @@ public class PegawaiView2 extends javax.swing.JFrame {
         namaFooter = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("CFL - Pegawai Panel");
         setMinimumSize(new java.awt.Dimension(1100, 700));
 
         navBar.setBackground(new java.awt.Color(35, 45, 59));

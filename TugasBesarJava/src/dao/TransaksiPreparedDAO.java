@@ -107,10 +107,12 @@ public class TransaksiPreparedDAO {
                         rs.getString("c.noHP")
                     );
                     
-                    String lastActivity = LocalDateTime.parse(rs.getString("jobTanggal"), Transaksi.DEFAULT_DTF).format(Transaksi.LOCAL_DTF) + " - " + rs.getString("jobAktivitas");
+                    String jobTanggal = rs.getString("jobTanggal");
+                    String lastActivity = LocalDateTime.parse(jobTanggal, Transaksi.DEFAULT_DTF).format(Transaksi.LOCAL_DTF) + " - " + rs.getString("jobAktivitas");
                     Transaksi t = new Transaksi(
                         rs.getInt("t.id"),
                         lastActivity,
+                        jobTanggal,
                         rs.getString("t.tglMasuk"), 
                         rs.getString("t.tglSelesai"), 
                         rs.getString("t.tglAmbil"), 

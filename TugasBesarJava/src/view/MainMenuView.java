@@ -40,7 +40,7 @@ public class MainMenuView extends javax.swing.JFrame {
         footerName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Main Menu - Clean Fresh Laundry");
+        setTitle("CFL - Main Menu");
         setBackground(new java.awt.Color(35, 45, 59));
         setMinimumSize(new java.awt.Dimension(800, 700));
 

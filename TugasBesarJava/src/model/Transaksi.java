@@ -13,6 +13,7 @@ public class Transaksi {
     public static final DateTimeFormatter LOCAL_DTF = DateTimeFormatter.ofPattern("E, d MMM yyyy, HH.mm", new java.util.Locale("id"));
     private int id;
     private String lastActivity;
+    private LocalDateTime tglLastActivity;
     private LocalDateTime tglMasuk;
     private LocalDateTime tglSelesai;
     private LocalDateTime tglAmbil;
@@ -27,6 +28,7 @@ public class Transaksi {
         // Constructor untuk insert/update:
         this.id = id;
         this.lastActivity = null;
+        this.tglLastActivity = null;
         this.tglMasuk = tglMasuk;
         this.tglSelesai = tglSelesai;
         this.tglAmbil = tglAmbil;
@@ -37,10 +39,11 @@ public class Transaksi {
         this.customer = customer;
     }
     
-    public Transaksi(int id, String lastActivity, String tglMasuk, String tglSelesai, String tglAmbil, String tipeLayanan, float beratPakaian, float beratSelimut, float beratBoneka, Customer customer) {
+    public Transaksi(int id, String lastActivity, String tglLastActivity, String tglMasuk, String tglSelesai, String tglAmbil, String tipeLayanan, float beratPakaian, float beratSelimut, float beratBoneka, Customer customer) {
         // Constructor saat mendapatkan query dari database:
         this.id = id;
         this.lastActivity = lastActivity;
+        this.tglLastActivity = LocalDateTime.parse(tglLastActivity, Transaksi.DEFAULT_DTF); ;
         this.tglMasuk = LocalDateTime.parse(tglMasuk, Transaksi.DEFAULT_DTF); 
         this.tglSelesai = LocalDateTime.parse(tglSelesai, Transaksi.DEFAULT_DTF);
         this.tglAmbil = tglAmbil != null ? LocalDateTime.parse(tglAmbil, Transaksi.DEFAULT_DTF) : null;
@@ -71,25 +74,25 @@ public class Transaksi {
         return tglMasuk;
     }
 
-//    public void setTglMasuk(String tglMasuk) {
-//        this.tglMasuk = tglMasuk;
-//    }
+    public void setTglMasuk(LocalDateTime tglMasuk) {
+        this.tglMasuk = tglMasuk;
+    }
     
     public LocalDateTime getTglSelesai() {
         return tglSelesai;
     }
 
-//    public void setTglSelesai(String tglSelesai) {
-//        this.tglSelesai = tglSelesai;
-//    }
+    public void setTglSelesai(LocalDateTime tglSelesai) {
+        this.tglSelesai = tglSelesai;
+    }
     
     public LocalDateTime getTglAmbil() {
         return tglAmbil;
     }
 
-//    public void setTglAmbil(String tglAmbil) {
-//        this.tglAmbil = tglAmbil;
-//    }
+    public void setTglAmbil(LocalDateTime tglAmbil) {
+        this.tglAmbil = tglAmbil;
+    }
 
     public JSONObject getTipeLayanan() {
         return tipeLayanan;
@@ -147,19 +150,11 @@ public class Transaksi {
         return this.beratBoneka + this.beratPakaian + this.beratSelimut;
     }
 
-    public double hitungDurasi(){
-        return 1; // dummy
+    public LocalDateTime getTglLastActivity() {
+        return tglLastActivity;
     }
 
-    public double hitungBonus(){
-        return 1; //dummy
-    }
-
-    public double hitungBerat(){
-        return 1; //dummy
-    }
-
-    public double hitungTotalBiaya(){
-        return 1; // dummy
+    public void setTglLastActivity(LocalDateTime tglLastActivity) {
+        this.tglLastActivity = tglLastActivity;
     }
 }

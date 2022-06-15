@@ -72,6 +72,7 @@ public class JobHistoryView extends javax.swing.JFrame {
     }
     
     private void initDetilTx() {
+        lblNoTransaksi.setText("Transaksi #" + selectedT.getId());
         lblNamaCustomer.setText(selectedT.getCustomer().getNama());
         lblTglMasuk.setText(selectedT.getTglMasuk().format(Transaksi.LOCAL_DTF));
         lblTglSelesai.setText(selectedT.getTglSelesai().format(Transaksi.LOCAL_DTF));
@@ -188,6 +189,21 @@ public class JobHistoryView extends javax.swing.JFrame {
         ) {
             throw new InputKosongException();
         }
+        
+        // Tgl log tidak boleh kurang dari tanggal masuk:
+        if(
+                inputTanggal.getDateTimeStrict().isBefore(selectedT.getTglMasuk())
+        ) {
+            throw new IllegalArgumentException("Tanggal log yang dimasukkan (" + inputTanggal.getDateTimeStrict().format(Transaksi.LOCAL_DTF) + ")\r\ntidak boleh kurang dari tanggal masuk (" + selectedT.getTglMasuk().format(Transaksi.LOCAL_DTF)  + ").");
+        }
+        
+        // Tgl log tidak boleh lebih dari tanggal ambil, kalau sudah diinput:
+        if(
+                selectedT.getTglAmbil() != null && 
+                inputTanggal.getDateTimeStrict().isAfter(selectedT.getTglAmbil())
+        ) {
+            throw new IllegalArgumentException("Tanggal log yang dimasukkan (" + inputTanggal.getDateTimeStrict().format(Transaksi.LOCAL_DTF) + ")\r\ntidak boleh lebih dari tanggal ambil (" + selectedT.getTglAmbil().format(Transaksi.LOCAL_DTF)  + ").");
+        }
     }
 
     /**
@@ -205,7 +221,7 @@ public class JobHistoryView extends javax.swing.JFrame {
         headerPanel = new javax.swing.JPanel();
         namaView = new javax.swing.JPanel();
         namaDetailView = new javax.swing.JLabel();
-        namaDetailView1 = new javax.swing.JLabel();
+        lblNoTransaksi = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
         inputPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -242,6 +258,7 @@ public class JobHistoryView extends javax.swing.JFrame {
         namaFooter = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("CFL - Job History");
         setMinimumSize(new java.awt.Dimension(900, 900));
 
         menuBar.setBackground(new java.awt.Color(241, 239, 239));
@@ -262,9 +279,9 @@ public class JobHistoryView extends javax.swing.JFrame {
         namaDetailView.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         namaDetailView.setForeground(new java.awt.Color(255, 255, 255));
 
-        namaDetailView1.setText("Transaksi #13");
-        namaDetailView1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        namaDetailView1.setForeground(new java.awt.Color(255, 255, 255));
+        lblNoTransaksi.setText("Transaksi");
+        lblNoTransaksi.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblNoTransaksi.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout namaViewLayout = new javax.swing.GroupLayout(namaView);
         namaView.setLayout(namaViewLayout);
@@ -274,14 +291,14 @@ public class JobHistoryView extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(namaViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(namaDetailView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(namaDetailView1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblNoTransaksi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         namaViewLayout.setVerticalGroup(
             namaViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, namaViewLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(namaDetailView1)
+                .addComponent(lblNoTransaksi)
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(namaDetailView)
                 .addGap(16, 16, 16))
@@ -845,6 +862,7 @@ public class JobHistoryView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblNamaCustomer;
+    private javax.swing.JLabel lblNoTransaksi;
     private javax.swing.JLabel lblTglAmbil;
     private javax.swing.JLabel lblTglMasuk;
     private javax.swing.JLabel lblTglSelesai;
@@ -852,7 +870,6 @@ public class JobHistoryView extends javax.swing.JFrame {
     private javax.swing.JPanel manuBarDetailPanel;
     private javax.swing.JPanel menuBar;
     private javax.swing.JLabel namaDetailView;
-    private javax.swing.JLabel namaDetailView1;
     private javax.swing.JLabel namaFooter;
     private javax.swing.JLabel namaLabel;
     private javax.swing.JPanel namaView;

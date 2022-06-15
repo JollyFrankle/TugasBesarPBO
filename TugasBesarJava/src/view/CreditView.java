@@ -49,7 +49,7 @@ public class CreditView extends javax.swing.JFrame{
         labelToGithub = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Credit View - Clean Fresh Laundry");
+        setTitle("CFL - Credits");
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(800, 700));
 
@@ -135,7 +135,7 @@ public class CreditView extends javax.swing.JFrame{
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
@@ -146,7 +146,7 @@ public class CreditView extends javax.swing.JFrame{
                 .addContainerGap(63, Short.MAX_VALUE))
         );
 
-        labelToGithub.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
+        labelToGithub.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         labelToGithub.setText("CLICK ME");
         labelToGithub.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         labelToGithub.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -201,7 +201,7 @@ public class CreditView extends javax.swing.JFrame{
                 .addComponent(corpName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(footer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -301,10 +301,8 @@ public class CreditView extends javax.swing.JFrame{
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CreditView().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new MainMenuView().setVisible(true);
         });
     }
 
