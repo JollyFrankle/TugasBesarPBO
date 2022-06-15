@@ -1,7 +1,5 @@
 package exception;
 
-import connection.DbConnection;
-
 public class InputKosongException extends Exception{
 
     @Override

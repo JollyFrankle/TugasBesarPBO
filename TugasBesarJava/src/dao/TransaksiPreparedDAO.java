@@ -20,11 +20,10 @@ import model.Transaksi;
  * @author ASUS
  */
 public class TransaksiPreparedDAO {
-    private static final DbConnection DBC = new DbConnection();
     private Connection con;
     
     public int insertTransaksi(Transaksi T, Pegawai P){
-        con = DBC.makeConnection();
+        con = DbConnection.getDBCon();
         int rowCount = 0;
         
         String sql = "INSERT INTO transaksi (idCustomer, tglMasuk, tglSelesai, tglAmbil, tipeLayanan, beratPakaian, beratSelimut, beratBoneka) "
@@ -66,12 +65,12 @@ public class TransaksiPreparedDAO {
         }catch(SQLException e){
             System.out.println(DbConnection.ANSI_RED + "[E] [TransaksiPreparedDAO/insertTransaksi] Error: " + e.toString());
         }
-        DBC.closeConnection();
+//        DBC.closeConnection();
         return rowCount;
     }
     
     public List<Transaksi> searchTransaksi(String input){
-        con = DBC.makeConnection();
+        con = DbConnection.getDBCon();
         
         String sql = "SELECT t.*, c.*, "
                 + "(SELECT j.tglLog FROM job_history j WHERE j.idTransaksi = t.id ORDER BY tglLog DESC LIMIT 1) AS jobTanggal, "
@@ -133,7 +132,7 @@ public class TransaksiPreparedDAO {
         } catch(SQLException e){
             System.out.println(DbConnection.ANSI_RED + "[E] [TransaksiPreparedDAO/searchTransaksi] Error: " + e.toString());
         }
-        DBC.closeConnection();
+//        DBC.closeConnection();
         
         return list;
     }
@@ -143,7 +142,7 @@ public class TransaksiPreparedDAO {
     }
     
     public int updateTransaksi(Transaksi T){
-        con = DBC.makeConnection();
+        con = DbConnection.getDBCon();
         int rowCount = 0;
         
         String sql = "UPDATE transaksi "
@@ -175,12 +174,12 @@ public class TransaksiPreparedDAO {
         }catch(SQLException e){
             System.out.println(DbConnection.ANSI_RED + "[E] [TransaksiPreparedDAO/updateTransaksi] Error: " + e.toString());
         }
-        DBC.closeConnection();
+//        DBC.closeConnection();
         return rowCount;
     }
     
     public int deleteTransaksi(int id){
-        con = DBC.makeConnection();
+        con = DbConnection.getDBCon();
         int rowCount = 0;
         
         String sql = "DELETE FROM transaksi WHERE id = ?;";
@@ -196,7 +195,7 @@ public class TransaksiPreparedDAO {
         }catch(SQLException e){
             System.out.println(DbConnection.ANSI_RED + "[E] [TransaksiPreparedDAO/deleteTransaksi] Error: " + e.toString());
         }
-        DBC.closeConnection();
+//        DBC.closeConnection();
         return rowCount;
     }
 }

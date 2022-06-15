@@ -35,7 +35,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="Backgound" alignment="0" pref="743" max="32767" attributes="0"/>
+          <Component id="Backgound" alignment="0" pref="700" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -64,13 +64,13 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Component id="corpName" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="89" max="32767" attributes="0"/>
+                  <EmptySpace pref="82" max="32767" attributes="0"/>
                   <Component id="transaksi" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="47" max="32767" attributes="0"/>
+                  <EmptySpace pref="40" max="32767" attributes="0"/>
                   <Component id="customer" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" pref="50" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" pref="43" max="32767" attributes="0"/>
                   <Component id="pegawai" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="87" max="32767" attributes="0"/>
+                  <EmptySpace pref="80" max="32767" attributes="0"/>
                   <Component id="footer" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>

@@ -19,14 +19,17 @@ public class TableTransaksi extends AbstractTableModel{
         this.list = list;
     }
     
+    @Override
     public int getRowCount(){
         return list.size();
     }
     
+    @Override
     public int getColumnCount(){
         return 7;
     }
     
+    @Override
     public Object getValueAt(int rowIndex, int columnIndex){
         switch(columnIndex){
             case 0:
@@ -50,6 +53,7 @@ public class TableTransaksi extends AbstractTableModel{
         }
     }
     
+    @Override
     public String getColumnName(int column){
         switch(column){
             case 0:

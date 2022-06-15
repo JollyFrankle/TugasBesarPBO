@@ -5,6 +5,7 @@ import java.sql.Connection;
 
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Customer;
@@ -15,11 +16,10 @@ import model.Customer;
  * @author ASUS
  */
 public class CustomerPreparedDAO {
-    private static final DbConnection DBC = new DbConnection();
     private static Connection con;
     
     public int insertCustomer(Customer C) {
-        con = DBC.makeConnection();
+        con = DbConnection.getDBCon();
         int rowCount = 0;
         
         String sql = "INSERT INTO customer(nama, alamat, noHP) VALUES (?, ?, ?);";
@@ -34,15 +34,15 @@ public class CustomerPreparedDAO {
             rowCount = st.executeUpdate();
             System.out.println(DbConnection.ANSI_GREEN + "[OK] [CustomerPreparedDAO/insertCustomer] Added " + rowCount + " row(s).");
             st.close();
-        } catch(Exception e) {
+        } catch(SQLException e) {
             System.out.println(DbConnection.ANSI_RED + "[E] [CustomerPreparedDAO/insertCustomer] Error: " + e.toString());
         }
-        DBC.closeConnection();
+//        DBC.closeConnection();
         return rowCount;
     }
     
     public List<Customer> searchCustomer(String input){
-        con = DBC.makeConnection();
+        con = DbConnection.getDBCon();
         
         String sql = "SELECT * FROM customer "
                 + "WHERE nama LIKE ? "
@@ -78,10 +78,10 @@ public class CustomerPreparedDAO {
             System.out.println(DbConnection.ANSI_GREEN + "[OK] [CustomerPreparedDAO/searchCustomer] Fetched " + rowCount + " row(s).");
             rs.close();
             st.close();
-        } catch(Exception e){
+        } catch(SQLException e){
             System.out.println(DbConnection.ANSI_RED + "[E] [CustomerPreparedDAO/searchCustomer] Error: " + e.toString());
         }
-        DBC.closeConnection();
+//        DBC.closeConnection();
         
         return list;
     }
@@ -91,7 +91,7 @@ public class CustomerPreparedDAO {
     }
     
     public int updateCustomer(Customer C){
-        con = DBC.makeConnection();
+        con = DbConnection.getDBCon();
         int rowCount = 0;
         String sql = "UPDATE customer SET nama = ?, alamat = ?, noHP = ? WHERE id = ?;";
         
@@ -106,15 +106,15 @@ public class CustomerPreparedDAO {
             rowCount = st.executeUpdate();
             System.out.println(DbConnection.ANSI_GREEN + "[OK] [CustomerPreparedDAO/updateCustomer] Updated " + rowCount + " row(s).");
             st.close();
-        }catch(Exception e){
+        }catch(SQLException e){
             System.out.println(DbConnection.ANSI_RED + "[E] [CustomerPreparedDAO/updateCustomer] Error: " + e.toString());
         }
-        DBC.closeConnection();
+//        DBC.closeConnection();
         return rowCount;
     }
     
     public int deleteCustomer(int id){
-        con = DBC.makeConnection();
+        con = DbConnection.getDBCon();
         int rowCount = 0;
         String sql = "DELETE FROM customer WHERE id = ?;";
         
@@ -126,10 +126,10 @@ public class CustomerPreparedDAO {
             rowCount = st.executeUpdate();
             System.out.println(DbConnection.ANSI_GREEN + "[OK] [CustomerPreparedDAO/deleteCustomer] Deleted " + rowCount + " row(s).");
             st.close();
-        }catch(Exception e){
+        }catch(SQLException e){
             System.out.println(DbConnection.ANSI_RED + "[E] [CustomerPreparedDAO/deleteCustomer] Error: " + e.toString());
         }
-        DBC.closeConnection();
+//        DBC.closeConnection();
         return rowCount;
     }
 }

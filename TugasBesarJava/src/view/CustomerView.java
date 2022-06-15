@@ -20,7 +20,6 @@ public class CustomerView extends javax.swing.JFrame {
     private String action = null;
     private int selectedId;
     private final CustomerControl cCTRL = new CustomerControl();
-    private List<Customer> listCustomer;
     /**
      * Creates new form test
      */
@@ -30,6 +29,8 @@ public class CustomerView extends javax.swing.JFrame {
         setSaveCancelBtn(false);
         setEditDeleteBtn(false);
         getTableData("", false);
+        
+        scrollPanel.getVerticalScrollBar().setUnitIncrement(16);
     }
     
     
@@ -220,12 +221,11 @@ public class CustomerView extends javax.swing.JFrame {
         menuBar.setBackground(new java.awt.Color(241, 239, 239));
 
         scrollPanel.setBorder(null);
-        scrollPanel.setMinimumSize(new java.awt.Dimension(550, 750));
-        scrollPanel.setPreferredSize(new java.awt.Dimension(550, 750));
+        scrollPanel.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPanel.setRequestFocusEnabled(false);
 
         manuBarDetailPanel.setBackground(new java.awt.Color(255, 255, 255));
-        manuBarDetailPanel.setPreferredSize(new java.awt.Dimension(550, 550));
+        manuBarDetailPanel.setPreferredSize(new java.awt.Dimension(550, 800));
 
         headerPanel.setBackground(new java.awt.Color(125, 135, 147));
 
@@ -306,7 +306,7 @@ public class CustomerView extends javax.swing.JFrame {
         mainPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         inputPanel.setOpaque(false);
-        inputPanel.setLayout(new java.awt.GridLayout());
+        inputPanel.setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel1.setOpaque(false);
 
@@ -637,7 +637,7 @@ public class CustomerView extends javax.swing.JFrame {
             }
         } catch(InputKosongException e){
             System.out.println("Error: " + e.getMessage());
-            JOptionPane.showConfirmDialog(null, "Data tidak boleh kosong", "Warning", JOptionPane.DEFAULT_OPTION);
+            JOptionPane.showConfirmDialog(null, "Data tidak boleh kosong", "CFL - Warning", JOptionPane.DEFAULT_OPTION);
         } 
        clearUserInput();
        getTableData("", false);
@@ -666,7 +666,7 @@ public class CustomerView extends javax.swing.JFrame {
     }//GEN-LAST:event_tabelViewMouseClicked
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-        int getAnswer = JOptionPane.showConfirmDialog(rootPane, "Apakah anda yakin untuk menghapus data?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        int getAnswer = JOptionPane.showConfirmDialog(rootPane, "Apakah Anda yakin untuk menghapus data?\r\nMenghapus data Customer berarti menghapus datanya dari transaksi juga.", "CFL - Notification", JOptionPane.YES_NO_OPTION);
         switch(getAnswer){
             case 0:
                 try{

@@ -8,6 +8,7 @@ import com.github.lgooddatepicker.components.DateTimePicker;
 import control.CustomerControl;
 import control.PegawaiControl;
 import control.TransaksiControl;
+import exception.BelumAmbilException;
 import exception.InputKosongException;
 import exception.TanggalAmbilInvalidException;
 import java.time.LocalDate;
@@ -63,6 +64,8 @@ public class TransaksiView extends javax.swing.JFrame {
         displayToDD();
         // Clear all user input
         clearUserInput();
+        
+        scrollPanel.getVerticalScrollBar().setUnitIncrement(16);
     }
     
     private void displayToDD() {
@@ -260,7 +263,7 @@ public class TransaksiView extends javax.swing.JFrame {
                 if(cbFSetrika.isSelected()) {
                     hrgSatuanP += 2000;
                     hrgSatuanS += 2000;
-                    hrgSatuanB += 2000;
+                    hrgSatuanB += 0;
                 }
             } else if(ddKecepatan.getSelectedIndex() == 1){     // EXPRESS
                 if(cbFCuci.isSelected()) {
@@ -271,7 +274,7 @@ public class TransaksiView extends javax.swing.JFrame {
                 if(cbFSetrika.isSelected()) {
                     hrgSatuanP += 4000;
                     hrgSatuanS += 4000;
-                    hrgSatuanB += 4000;
+                    hrgSatuanB += 0;
                 }
             }
             lblHargaPakaian.setText("Rp" + String.format(locID, "%,.0f", hrgSatuanP) + "/kg");
@@ -425,7 +428,7 @@ public class TransaksiView extends javax.swing.JFrame {
         namaFooter = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(900, 900));
+        setMinimumSize(new java.awt.Dimension(1200, 700));
 
         navBar.setBackground(new java.awt.Color(35, 45, 59));
 
@@ -503,13 +506,12 @@ public class TransaksiView extends javax.swing.JFrame {
 
         menuBar.setBackground(new java.awt.Color(241, 239, 239));
 
+        scrollPanel.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPanel.setBorder(null);
-        scrollPanel.setMinimumSize(new java.awt.Dimension(100, 750));
-        scrollPanel.setPreferredSize(new java.awt.Dimension(550, 750));
         scrollPanel.setRequestFocusEnabled(false);
 
         manuBarDetailPanel.setBackground(new java.awt.Color(255, 255, 255));
-        manuBarDetailPanel.setPreferredSize(new java.awt.Dimension(550, 550));
+        manuBarDetailPanel.setPreferredSize(new java.awt.Dimension(700, 915));
 
         headerPanel.setBackground(new java.awt.Color(125, 135, 147));
 
@@ -687,22 +689,22 @@ public class TransaksiView extends javax.swing.JFrame {
             }
         });
 
+        btnSetDTMasukNow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-calendar.png"))); // NOI18N
+        btnSetDTMasukNow.setText("Sekarang");
         btnSetDTMasukNow.setBackground(new java.awt.Color(25, 135, 84));
         btnSetDTMasukNow.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnSetDTMasukNow.setForeground(new java.awt.Color(255, 255, 255));
-        btnSetDTMasukNow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-calendar.png"))); // NOI18N
-        btnSetDTMasukNow.setText("Sekarang");
         btnSetDTMasukNow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSetDTMasukNowActionPerformed(evt);
             }
         });
 
+        btnSetDTAmbilNow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-calendar.png"))); // NOI18N
+        btnSetDTAmbilNow.setText("Sekarang");
         btnSetDTAmbilNow.setBackground(new java.awt.Color(25, 135, 84));
         btnSetDTAmbilNow.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnSetDTAmbilNow.setForeground(new java.awt.Color(255, 255, 255));
-        btnSetDTAmbilNow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-calendar.png"))); // NOI18N
-        btnSetDTAmbilNow.setText("Sekarang");
         btnSetDTAmbilNow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSetDTAmbilNowActionPerformed(evt);
@@ -746,7 +748,7 @@ public class TransaksiView extends javax.swing.JFrame {
                         .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 67, Short.MAX_VALUE)))
+                        .addGap(0, 59, Short.MAX_VALUE)))
                 .addGap(16, 16, 16))
         );
         jPanel2Layout.setVerticalGroup(
@@ -764,10 +766,11 @@ public class TransaksiView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ddCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(btnSetDTMasukNow)
-                    .addComponent(btnResetTglMasuk, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnResetTglMasuk, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(btnSetDTMasukNow)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inputTglMasuk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
@@ -871,7 +874,7 @@ public class TransaksiView extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(inputBeratPakaian, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                        .addComponent(inputBeratPakaian, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6)))
                 .addGap(8, 8, 8))
@@ -923,7 +926,7 @@ public class TransaksiView extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(inputBeratSelimut, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                        .addComponent(inputBeratSelimut, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8)))
                 .addGap(8, 8, 8))
@@ -985,7 +988,7 @@ public class TransaksiView extends javax.swing.JFrame {
                         .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(inputBeratBoneka, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                        .addComponent(inputBeratBoneka, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel10))))
         );
@@ -1052,13 +1055,13 @@ public class TransaksiView extends javax.swing.JFrame {
         jLabel16.setText("REGULAR: selesai dalam 2 hari, EXPRESS: selesai dalam 6 jam");
         jLabel16.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
 
-        jobHistoryBtn.setBackground(new java.awt.Color(33, 37, 41));
-        jobHistoryBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jobHistoryBtn.setForeground(new java.awt.Color(255, 255, 255));
         jobHistoryBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buttons/icon-save.png"))); // NOI18N
         jobHistoryBtn.setText("Lihat Job History");
+        jobHistoryBtn.setBackground(new java.awt.Color(33, 37, 41));
         jobHistoryBtn.setBorder(null);
         jobHistoryBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jobHistoryBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jobHistoryBtn.setForeground(new java.awt.Color(255, 255, 255));
         jobHistoryBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jobHistoryBtnActionPerformed(evt);
@@ -1084,7 +1087,7 @@ public class TransaksiView extends javax.swing.JFrame {
                             .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
                             .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
@@ -1184,7 +1187,7 @@ public class TransaksiView extends javax.swing.JFrame {
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(inputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(inputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 933, Short.MAX_VALUE)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(scrollTabelPanel)
@@ -1354,12 +1357,20 @@ public class TransaksiView extends javax.swing.JFrame {
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         int userAns = JOptionPane.showConfirmDialog(rootPane, "Apakah Anda yakin ingin menghapus data ini?\r\nData yang sudah dihapus tidak dapat lagi dipulihkan.", "CFL - Konfirmasi tindakan", JOptionPane.YES_NO_OPTION);
         if(userAns == 0) {
-            // proceed
-            tCTRL.deleteDataTransaksi(selectedId);
-            JOptionPane.showMessageDialog(this, "Berhasil menghapus data transaksi!", "CFL - Notification", JOptionPane.INFORMATION_MESSAGE);
-            
-            // reload table
-            getTableData(searchInput.getText(), false);
+            try {
+                if(getFullDateTime(inputTglAmbil) == null) {
+                    throw new BelumAmbilException();
+                }
+                
+                // proceed
+                tCTRL.deleteDataTransaksi(selectedId);
+                JOptionPane.showMessageDialog(this, "Berhasil menghapus data transaksi!", "CFL - Notification", JOptionPane.INFORMATION_MESSAGE);
+
+                // reload table
+                getTableData(searchInput.getText(), false);
+            } catch(BelumAmbilException e) {
+                JOptionPane.showMessageDialog(this, e.toString());
+            }
         } else {
             // Batal menambahkan/memperbarui data
             JOptionPane.showMessageDialog(this, "Batal melakukan tindakan!", "CFL - Notification", JOptionPane.INFORMATION_MESSAGE);

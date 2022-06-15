@@ -5,6 +5,7 @@ import java.sql.Connection;
 
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Pegawai;
@@ -15,11 +16,10 @@ import model.Pegawai;
  * @author ASUS
  */
 public class PegawaiPreparedDAO {
-    private static final DbConnection DBC = new DbConnection();
     private Connection con;
     
     public int insertPegawai(Pegawai P){
-        con = DBC.makeConnection();
+        con = DbConnection.getDBCon();
         int rowCount = 0;
         
         String sql = "INSERT INTO pegawai (id, nama, tglLahir, noHP, jobDesc) VALUES (?, ?, ?, ?, ?)";
@@ -36,15 +36,15 @@ public class PegawaiPreparedDAO {
             rowCount = st.executeUpdate();
             System.out.println(DbConnection.ANSI_GREEN + "[OK] [PegawaiPreparedDAO/insertPegawai] Added " + rowCount + " row(s).");
             st.close();
-        }catch(Exception e){
+        }catch(SQLException e){
             System.out.println(DbConnection.ANSI_RED + "[E] [PegawaiPreparedDAO/insertPegawai] Error: " + e.toString());
         }
-        DBC.closeConnection();
+//        DBC.closeConnection();
         return rowCount;
     }
     
     public List<Pegawai> searchPegawai(String input){
-        con = DBC.makeConnection();
+        con = DbConnection.getDBCon();
         
         String sql = "SELECT * FROM pegawai "
                 + "WHERE nama LIKE ? "
@@ -78,10 +78,10 @@ public class PegawaiPreparedDAO {
             System.out.println(DbConnection.ANSI_GREEN + "[OK] [PegawaiPreparedDAO/searchPegawai] Fetched " + rowCount + " row(s).");
             rs.close();
             st.close();
-        } catch(Exception e){
+        } catch(SQLException e){
             System.out.println(DbConnection.ANSI_RED + "[E] [PegawaiPreparedDAO/searchPegawai] Error: " + e.toString());
         }
-        DBC.closeConnection();
+//        DBC.closeConnection();
         
         return list;
     }
@@ -91,7 +91,7 @@ public class PegawaiPreparedDAO {
     }
     
     public int updatePegawai(Pegawai P){
-        con = DBC.makeConnection();
+        con = DbConnection.getDBCon();
         int rowCount = 0;
         
         String sql = "UPDATE pegawai SET nama = ?, "
@@ -112,15 +112,15 @@ public class PegawaiPreparedDAO {
             rowCount = st.executeUpdate();
             System.out.println(DbConnection.ANSI_GREEN + "[OK] [PegawaiPreparedDAO/updatePegawai] Updated " + rowCount + " row(s).");
             st.close();
-        }catch(Exception e){
+        }catch(SQLException e){
             System.out.println(DbConnection.ANSI_RED + "[E] [PegawaiPreparedDAO/updatePegawai] Error: " + e.toString());
         }
-        DBC.closeConnection();
+//        DBC.closeConnection();
         return rowCount;
     }
     
     public int deletePegawai(String id){
-        con = DBC.makeConnection();
+        con = DbConnection.getDBCon();
         int rowCount = 0;
         
         String sql = "DELETE FROM pegawai WHERE id = ?;";
@@ -133,10 +133,10 @@ public class PegawaiPreparedDAO {
             rowCount = st.executeUpdate();
             System.out.println(DbConnection.ANSI_GREEN + "[OK] [PegawaiPreparedDAO/deletePegawai] Deleted " + rowCount + " row(s).");
             st.close();
-        }catch(Exception e){
+        }catch(SQLException e){
             System.out.println(DbConnection.ANSI_RED + "[E] [PegawaiPreparedDAO/deletePegawai] Error: " + e.toString());
         }
-        DBC.closeConnection();
+//        DBC.closeConnection();
         return rowCount;
     }
 }

@@ -1,15 +1,16 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ *
  */
 
-// Jolly Hans Frankle - 200710932
 package connection;
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class DbConnection {
-    private static Connection CON;
+    private Connection CON;
+    private static DbConnection internalDB;
     public static final String URL = "jdbc:mysql://";
     public static final String PATH = "109.106.254.101:3306/u764338354_tubes?useSSL=false";
     public static final String USER = "u764338354_tubes";
@@ -20,21 +21,26 @@ public class DbConnection {
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_YELLOW = "\u001B[33m";
     
-    public Connection makeConnection() {        
+    private DbConnection() throws SQLException {
+        this.CON = DriverManager.getConnection(URL + PATH, USER, PWD);
+    }
+    
+    public static Connection getDBCon() {
         try {
-            CON = DriverManager.getConnection(URL + PATH, USER, PWD);
-        } catch (Exception e) {
+            if(DbConnection.internalDB == null) {
+                DbConnection.internalDB = new DbConnection();
+            }
+            try {
+                Statement st = DbConnection.internalDB.CON.createStatement();
+                st.execute("SELECT 1;");
+            } catch (SQLException e) {
+                DbConnection.internalDB.CON = DriverManager.getConnection(URL + PATH, USER, PWD);
+                System.out.println(ANSI_YELLOW + "[OK] [DBcon/make] Database regeneration attempted after timeout.");
+            }
+        } catch (SQLException e) {
             System.out.println(ANSI_RED + "[E] [DBcon/make]: " + e.getMessage());
         }
         
-        return CON;
-    }
-    
-    public void closeConnection() {
-        try {
-            CON.close();
-        } catch (Exception e) {
-            System.out.println(ANSI_RED + "[E] [DBcon/close]: " + e.getMessage());
-        }
+        return DbConnection.internalDB.CON;
     }
 }

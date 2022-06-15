@@ -18,11 +18,10 @@ import model.Transaksi;
  * @author ASUS
  */
 public class JobHistoryPreparedDAO {
-    private static final DbConnection DBC = new DbConnection();
     private Connection con;
     
     public int insertJobHistory(JobHistory J){
-        con = DBC.makeConnection();
+        con = DbConnection.getDBCon();
         int rowCount = 0;
         
         String sql = "INSERT INTO job_history (idTransaksi, idPegawai, tglLog, aktivitas) "
@@ -41,12 +40,12 @@ public class JobHistoryPreparedDAO {
         }catch(SQLException e){
             System.out.println(DbConnection.ANSI_RED + "[E] [JobHistoryPreparedDAO/insertJobHistory] Error: " + e.toString());
         }
-        DBC.closeConnection();
+//        DBC.closeConnection();
         return rowCount;
     }
     
     public List<JobHistory> getJobHistory(int idTransaksi){
-        con = DBC.makeConnection();
+        con = DbConnection.getDBCon();
         
         String sql = "SELECT j.*, p.* FROM job_history j INNER JOIN pegawai p ON j.idPegawai = p.id "
                 + "WHERE j.idTransaksi = ? "
@@ -91,13 +90,13 @@ public class JobHistoryPreparedDAO {
         } catch(SQLException e){
             System.out.println(DbConnection.ANSI_RED + "[E] [JobHistoryPreparedDAO/searchJobHistory] Error: " + e.toString());
         }
-        DBC.closeConnection();
+//        DBC.closeConnection();
         
         return list;
     }
     
     public int updateJobHistory(JobHistory J){
-        con = DBC.makeConnection();
+        con = DbConnection.getDBCon();
         int rowCount = 0;
         
         String sql = "UPDATE job_history "
@@ -119,12 +118,12 @@ public class JobHistoryPreparedDAO {
         }catch(SQLException e){
             System.out.println(DbConnection.ANSI_RED + "[E] [JobHistoryPreparedDAO/updateJobHistory] Error: " + e.toString());
         }
-        DBC.closeConnection();
+//        DBC.closeConnection();
         return rowCount;
     }
     
     public int deleteJobHistory(int id){
-        con = DBC.makeConnection();
+        con = DbConnection.getDBCon();
         int rowCount = 0;
         
         String sql = "DELETE FROM job_history WHERE id = ?;";
@@ -140,7 +139,7 @@ public class JobHistoryPreparedDAO {
         }catch(SQLException e){
             System.out.println(DbConnection.ANSI_RED + "[E] [JobHistoryPreparedDAO/deleteJobHistory] Error: " + e.toString());
         }
-        DBC.closeConnection();
+//        DBC.closeConnection();
         return rowCount;
     }
 }

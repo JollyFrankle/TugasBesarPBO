@@ -1,7 +1,5 @@
 package exception;
 
-import connection.DbConnection;
-
 public class TanggalAmbilInvalidException extends Exception{
     private String tglSelesai;
     private String tglAmbil;
