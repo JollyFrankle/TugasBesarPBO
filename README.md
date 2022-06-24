@@ -10,6 +10,7 @@ Clean Fresh Laundry adalah aplikasi yang dapat mempermudah jalannya transaksi-tr
 - Transaksi Menu
   - View & search transactions
   - Add new transaction
+  - Vewi transaction detail and total price
   - Edit transaction data (except for `tanggal masuk`)
   - Delete transaction (only if `tanggal ambil` is already defined)
   - Job history for certain jobs
